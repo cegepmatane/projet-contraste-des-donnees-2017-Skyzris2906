@@ -13,6 +13,10 @@ void loop()
   float volts = lectureTemp * 5.0;
   volts /= 1024.0;
 
+    //Si le capteur est branché en 3.3V
+  /* float volts = lectureTemp * 3.3;
+  volts /= 1024.0; */
+
   Serial.print(volts); //Affiche le
   Serial.println(" V"); //voltage
 
