@@ -22,5 +22,11 @@ void loop()
   Serial.print(temperatureCelsius);
   Serial.println(" °C");
 
+    //Conversion en temperature Fahrenheit
+  float temperatureFahrenheit = (temperatureCelsius * 9.0 / 5.0) + 32.0;
+
+  Serial.print(temperatureFahrenheit);
+  Serial.println(" °F");
+
   delay(1000); //Pour 1 seconde
 }
