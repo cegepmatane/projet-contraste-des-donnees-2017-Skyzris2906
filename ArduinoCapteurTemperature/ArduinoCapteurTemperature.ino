@@ -8,4 +8,11 @@ void setup()
 void loop() 
 {
   int lectureTemp = analogRead(capteurTemp); //Lecture des volts du capteur de temperature
+
+    //Capteur branché en 5V
+  float volts = lectureTemp * 5.0;
+  volts /= 1024.0;
+
+  Serial.print(volts); //Affiche le
+  Serial.println(" V"); //voltage
 }
