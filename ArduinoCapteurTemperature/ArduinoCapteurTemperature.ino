@@ -33,4 +33,7 @@ void loop()
   Serial.println(" °F");
 
   delay(1000); //Pour 1 seconde
+  //delay(60000) //Pour 1 minute
+  //delay(600000); //Pour 10 minutes
+
 }
