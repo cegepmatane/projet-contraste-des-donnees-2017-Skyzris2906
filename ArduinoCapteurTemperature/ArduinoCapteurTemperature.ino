@@ -7,5 +7,5 @@ void setup()
 
 void loop() 
 {
-  
+  int lectureTemp = analogRead(capteurTemp); //Lecture des volts du capteur de temperature
 }
