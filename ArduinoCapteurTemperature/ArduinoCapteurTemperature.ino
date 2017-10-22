@@ -15,4 +15,12 @@ void loop()
 
   Serial.print(volts); //Affiche le
   Serial.println(" V"); //voltage
+
+    //Conversion en temperature Celsius
+  float temperatureCelsius = (volts - 0.5) * 100 ; //10mV par °C
+
+  Serial.print(temperatureCelsius);
+  Serial.println(" °C");
+
+  delay(1000); //Pour 1 seconde
 }
