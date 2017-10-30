@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="Launcher.cs" />
     <Compile Include="ReadFromArduino.cs" />
-    <Compile Include="Send2Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

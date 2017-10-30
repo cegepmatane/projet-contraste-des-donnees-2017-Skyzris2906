@@ -19,7 +19,10 @@ public class ReadFromArduino
     private void ArduinoDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         String valeurArduino = arduino.ReadLine();
-        Insert2Database(valeurArduino);
+        if (valeurArduino.Length == 6)
+            Insert2Database(valeurArduino);
+        else
+            valeurArduino = "";
     }
 
     private void Insert2Database(String valeur)
