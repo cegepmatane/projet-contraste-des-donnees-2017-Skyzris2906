@@ -21,18 +21,18 @@ void loop()
   /* float volts = lectureTemp * 3.3;
   volts /= 1024.0; */
 
-  Serial.print(volts); //Affiche le
-  Serial.println(" V"); //voltage
+  //Serial.print(volts); //Affiche le
+  //Serial.println(" V"); //voltage
 
     //Conversion en temperature Celsius
   temperatureCelsius = Kev2Cel(lectureTemp);
-  Serial.print(temperatureCelsius); 
-  Serial.println(" °C");
+  Serial.println(temperatureCelsius); 
+  //Serial.println(" °C");
 
     //Conversion en temperature Fahrenheit
   temperatureFahrenheit = (temperatureCelsius * 9.0 / 5.0) + 32.0;
-  Serial.print(temperatureFahrenheit);
-  Serial.println(" °F");
+  //Serial.print(temperatureFahrenheit);
+  //Serial.println(" °F");
 
   delay(1000); //Pour 1 seconde
   //delay(60000) //Pour 1 minute

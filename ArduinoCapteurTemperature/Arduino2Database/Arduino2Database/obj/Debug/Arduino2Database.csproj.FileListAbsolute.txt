@@ -1,0 +1,11 @@
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\Arduino2Database.exe.config
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\Arduino2Database.exe
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\Arduino2Database.pdb
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\obj\Debug\Arduino2Database.csprojResolveAssemblyReference.cache
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\obj\Debug\Arduino2Database.csproj.CoreCompileInputs.cache
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\obj\Debug\Arduino2Database.exe
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\obj\Debug\Arduino2Database.pdb
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\Npgsql.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\Npgsql.xml
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Threading.Tasks.Extensions.xml
