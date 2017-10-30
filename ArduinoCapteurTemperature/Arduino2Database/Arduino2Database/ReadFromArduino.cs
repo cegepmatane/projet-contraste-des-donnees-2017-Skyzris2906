@@ -43,11 +43,14 @@ public class ReadFromArduino
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = connection;
-                cmd.CommandText = "INSERT INTO temperature (temperature_celsius, temperature_date) VALUES (@t, @d)";
+                cmd.CommandText = "INSERT INTO temperature (temperature_celsius, temperature_date, temperature_heure) VALUES (@t, @d, @h)";
                 cmd.Parameters.AddWithValue("t", valeur);
-                cmd.Parameters.AddWithValue("d", DateTime.Now.ToString("MM/dd/yyyy hh'h'mm"));
+                cmd.Parameters.AddWithValue("d", DateTime.Now.ToString("MM/dd/yyyy"));
+                cmd.Parameters.AddWithValue("h", DateTime.Now.ToString("hh'h'mm"));
                 cmd.ExecuteNonQuery();
-                Console.WriteLine("Valeur inscrite: " + valeur + "Date inscrite: " + DateTime.Now.ToString("MM/dd/yyyy hh'h'mm"));
+                Console.WriteLine("Valeur inscrite: " + valeur);
+                Console.WriteLine("Date inscrite: " + DateTime.Now.ToString("MM/dd/yyyy"));
+                Console.WriteLine("Heure inscrite: " + DateTime.Now.ToString("hh'h'mm"));
             }
         }
     }
