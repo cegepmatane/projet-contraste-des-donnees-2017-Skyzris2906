@@ -19,5 +19,25 @@ public class ReadFromArduino
     private void ArduinoDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         String valeurArduino = arduino.ReadLine();
+        Insert2Database(valeurArduino);
+    }
+
+    private void Insert2Database(String valeur)
+    {
+        var connectionInformations = "Host=127.0.0.1;Username=Nicolas;Password=Sql1995;Database=jeuvideo;";
+
+        using (var connection = new NpgsqlConnection(connectionInformations))
+        {
+
+            connection.Open();
+            using (var cmd = new NpgsqlCommand())
+            {
+                cmd.Connection = connection;
+                cmd.CommandText = "INSERT INTO developpeur (nom) VALUES (@p)";
+                cmd.Parameters.AddWithValue("p", valeur);
+                cmd.ExecuteNonQuery();
+                Console.WriteLine("Valeur inscrite: " + valeur);
+            }
+        }
     }
 }
