@@ -19,10 +19,10 @@ public class ReadFromArduino
     private void ArduinoDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         String valeurArduino = arduino.ReadLine();
-        if (valeurArduino.Length == 6)
+        if (valeurArduino.Length == 6 && (DateTime.Now.Minute == 30 || DateTime.Now.Minute == 00))
             Insert2Database(valeurArduino);
         else
-            valeurArduino = "";
+            valeurArduino = "";      
     }
 
     private void Insert2Database(String valeur)
@@ -36,10 +36,11 @@ public class ReadFromArduino
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = connection;
-                cmd.CommandText = "INSERT INTO developpeur (nom) VALUES (@p)";
-                cmd.Parameters.AddWithValue("p", valeur);
+                cmd.CommandText = "INSERT INTO developpeur (nom, date) VALUES (@t, @d)";
+                cmd.Parameters.AddWithValue("t", valeur);
+                cmd.Parameters.AddWithValue("d", DateTime.Now.ToString("MM/dd/yyyy hh'h'mm"));
                 cmd.ExecuteNonQuery();
-                Console.WriteLine("Valeur inscrite: " + valeur);
+                Console.WriteLine("Valeur inscrite: " + valeur + "Date inscrite: " + DateTime.Now.ToString("MM/dd/yyyy hh'h'mm"));
             }
         }
     }
