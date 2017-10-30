@@ -28,13 +28,13 @@ public class ReadFromArduino
         else
             valeurArduino = "";
 
-        if (droitEcriture == false && (DateTime.Now.Minute != 30 && DateTime.Now.Minute != 00))
+        if (droitEcriture == false && (DateTime.Now.Minute == 29 || DateTime.Now.Minute == 59))
             droitEcriture = true;
     }
 
     private void Insert2Database(String valeur)
     {
-        var connectionInformations = "Host=127.0.0.1;Username=Nicolas;Password=Sql1995;Database=jeuvideo;";
+        var connectionInformations = "Host=127.0.0.1;Username=postgres;Password=Sql1995;Database=principale;";
 
         using (var connection = new NpgsqlConnection(connectionInformations))
         {
@@ -43,7 +43,7 @@ public class ReadFromArduino
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = connection;
-                cmd.CommandText = "INSERT INTO developpeur (nom, date) VALUES (@t, @d)";
+                cmd.CommandText = "INSERT INTO temperature (temperature_celsius, temperature_date) VALUES (@t, @d)";
                 cmd.Parameters.AddWithValue("t", valeur);
                 cmd.Parameters.AddWithValue("d", DateTime.Now.ToString("MM/dd/yyyy hh'h'mm"));
                 cmd.ExecuteNonQuery();
