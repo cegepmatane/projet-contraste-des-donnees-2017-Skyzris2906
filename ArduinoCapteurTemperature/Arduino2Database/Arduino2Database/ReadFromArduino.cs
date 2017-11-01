@@ -30,6 +30,36 @@ public class ReadFromArduino
 
         if (droitEcriture == false && (DateTime.Now.Minute == 29 || DateTime.Now.Minute == 59))
             droitEcriture = true;
+
+        if (DateTime.Now.Second == 00)
+        {
+            switch (DateTime.Now.Minute)
+            {
+                case 10:
+                    Console.WriteLine("Ecriture dans 20 Minutes");
+                    break;
+
+                case 20:
+                    Console.WriteLine("Ecriture dans 10 Minutes");
+                    break;
+
+                case 25:
+                    Console.WriteLine("Ecriture dans 5 Minutes");
+                    break;
+
+                case 40:
+                    Console.WriteLine("Ecriture dans 20 Minutes");
+                    break;
+
+                case 50:
+                    Console.WriteLine("Ecriture dans 10 Minutes");
+                    break;
+
+                case 55:
+                    Console.WriteLine("Ecriture dans 5 Minutes");
+                    break;
+            }
+        }
     }
 
     private void Insert2Database(String valeur)
