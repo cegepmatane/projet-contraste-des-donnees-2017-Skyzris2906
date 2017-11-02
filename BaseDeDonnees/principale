@@ -5,7 +5,7 @@
 -- Dumped from database version 9.6.5
 -- Dumped by pg_dump version 9.6.5
 
--- Started on 2017-10-31 21:17:00
+-- Started on 2017-11-01 13:51:41
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -40,7 +40,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 186 (class 1259 OID 41040)
+-- TOC entry 186 (class 1259 OID 49212)
 -- Name: temperature; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -55,7 +55,7 @@ CREATE TABLE temperature (
 ALTER TABLE temperature OWNER TO postgres;
 
 --
--- TOC entry 185 (class 1259 OID 41038)
+-- TOC entry 185 (class 1259 OID 49210)
 -- Name: temperature_id_temperature_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -79,7 +79,7 @@ ALTER SEQUENCE temperature_id_temperature_seq OWNED BY temperature.id_temperatur
 
 
 --
--- TOC entry 2002 (class 2604 OID 41043)
+-- TOC entry 2002 (class 2604 OID 49215)
 -- Name: temperature id_temperature; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -87,14 +87,23 @@ ALTER TABLE ONLY temperature ALTER COLUMN id_temperature SET DEFAULT nextval('te
 
 
 --
--- TOC entry 2123 (class 0 OID 41040)
+-- TOC entry 2123 (class 0 OID 49212)
 -- Dependencies: 186
 -- Data for Name: temperature; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) FROM stdin;
-1	22.08\r	10/31/2017	08h30
-2	22.44\r	10/31/2017	09h00
+1	22.26\r	10/31/2017	10h00
+2	22.35\r	10/31/2017	10h30
+3	22.26\r	10/31/2017	11h00
+4	22.61\r	10/31/2017	11h30
+5	33.98\r	11/01/2017	12h00
+6	25.27\r	11/01/2017	10h30
+7	25.09\r	11/01/2017	11h00
+8	25.27\r	11/01/2017	11h30
+9	25.71\r	11/01/2017	12h30
+10	33.20\r	11/01/2017	01h00
+11	23.41\r	11/01/2017	01h30
 \.
 
 
@@ -104,11 +113,11 @@ COPY temperature (id_temperature, temperature_celsius, temperature_date, tempera
 -- Name: temperature_id_temperature_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('temperature_id_temperature_seq', 34, true);
+SELECT pg_catalog.setval('temperature_id_temperature_seq', 11, true);
 
 
 --
--- TOC entry 2004 (class 2606 OID 41048)
+-- TOC entry 2004 (class 2606 OID 49220)
 -- Name: temperature temperature_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -116,7 +125,7 @@ ALTER TABLE ONLY temperature
     ADD CONSTRAINT temperature_pkey PRIMARY KEY (id_temperature);
 
 
--- Completed on 2017-10-31 21:17:01
+-- Completed on 2017-11-01 13:51:41
 
 --
 -- PostgreSQL database dump complete
