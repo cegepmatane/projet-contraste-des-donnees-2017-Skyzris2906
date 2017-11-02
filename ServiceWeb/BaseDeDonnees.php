@@ -1,8 +1,8 @@
 <?php
-	$usager = 'root';
-	$motdepasse = 'toor';
+	$usager = 'postgres';
+	$motdepasse = 'Sql1995';
 	$hote = 'localhost';
-	$base = 'devoir_integrite';
+	$base = 'principale';
 	$dsn = 'mysql:dbname='.$base.';host=' . $hote;
 	$basededonnees = new PDO($dsn, $usager, $motdepasse);
 ?>
