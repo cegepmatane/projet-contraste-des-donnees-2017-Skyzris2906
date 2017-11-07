@@ -10,7 +10,7 @@
 	$listeTemperatures = $requeteListeTemperatures->fetchAll(PDO::FETCH_OBJ);
 ?>
 <listeTemperatures>
-<?php
+u<?php
 foreach($listeTemperatures as $temp)
 {
 ?>
