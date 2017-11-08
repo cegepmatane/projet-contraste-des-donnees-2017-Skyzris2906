@@ -1,5 +1,3 @@
-package ApplicationTemperature;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -14,9 +12,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
-
-import modele.Temperature;
-import modele.temperature;
 
 import javax.xml.parsers.DocumentBuilder;
 
@@ -49,7 +44,6 @@ public class TemperatureService
 			}
 		
 		
-		
 		if(xml != null)
 		{
 			try 
@@ -68,9 +62,6 @@ public class TemperatureService
 				
 				System.out.println("Variables trouvees " + id + " " + temperatureCelcius + " " + temperatureHeure + " "  + temperatureDate);
 				
-			//	Temperature temperature = new Temperature(id, temperatureCelcius);
-			//	temperature.setId(Integer.parseInt(id));
-				
 				
 			} catch (ParserConfigurationException e) {
 				e.printStackTrace();
@@ -81,8 +72,6 @@ public class TemperatureService
 				e.printStackTrace();
 			}
 		}
-		
-		
 		
 		
 	}
