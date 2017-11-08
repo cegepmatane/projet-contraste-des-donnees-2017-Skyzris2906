@@ -15,6 +15,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+import modele.Temperature;
+import modele.temperature;
+
 import javax.xml.parsers.DocumentBuilder;
 
 public class TemperatureService 
@@ -64,6 +67,9 @@ public class TemperatureService
 				String temperatureDate = document.getElementsByTagName("temperature date").item(0).getTextContent();
 				
 				System.out.println("Variables trouvees " + id + " " + temperatureCelcius + " " + temperatureHeure + " "  + temperatureDate);
+				
+			//	Temperature temperature = new Temperature(id, temperatureCelcius);
+			//	temperature.setId(Integer.parseInt(id));
 				
 				
 			} catch (ParserConfigurationException e) {
