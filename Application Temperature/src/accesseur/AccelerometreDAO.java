@@ -22,6 +22,26 @@ import modele.Accelerometre;
 
 public class AccelerometreDAO {
 	
+	private Document parserXML(String xml)
+	{
+		Document doc = null;
+		DocumentBuilder parseur;
+		try {
+			parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			doc = parseur.parse(new StringBufferInputStream(xml));		
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return doc;
+	}
+	
 	private String consommerService(String url)
 	{
 
@@ -59,16 +79,13 @@ public class AccelerometreDAO {
 
 		if(xml != null)
 		{
-				try 
-				{
 					// interpretation du xml
-					DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-					@SuppressWarnings("deprecation")
-					Document document = parseur.parse(new StringBufferInputStream(xml));
+					Document document = parserXML(xml);
+					if (document == null) return null;
 					
 					//  a définir selon la table dans postgresql
 					 
-					String numero = document.getElementsByTagName("id").item(0).getTextContent();
+					String id = document.getElementsByTagName("id").item(0).getTextContent();
 					String pixel = document.getElementsByTagName("pixel ").item(0).getTextContent();
 					String date = document.getElementsByTagName("date").item(0).getTextContent();
 					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
@@ -78,16 +95,6 @@ public class AccelerometreDAO {
 					Accelerometre accelerometre = new Accelerometre();
 							// accelerometre.setId(Integer.parseInt(id));
 					return accelerometre;
-					
-					
-				} catch (ParserConfigurationException e) {
-					e.printStackTrace();
-				} catch (SAXException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 			}	
 	
 			return null;
@@ -100,13 +107,11 @@ public class AccelerometreDAO {
 			String xml = consommerService("http://localhost/");		
 	 	
 	 		// Interprétation du xml - construire les modeles
+			
 			if(xml != null)
 	 		{
-	 			try 
-	 			{
-	 				DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-	 				@SuppressWarnings("deprecation")
-	 				Document document = parseur.parse(new StringBufferInputStream(xml));
+	 				Document document = parserXML(xml);
+	 				if (document == null) return null;
 	 				
 	 
 	 				ArrayList<Accelerometre> listeAccelerometres = new ArrayList<Accelerometre>();
@@ -126,19 +131,7 @@ public class AccelerometreDAO {
 						listeAccelerometres.add(accelerometre);
 	 				}
 	 				return listeAccelerometres;
-	 				
-	 				
-	 			} catch (ParserConfigurationException e) {
-	 				e.printStackTrace();
-	 			} catch (SAXException e) {
-	 				e.printStackTrace();
-	 			} catch (IOException e) {
-	 				// TODO Auto-generated catch block
-	 				e.printStackTrace();
-	 			}
 	 		}		
-	 		
-			
 			return null;
 	 	}
 
