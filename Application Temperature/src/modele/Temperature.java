@@ -3,46 +3,44 @@ package modele;
 public class Temperature {
 	
 	protected int id;
-	protected int temperatureCelcius;
-	protected String temperatureHeure;
-	protected String temperatureDate;
+	protected int pixel;
+	protected String date;
+	protected String heure;
 	
-	public Temperature(int id, int temperatureCelcius) {
-		super();
-		this.id = id;
-		this.temperatureCelcius = temperatureCelcius;
-	}
-	
+	//public void setTemperatureDate(String temperatureDate) {
+	//	this.temperatureDate = temperatureDate;
+//	}
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public int getTemperatureCelcius() {
-		return temperatureCelcius;
+
+	public int getPixel() {
+		return pixel;
 	}
-	
-	public void setTemperatureCelcius(int temperatureCelcius) {
-		this.temperatureCelcius = temperatureCelcius;
+
+	public void setPixel(int pixel) {
+		this.pixel = pixel;
 	}
-	
-	public String getTemperatureHeure() {
-		return temperatureHeure;
+
+	public String getDate() {
+		return date;
 	}
-	
-	public void setTemperatureHeure(String temperatureHeure) {
-		this.temperatureHeure = temperatureHeure;
+
+	public void setDate(String date) {
+		this.date = date;
 	}
-	
-	public String getTemperatureDate() {
-		return temperatureDate;
+
+	public String getHeure() {
+		return heure;
 	}
-	
-	public void setTemperatureDate(String temperatureDate) {
-		this.temperatureDate = temperatureDate;
+
+	public void setHeure(String heure) {
+		this.heure = heure;
 	}
 	
 }
