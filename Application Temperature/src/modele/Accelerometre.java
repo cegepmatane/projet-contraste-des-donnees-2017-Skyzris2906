@@ -1,6 +1,6 @@
 package modele;
 
-public class Temperature {
+public class Accelerometre {
 	
 	protected int id;
 	protected int pixel;
@@ -10,6 +10,7 @@ public class Temperature {
 	//public void setTemperatureDate(String temperatureDate) {
 	//	this.temperatureDate = temperatureDate;
 //	}
+
 
 	public int getId() {
 		return id;

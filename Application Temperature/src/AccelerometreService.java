@@ -13,14 +13,15 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 
-import accesseur.TemperatureDAO;
+import accesseur.AccelerometreDAO;
 
-public class TemperatureService 
+public class AccelerometreService 
 {
 	public static void main (String[] args)
 	{
 		
-		TemperatureDAO temperatureDAO = new TemperatureDAO();
+		AccelerometreDAO accelerometreDAO = new AccelerometreDAO();
+		accelerometreDAO.listerAccelerometres();
 		
 	}
 

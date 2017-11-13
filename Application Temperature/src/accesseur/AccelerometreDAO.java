@@ -18,22 +18,22 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import modele.Temperature;
+import modele.Accelerometre;
 
-public class TemperatureDAO {
+public class AccelerometreDAO {
 	
-	public Temperature chercherTemperature(int id)
+	public Accelerometre chercherAccelerometre(int id)
 	{
 
 		String xml = null;
 			try
 			{
 				// récupere le XML
-				URL urlServiceTemperature = new URL ("http://localhost/principale/temperature");
-				URLConnection serviceTemperature = urlServiceTemperature.openConnection();
-				InputStream fluxTemperature = serviceTemperature.getInputStream();
+				URL urlServiceAccelerometre = new URL ("http://localhost/principale/taccelerometre");
+				URLConnection serviceAccelerometre = urlServiceAccelerometre.openConnection();
+				InputStream fluxAccelerometre = serviceAccelerometre.getInputStream();
 				
-				Scanner lecteur = new Scanner(fluxTemperature).useDelimiter("\\A");
+				Scanner lecteur = new Scanner(fluxAccelerometre).useDelimiter("\\A");
 				xml = lecteur.hasNext() ? lecteur.next() : "";
 				System.out.println(xml);
 			}
@@ -67,9 +67,9 @@ public class TemperatureDAO {
 				
 				System.out.println("Variables trouvees " + id + " " + pixel + " " + date + " "  + heure);
 				
-				Temperature temperature = new Temperature();
-						// temperature.setId(Integer.parseInt(id));
-				return temperature;
+				Accelerometre taccelerometre = new Accelerometre();
+						// taccelerometre.setId(Integer.parseInt(id));
+				return taccelerometre;
 				
 				
 			} catch (ParserConfigurationException e) {
@@ -86,16 +86,16 @@ public class TemperatureDAO {
 	}
 	
 	
-	public List<Temperature> listerTemperatures()
+	public List<Accelerometre> listerAccelerometres()
 	 	{
 	 		// Récupérer le xml
 	 		String xml = null;
 	 		try {
-	 			URL urlServiceTemperature = new URL ("http://localhost/principale/temperature");
-				URLConnection serviceTemperature = urlServiceTemperature.openConnection();
-				InputStream fluxTemperature = serviceTemperature.getInputStream();
+	 			URL urlServiceAccelerometre = new URL ("http://localhost/principale/taccelerometre");
+				URLConnection serviceAccelerometre = urlServiceAccelerometre.openConnection();
+				InputStream fluxAccelerometre = serviceAccelerometre.getInputStream();
 	 			
-				Scanner lecteur = new Scanner(fluxTemperature).useDelimiter("\\A");
+				Scanner lecteur = new Scanner(fluxAccelerometre).useDelimiter("\\A");
 				xml = lecteur.hasNext() ? lecteur.next() : "";
 				System.out.println(xml);
 	 			
@@ -115,23 +115,23 @@ public class TemperatureDAO {
 	 				Document document = parseur.parse(new StringBufferInputStream(xml));
 	 				
 	 
-	 				ArrayList<Temperature> listeTemperatures = new ArrayList<Temperature>();
-	 				NodeList listeNoeudsTemperatures = document.getElementsByTagName("temperature");
-	 				for(int position = 0; position < listeNoeudsTemperatures.getLength(); position++)
+	 				ArrayList<Accelerometre> listeAccelerometres = new ArrayList<Accelerometre>();
+	 				NodeList listeNoeudsAccelerometres = document.getElementsByTagName("taccelerometre");
+	 				for(int position = 0; position < listeNoeudsAccelerometres.getLength(); position++)
 	 				{
-	 					Element elementTemperature = (Element)listeNoeudsTemperatures.item(position);
-	 					//System.out.println("Tagname=" + elementTemperature.getTagName());
+	 					Element elementAccelerometre = (Element)listeNoeudsAccelerometres.item(position);
+	 					//System.out.println("Tagname=" + elementAccelerometre.getTagName());
 	 					
 	 					String numero = document.getElementsByTagName("id").item(0).getTextContent();
 	 					String pixel = document.getElementsByTagName("pixel ").item(0).getTextContent();
 	 					String date = document.getElementsByTagName("date").item(0).getTextContent();
 	 					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
 	 					
-	 					Temperature temperature = new Temperature();
-	 				//	temperature.setId(Integer.parseInt(id)); // TODO : robustesse 
-						listeTemperatures.add(temperature);
+	 					Accelerometre taccelerometre = new Accelerometre();
+	 				//	taccelerometre.setId(Integer.parseInt(id)); // TODO : robustesse 
+						listeAccelerometres.add(taccelerometre);
 	 				}
-	 				return listeTemperatures;
+	 				return listeAccelerometres;
 	 				
 	 				
 	 			} catch (ParserConfigurationException e) {
