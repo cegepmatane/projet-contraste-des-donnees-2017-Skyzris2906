@@ -8,6 +8,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 {
 
     private static BaseDeDonnees instance = null;
+    public static String databasePath;
 
     public static BaseDeDonnees getInstance(Context contexte)
     {
@@ -23,6 +24,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
     public BaseDeDonnees(Context contexte)
     {
         super(contexte, "capteurvaleur.db", null, 1);
+        databasePath = contexte.getDatabasePath("capteurvaleur.db").getPath();
     }
 
     @Override

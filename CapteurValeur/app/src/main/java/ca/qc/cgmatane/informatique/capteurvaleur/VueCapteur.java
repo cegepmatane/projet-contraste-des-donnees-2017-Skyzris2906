@@ -4,10 +4,13 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +20,22 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,6 +64,10 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
 
         accesseurBaseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
         Log.d("INSTANCE", "Bdd = " + accesseurBaseDeDonnees);
+
+        Log.d("INSTANCE", "PATH = " + BaseDeDonnees.databasePath);
+
+        Log.d("INSTANCE", "JSON = " + getResults().toString());
     }
 
     @Override
@@ -100,6 +123,50 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
                 }, 1);
             }
         }
+    }
+
+    public JSONArray getResults() {
+        String myPath = BaseDeDonnees.databasePath;// Set path to your database
+        SQLiteDatabase myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+
+
+        String searchQuery = "SELECT * FROM accelerometre";
+        Cursor cursor = myDataBase.rawQuery(searchQuery, null);
+
+        JSONArray resultSet = new JSONArray();
+        JSONObject returnObj = new JSONObject();
+
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() == false) {
+
+            int totalColumn = cursor.getColumnCount();
+            JSONObject rowObject = new JSONObject();
+
+            for (int i = 0; i < totalColumn; i++) {
+                if (cursor.getColumnName(i) != null) {
+
+                    try {
+
+                        if (cursor.getString(i) != null) {
+                            Log.d("TAG_NAME", cursor.getString(i));
+                            rowObject.put(cursor.getColumnName(i), cursor.getString(i));
+                        } else {
+                            rowObject.put(cursor.getColumnName(i), "");
+                        }
+                    } catch (Exception e) {
+                        Log.d("TAG_NAME", e.getMessage());
+                    }
+                }
+
+            }
+
+            resultSet.put(rowObject);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        Log.d("TAG_NAME", resultSet.toString());
+        return resultSet;
     }
 
     @Override
