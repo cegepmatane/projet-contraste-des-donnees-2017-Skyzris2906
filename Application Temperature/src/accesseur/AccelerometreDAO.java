@@ -22,20 +22,21 @@ import modele.Accelerometre;
 
 public class AccelerometreDAO {
 	
-	public Accelerometre chercherAccelerometre(int id)
+	private String consommerService(String url)
 	{
 
 		String xml = null;
 			try
 			{
 				// récupere le XML
-				URL urlServiceAccelerometre = new URL ("http://localhost/principale/taccelerometre");
+				URL urlServiceAccelerometre = new URL (url);
 				URLConnection serviceAccelerometre = urlServiceAccelerometre.openConnection();
 				InputStream fluxAccelerometre = serviceAccelerometre.getInputStream();
 				
 				Scanner lecteur = new Scanner(fluxAccelerometre).useDelimiter("\\A");
 				xml = lecteur.hasNext() ? lecteur.next() : "";
 				System.out.println(xml);
+				return xml;
 			}
 			
 			catch (MalformedURLException e) 
@@ -47,63 +48,56 @@ public class AccelerometreDAO {
 			{
 				e.printStackTrace();
 			}
-		
-		
+			return null;
+	}
+	
+			
+	public Accelerometre chercherAccelerometre(int numero)
+	{
+		String xml = consommerService("http://localhost/" + numero);
+
+
 		if(xml != null)
 		{
-			try 
-			{
-				// interpretation du xml
-				DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-				@SuppressWarnings("deprecation")
-				Document document = parseur.parse(new StringBufferInputStream(xml));
-				
-				//  a définir selon la table dans postgresql
-				 
-				String numero = document.getElementsByTagName("id").item(0).getTextContent();
-				String pixel = document.getElementsByTagName("pixel ").item(0).getTextContent();
-				String date = document.getElementsByTagName("date").item(0).getTextContent();
-				String heure = document.getElementsByTagName("heure").item(0).getTextContent();
-				
-				System.out.println("Variables trouvees " + id + " " + pixel + " " + date + " "  + heure);
-				
-				Accelerometre taccelerometre = new Accelerometre();
-						// taccelerometre.setId(Integer.parseInt(id));
-				return taccelerometre;
-				
-				
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try 
+				{
+					// interpretation du xml
+					DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+					@SuppressWarnings("deprecation")
+					Document document = parseur.parse(new StringBufferInputStream(xml));
+					
+					//  a définir selon la table dans postgresql
+					 
+					String numero = document.getElementsByTagName("id").item(0).getTextContent();
+					String pixel = document.getElementsByTagName("pixel ").item(0).getTextContent();
+					String date = document.getElementsByTagName("date").item(0).getTextContent();
+					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
+					
+					System.out.println("Variables trouvees " + numero + " " + pixel + " " + date + " "  + heure);
+					
+					Accelerometre accelerometre = new Accelerometre();
+							// accelerometre.setId(Integer.parseInt(id));
+					return accelerometre;
+					
+					
+				} catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				} catch (SAXException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}	
+	
+			return null;
 		}
-		
-		return null;
-	}
 	
 	
 	public List<Accelerometre> listerAccelerometres()
 	 	{
 	 		// Récupérer le xml
-	 		String xml = null;
-	 		try {
-	 			URL urlServiceAccelerometre = new URL ("http://localhost/principale/taccelerometre");
-				URLConnection serviceAccelerometre = urlServiceAccelerometre.openConnection();
-				InputStream fluxAccelerometre = serviceAccelerometre.getInputStream();
-	 			
-				Scanner lecteur = new Scanner(fluxAccelerometre).useDelimiter("\\A");
-				xml = lecteur.hasNext() ? lecteur.next() : "";
-				System.out.println(xml);
-	 			
-	 		} catch (MalformedURLException e) {
-				e.printStackTrace();
-	 		} catch (IOException e) {
-	 			e.printStackTrace();
-	 		}		
+			String xml = consommerService("http://localhost/");		
 	 	
 	 		// Interprétation du xml - construire les modeles
 			if(xml != null)
@@ -116,7 +110,7 @@ public class AccelerometreDAO {
 	 				
 	 
 	 				ArrayList<Accelerometre> listeAccelerometres = new ArrayList<Accelerometre>();
-	 				NodeList listeNoeudsAccelerometres = document.getElementsByTagName("taccelerometre");
+	 				NodeList listeNoeudsAccelerometres = document.getElementsByTagName("accelerometre");
 	 				for(int position = 0; position < listeNoeudsAccelerometres.getLength(); position++)
 	 				{
 	 					Element elementAccelerometre = (Element)listeNoeudsAccelerometres.item(position);
@@ -127,9 +121,9 @@ public class AccelerometreDAO {
 	 					String date = document.getElementsByTagName("date").item(0).getTextContent();
 	 					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
 	 					
-	 					Accelerometre taccelerometre = new Accelerometre();
-	 				//	taccelerometre.setId(Integer.parseInt(id)); // TODO : robustesse 
-						listeAccelerometres.add(taccelerometre);
+	 					Accelerometre accelerometre = new Accelerometre();
+	 				//	accelerometre.setId(Integer.parseInt(id)); // TODO : robustesse 
+						listeAccelerometres.add(accelerometre);
 	 				}
 	 				return listeAccelerometres;
 	 				
