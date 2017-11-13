@@ -1,11 +1,13 @@
 ﻿using Npgsql;
 using System;
+using System.Data.SQLite;
 using System.IO.Ports;
 
 public class ReadFromArduino
 {
     SerialPort arduino = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
     public bool droitEcriture = true;
+
     public ReadFromArduino()
     {
         
@@ -64,23 +66,25 @@ public class ReadFromArduino
 
     private void Insert2Database(String valeur)
     {
-        var connectionInformations = "Host=127.0.0.1;Username=postgres;Password=Sql1995;Database=principale;";
-
-        using (var connection = new NpgsqlConnection(connectionInformations))
+        using (var connection = new SQLiteConnection(Launcher.DatabaseSource))
         {
-
-            connection.Open();
-            using (var cmd = new NpgsqlCommand())
+            using (var cmd = new SQLiteCommand(connection))
             {
-                cmd.Connection = connection;
-                cmd.CommandText = "INSERT INTO temperature (temperature_celsius, temperature_date, temperature_heure) VALUES (@t, @d, @h)";
-                cmd.Parameters.AddWithValue("t", valeur);
+                connection.Open();
+                cmd.CommandText = Launcher.CreateTable;
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "INSERT INTO temperature (celsius, date, heure) VALUES (@c, @d, @h)";
+                cmd.Parameters.AddWithValue("@c", valeur);
                 cmd.Parameters.AddWithValue("d", DateTime.Now.ToString("MM/dd/yyyy"));
                 cmd.Parameters.AddWithValue("h", DateTime.Now.ToString("hh'h'mm"));
                 cmd.ExecuteNonQuery();
+
                 Console.WriteLine("Valeur inscrite: " + valeur);
                 Console.WriteLine("Date inscrite: " + DateTime.Now.ToString("MM/dd/yyyy"));
                 Console.WriteLine("Heure inscrite: " + DateTime.Now.ToString("hh'h'mm"));
+
+                connection.Close();
             }
         }
     }
