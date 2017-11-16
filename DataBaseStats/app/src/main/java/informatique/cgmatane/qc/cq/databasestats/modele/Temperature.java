@@ -9,11 +9,11 @@ import java.util.HashMap;
 public class Temperature {
 
     private int id;
-    private Double temperature;
+    private double temperature;
     private String date;
     private String heure;
 
-    public Temperature(int id, Double temperature, String date, String heure) {
+    public Temperature(int id, double temperature, String date, String heure) {
         this.id = id;
         this.temperature = temperature;
         this.date = date;
@@ -28,11 +28,11 @@ public class Temperature {
         this.id = id;
     }
 
-    public Double getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(Double temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
