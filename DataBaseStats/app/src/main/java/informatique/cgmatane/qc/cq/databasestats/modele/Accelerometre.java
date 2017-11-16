@@ -88,7 +88,7 @@ public class Accelerometre {
         HashMap<String,String> listeAccelerometre = new HashMap<>();
 
         listeAccelerometre.put("id_accelerometre",String.valueOf(this.id));
-        listeAccelerometre.put("accelerometre","x : " + String.valueOf(this.x) + "y : " + String.valueOf(this.y) + "z : " + String.valueOf(this.y));
+        listeAccelerometre.put("accelerometre","x : " + String.valueOf(this.x) + " - y : " + String.valueOf(this.y) + " - z : " + String.valueOf(this.y));
         listeAccelerometre.put("date",this.date + " " + this.heure);
 
         return listeAccelerometre;
