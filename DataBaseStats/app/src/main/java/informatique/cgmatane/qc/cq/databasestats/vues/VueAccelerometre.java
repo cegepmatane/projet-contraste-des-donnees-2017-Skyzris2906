@@ -42,6 +42,10 @@ public class VueAccelerometre extends AppCompatActivity {
 
         afficherValeursAccelerometre();
 
+        listeAccelerometre = accelerometreDAO.listerToutesLesValeursAccelerometre();
+
+        libelleNombreValeurs.setText("Total : "+ listeAccelerometre.size()+ " valeurs");
+
     }
 
     protected void afficherValeursAccelerometre(){
