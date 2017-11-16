@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="Nombre de valeurs"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="26dp"
-        app:layout_constraintTop_toBottomOf="@+id/liste_temperatures_vue_temperatures"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="123dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="Valeur moyenne :"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@+id/libelle_nombrevaleurs_vue_temperatures"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/libelle_nombrevaleurs_vue_temperatures" />
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="Valeur maximum :"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@+id/libelle_moyenne_vue_temperatures"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/libelle_moyenne_vue_temperatures" />
@@ -48,23 +48,25 @@
         android:layout_height="wrap_content"
         android:text="Valeur minimum :"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@+id/libelle_valeurmax_vue_temperatures"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="@+id/libelle_valeurmax_vue_temperatures" />
 
     <ListView
         android:id="@+id/liste_temperatures_vue_temperatures"
         android:layout_width="0dp"
-        android:layout_height="302dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginStart="6dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/libelle_nombrevaleurs_vue_temperatures"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="2dp"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="19dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
