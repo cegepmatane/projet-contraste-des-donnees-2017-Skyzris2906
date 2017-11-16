@@ -1,8 +1,5 @@
 package informatique.cgmatane.qc.cq.databasestats.modele;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -12,13 +9,15 @@ import java.util.HashMap;
 public class Temperature {
 
     private int id;
-    private String accelerometre;
-    private Date date;
+    private Double temperature;
+    private String date;
+    private String heure;
 
-    public Temperature(int id, String accelerometre, Date date) {
+    public Temperature(int id, Double temperature, String date, String heure) {
         this.id = id;
-        this.accelerometre = accelerometre;
+        this.temperature = temperature;
         this.date = date;
+        this.heure = heure;
     }
 
     public int getId() {
@@ -29,39 +28,47 @@ public class Temperature {
         this.id = id;
     }
 
-    public String getAccelerometre() {
-        return accelerometre;
+    public Double getTemperature() {
+        return temperature;
     }
 
-    public void setAccelerometre(String accelerometre) {
-        this.accelerometre = accelerometre;
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getHeure() {
+        return heure;
+    }
+
+    public void setHeure(String heure) {
+        this.heure = heure;
     }
 
     @Override
     public String toString() {
         return "Temperature{" +
                 "id=" + id +
-                ", accelerometre='" + accelerometre + '\'' +
-                ", date=" + date +
+                ", temperature=" + temperature +
+                ", date='" + date + '\'' +
+                ", heure='" + heure + '\'' +
                 '}';
     }
 
     public HashMap<String,String> exporteEnHashMap(){
-        HashMap<String,String> listeDonnees = new HashMap<>();
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        HashMap<String,String> listeTemperatures = new HashMap<>();
 
-        listeDonnees.put("id_donnees",String.valueOf(this.id));
-        listeDonnees.put("accelerometre",this.accelerometre);
-        listeDonnees.put("date",dateFormat.format(date));
+        listeTemperatures.put("id_temperature",String.valueOf(this.id));
+        listeTemperatures.put("temperature",String.valueOf(this.temperature));
+        listeTemperatures.put("date",this.date + " " + this.heure);
 
-        return listeDonnees;
+        return listeTemperatures;
     }
 }
