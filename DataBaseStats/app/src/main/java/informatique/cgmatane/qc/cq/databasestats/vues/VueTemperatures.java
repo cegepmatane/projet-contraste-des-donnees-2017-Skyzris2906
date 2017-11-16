@@ -2,6 +2,7 @@ package informatique.cgmatane.qc.cq.databasestats.vues;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -9,11 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import informatique.cgmatane.qc.cq.databasestats.R;
+import informatique.cgmatane.qc.cq.databasestats.donnees.TemperaturesDAO;
 
 public class VueTemperatures extends AppCompatActivity {
 
     protected ListView vueListeTemperatures;
     protected List<HashMap<String,String>> listeTemperatures;
+    protected TemperaturesDAO temperaturesDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +25,14 @@ public class VueTemperatures extends AppCompatActivity {
 
         vueListeTemperatures = (ListView)findViewById(R.id.liste_temperatures_vue_temperatures);
 
+        temperaturesDAO = new TemperaturesDAO();
+
         afficherLesTemperatures();
     }
 
     protected void afficherLesTemperatures(){
 
-        listeTemperatures = null;
+        listeTemperatures = temperaturesDAO.listerLesTemperaturesEnHashMap();
 
         SimpleAdapter adapteurVueListeTemperatures = new SimpleAdapter(
                 this,

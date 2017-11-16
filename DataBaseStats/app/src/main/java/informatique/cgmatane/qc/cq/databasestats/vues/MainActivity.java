@@ -3,6 +3,7 @@ package informatique.cgmatane.qc.cq.databasestats.vues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,8 +25,12 @@ public class MainActivity extends AppCompatActivity {
         boutonTemperatures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,VueTemperatures.class);
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(MainActivity.this, VueTemperatures.class);
+                    startActivity(intent);
+                }catch (Exception ex){
+                    Log.d("APPERROR",ex.getMessage());
+                }
             }
         });
 

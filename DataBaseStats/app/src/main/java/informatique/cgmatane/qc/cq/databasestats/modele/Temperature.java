@@ -66,7 +66,7 @@ public class Temperature {
         HashMap<String,String> listeTemperatures = new HashMap<>();
 
         listeTemperatures.put("id_temperature",String.valueOf(this.id));
-        listeTemperatures.put("temperature",String.valueOf(this.temperature));
+        listeTemperatures.put("temperature",String.valueOf(this.temperature) + " °C");
         listeTemperatures.put("date",this.date + " " + this.heure);
 
         return listeTemperatures;
