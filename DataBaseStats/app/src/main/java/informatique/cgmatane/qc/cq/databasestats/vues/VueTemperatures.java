@@ -37,7 +37,7 @@ public class VueTemperatures extends AppCompatActivity {
         libelleValeurMax = (TextView)findViewById(R.id.libelle_valeurmax_vue_temperatures);
         libelleValeurMin = (TextView)findViewById(R.id.libelle_valeurmin_vue_temperatures);
 
-        temperaturesDAO = new TemperaturesDAO();
+        temperaturesDAO = new TemperaturesDAO(getApplicationContext());
 
         afficherLesTemperatures();
 

@@ -1,8 +1,21 @@
 package informatique.cgmatane.qc.cq.databasestats.donnees;
 
+import android.content.Context;
+import android.util.Log;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.io.InputStream;
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import informatique.cgmatane.qc.cq.databasestats.modele.Temperature;
 
@@ -14,8 +27,11 @@ public class TemperaturesDAO {
 
     private List<Temperature> listeTemperatures;
     private List<HashMap<String,String>> listeTemperaturesEnHashMap;
+    private Context context;
 
-    public TemperaturesDAO(){
+    public TemperaturesDAO(Context context){
+
+        this.context = context;
 
         listeTemperatures = new ArrayList<>();
         listeTemperaturesEnHashMap = new ArrayList<>();
@@ -25,15 +41,36 @@ public class TemperaturesDAO {
 
         listeTemperatures.clear();
 
-        Temperature temperature1 = new Temperature(1,25.3,"25/11","11:45");
-        Temperature temperature2 = new Temperature(2,26.0,"13/12","14:22");
-        Temperature temperature3 = new Temperature(3,27.8,"18/08","23:55");
-        Temperature temperature4 = new Temperature(4,14.1,"01/05","02:30");
+        try{
+            InputStream flux = context.getAssets().open("temperatures.xml");
+            Scanner lecteur = new Scanner(flux).useDelimiter("\\A");
+            String xml = lecteur.hasNext() ? lecteur.next() : "";
 
-        listeTemperatures.add(temperature1);
-        listeTemperatures.add(temperature2);
-        listeTemperatures.add(temperature3);
-        listeTemperatures.add(temperature4);
+            if (xml != null) {
+
+                DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                Document document = parseur.parse(new StringBufferInputStream(xml));
+
+                NodeList nodeListe = document.getElementsByTagName("Temperature");
+
+                for (int i =0; i<nodeListe.getLength(); i++) {
+
+                    Element elementTemperature = (Element) nodeListe.item(i);
+
+                    int id = Integer.parseInt(elementTemperature.getElementsByTagName("id").item(0).getTextContent());
+                    double degre = Double.parseDouble(elementTemperature.getElementsByTagName("degre").item(0).getTextContent());
+                    String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
+                    String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
+
+                    Temperature temperature = new Temperature(id,degre,date,heure);
+
+                    listeTemperatures.add(temperature);
+                }
+
+            }
+        }catch (Exception ex){
+            Log.d("APPERROR", ex.getMessage());
+        }
 
         return  listeTemperatures;
     }

@@ -1,0 +1,20 @@
+<listeTemperatures>
+    <Temperature>
+        <id>1</id>
+        <degre>22.9</degre>
+        <date>22/09</date>
+        <heure>23:30</heure>
+    </Temperature>
+    <Temperature>
+        <id>2</id>
+        <degre>15.6</degre>
+        <date>16/12</date>
+        <heure>15:55</heure>
+    </Temperature>
+    <Temperature>
+        <id>3</id>
+        <degre>25.2</degre>
+        <date>10/06</date>
+        <heure>17:24</heure>
+    </Temperature>
+</listeTemperatures>

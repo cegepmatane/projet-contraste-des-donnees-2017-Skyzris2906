@@ -38,7 +38,7 @@ public class VueAccelerometre extends AppCompatActivity {
         libelleValeurMax = (TextView)findViewById(R.id.libelle_valeurmax_vue_accelerometre);
         libelleValeurMin = (TextView)findViewById(R.id.libelle_valeurmin_vue_accelerometre);
 
-        accelerometreDAO = new AccelerometreDAO();
+        accelerometreDAO = new AccelerometreDAO(getApplicationContext());
 
         afficherValeursAccelerometre();
 

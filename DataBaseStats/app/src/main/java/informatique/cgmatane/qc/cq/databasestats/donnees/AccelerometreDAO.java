@@ -1,8 +1,21 @@
 package informatique.cgmatane.qc.cq.databasestats.donnees;
 
+import android.content.Context;
+import android.util.Log;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.io.InputStream;
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import informatique.cgmatane.qc.cq.databasestats.modele.Accelerometre;
 import informatique.cgmatane.qc.cq.databasestats.modele.Temperature;
@@ -15,8 +28,11 @@ public class AccelerometreDAO {
 
     private List<Accelerometre> listeAccelerometre;
     private List<HashMap<String,String>> listeAccelerometreEnHashMap;
+    private Context context;
 
-    public AccelerometreDAO (){
+    public AccelerometreDAO (Context context){
+
+        this.context = context;
 
         listeAccelerometre = new ArrayList<>();
         listeAccelerometreEnHashMap = new ArrayList<>();
@@ -26,15 +42,38 @@ public class AccelerometreDAO {
 
         listeAccelerometre.clear();
 
-        Accelerometre accelerometre1 = new Accelerometre(1,22.3,55.1,64.2,"14/09","13:26");
-        Accelerometre accelerometre2 = new Accelerometre(2,52.6,89.1,23.89,"26/10","19:40");
-        Accelerometre accelerometre3 = new Accelerometre(3,29.27,38.13,95.14,"11/04","22:54");
-        Accelerometre accelerometre4 = new Accelerometre(4,101.8,360.0,54.9,"05/01","12:17");
+        try{
+            InputStream flux = context.getAssets().open("accelerometre.xml");
+            Scanner lecteur = new Scanner(flux).useDelimiter("\\A");
+            String xml = lecteur.hasNext() ? lecteur.next() : "";
 
-        listeAccelerometre.add(accelerometre1);
-        listeAccelerometre.add(accelerometre2);
-        listeAccelerometre.add(accelerometre3);
-        listeAccelerometre.add(accelerometre4);
+            if (xml != null) {
+
+                DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                Document document = parseur.parse(new StringBufferInputStream(xml));
+
+                NodeList nodeListe = document.getElementsByTagName("Accelerometre");
+
+                for (int i =0; i<nodeListe.getLength(); i++) {
+
+                    Element elementTemperature = (Element) nodeListe.item(i);
+
+                    int id = Integer.parseInt(elementTemperature.getElementsByTagName("id").item(0).getTextContent());
+                    double x = Double.parseDouble(elementTemperature.getElementsByTagName("x").item(0).getTextContent());
+                    double y = Double.parseDouble(elementTemperature.getElementsByTagName("y").item(0).getTextContent());
+                    double z = Double.parseDouble(elementTemperature.getElementsByTagName("z").item(0).getTextContent());
+                    String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
+                    String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
+
+                    Accelerometre accelerometre = new Accelerometre(id,x,y,z,date,heure);
+
+                    listeAccelerometre.add(accelerometre);
+                }
+
+            }
+        }catch (Exception ex){
+            Log.d("APPERROR", ex.getMessage());
+        }
 
         return  listeAccelerometre;
     }
