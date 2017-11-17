@@ -1,6 +1,8 @@
 var http = require('http');
 var adresse = "127.0.0.1";
 var port = 8080;
+var postgresql = require('pg');
+var chaineDeConnection = 'postgres://maxime:naruto77@localhost:5432/database_principal';
 
 var repondre = async function(requete,reponse)
 {
@@ -17,7 +19,7 @@ var repondre = async function(requete,reponse)
 					
 					reponse.statusCode = 200;
 					reponse.setHeader('Content-type', 'application/json');
-					reponse.end("Valeur ajoutée !");			
+					reponse.end("Valeur ajoutée !");					
 				});
 		}
 	}
