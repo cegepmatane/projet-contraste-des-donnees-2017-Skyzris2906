@@ -8,7 +8,13 @@ var repondre = async function(requete,reponse)
 	{
 		if(requete.url === '/ajouter-accelerometre' || requete.url === '/ajouter-accelerometre/' )
 		{	
-
+			var message = '';
+			requete.on('data', function (data) { message += data;});
+			requete.on('end', async function()
+				{
+					console.log(message);
+		
+				});
 		}
 	}
 };
