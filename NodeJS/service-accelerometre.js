@@ -4,7 +4,10 @@ var port = 8080;
 
 var repondre = async function(requete,reponse)
 {
-	
+	if(requete.method === 'POST')
+	{
+		console.log("J'ai un POST");
+	}
 };
 
 var serveur = http.createServer( repondre );
