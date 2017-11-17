@@ -6,7 +6,10 @@ var repondre = async function(requete,reponse)
 {
 	if(requete.method === 'POST')
 	{
-		console.log("J'ai un POST");
+		if(requete.url === '/ajouter-accelerometre' || requete.url === '/ajouter-accelerometre/' )
+		{	
+
+		}
 	}
 };
 
