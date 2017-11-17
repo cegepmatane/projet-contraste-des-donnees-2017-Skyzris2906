@@ -12,8 +12,12 @@ var repondre = async function(requete,reponse)
 			requete.on('data', function (data) { message += data;});
 			requete.on('end', async function()
 				{
-					console.log(message);
-		
+					var accelerometre = JSON.parse(message); 
+					console.log(accelerometre);
+					
+					reponse.statusCode = 200;
+					reponse.setHeader('Content-type', 'application/json');
+					reponse.end("Valeur ajoutée !");			
 				});
 		}
 	}
