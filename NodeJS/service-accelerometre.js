@@ -1,3 +1,4 @@
+require('await');
 var http = require('http');
 var adresse = "127.0.0.1";
 var port = 8080;
@@ -16,7 +17,7 @@ var repondre = async function(requete,reponse)
 				{
 					var accelerometre = JSON.parse(message); 
 					console.log(accelerometre);
-					
+					await ajouterAccelerometre(accelerometre);
 					reponse.statusCode = 200;
 					reponse.setHeader('Content-type', 'application/json');
 					reponse.end("Valeur ajoutée !");					
@@ -24,6 +25,16 @@ var repondre = async function(requete,reponse)
 		}
 	}
 };
+
+ajouterAccelerometre = async function(accelerometre)
+{
+	basededonnees = new postgresql.Client(chaineDeConnection);
+	await basededonnees.connect();
+	var requeteAjouterAccelerometre = SQL_AJOUTER_ACCELEROMETRE.replace(':x', accelerometre.x).replace(':y', accelerometre.y).replace(':z', accelerometre.z).replace(':date', accelerometre.date).replace(':heure', accelerometre.heure);
+	console.log(requeteAjouterAccelerometre);
+	await basededonnees.query(requeteAjouterAccelerometre);
+	return true;
+}
 
 var serveur = http.createServer( repondre );
 
