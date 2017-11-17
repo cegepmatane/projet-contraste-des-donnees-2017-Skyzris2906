@@ -10,12 +10,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,22 +22,13 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import ca.qc.cgmatane.informatique.capteurvaleur.Donnees.BaseDeDonnees;
 
@@ -68,6 +58,8 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
         Log.d("INSTANCE", "PATH = " + BaseDeDonnees.databasePath);
 
         Log.d("INSTANCE", "JSON = " + getResults().toString());
+
+
     }
 
     @Override
@@ -119,6 +111,38 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
 
                         Toast.makeText(VueCapteur.this, "Valeur ajouté à la BDD", Toast.LENGTH_LONG).show();
                         write = true;
+
+                        try {
+
+                            URL url = new URL("http://127.0.0.1:8080/ajouter-accelerometre/");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setDoOutput(true);
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json");
+
+                            /*String input = "{\"x\":" + x + ", \"y\":" + y + ", \"z\":" + z + ", " +
+                                    "\"date\":" + strDate +", \"heure\":" + strTemps +"}";*/
+
+                            OutputStream os = conn.getOutputStream();
+                            os.write(getResults().toString().getBytes());
+                            os.flush();
+
+                            if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                                throw new RuntimeException("Failed : HTTP error code : "
+                                        + conn.getResponseCode());
+                            }
+
+                            conn.disconnect();
+
+                        } catch (MalformedURLException e) {
+
+                            e.printStackTrace();
+
+                        } catch (IOException e) {
+
+                            e.printStackTrace();
+
+                        }
                     }
                 }, 1);
             }
