@@ -9,3 +9,12 @@ E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCa
 E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\obj\Release\Arduino2Database.csproj.CoreCompileInputs.cache
 E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\obj\Release\Arduino2Database.exe
 E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\obj\Release\Arduino2Database.pdb
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\EntityFramework.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\EntityFramework.SqlServer.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\System.Data.SQLite.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\System.Data.SQLite.EF6.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\System.Data.SQLite.Linq.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\EntityFramework.xml
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\EntityFramework.SqlServer.xml
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\System.Data.SQLite.xml
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Release\System.Data.SQLite.dll.config

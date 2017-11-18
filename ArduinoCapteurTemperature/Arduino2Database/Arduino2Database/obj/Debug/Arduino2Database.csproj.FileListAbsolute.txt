@@ -9,3 +9,12 @@ E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCa
 E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Threading.Tasks.Extensions.dll
 E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\Npgsql.xml
 E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Threading.Tasks.Extensions.xml
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\EntityFramework.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\EntityFramework.SqlServer.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Data.SQLite.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Data.SQLite.EF6.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Data.SQLite.Linq.dll
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\EntityFramework.xml
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\EntityFramework.SqlServer.xml
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Data.SQLite.xml
+E:\TrashSoftwares\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\ArduinoCapteurTemperature\Arduino2Database\Arduino2Database\bin\Debug\System.Data.SQLite.dll.config

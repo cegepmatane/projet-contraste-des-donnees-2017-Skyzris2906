@@ -5,12 +5,11 @@ using System.IO.Ports;
 
 public class ReadFromArduino
 {
-    SerialPort arduino = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
+    SerialPort arduino = new SerialPort("COM7", 9600, Parity.None, 8, StopBits.One);
     public bool droitEcriture = true;
 
     public ReadFromArduino()
-    {
-        
+    {  
         arduino.DataReceived += new SerialDataReceivedEventHandler(ArduinoDataReceived); //Get les datas du port
         
         arduino.Open(); //Ouvre le port
@@ -21,7 +20,7 @@ public class ReadFromArduino
     private void ArduinoDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         String valeurArduino = arduino.ReadLine();
-        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 30 || DateTime.Now.Minute == 00))
+        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 48 || DateTime.Now.Minute == 00))
         {
             droitEcriture = false;
             Insert2Database(valeurArduino);
@@ -66,15 +65,16 @@ public class ReadFromArduino
 
     private void Insert2Database(String valeur)
     {
-        using (var connection = new SQLiteConnection(Launcher.DatabaseSource))
+        var connectionInformations = "Host=127.0.0.1;Username=postgres;Password=Sql1995;Database=principale;";
+        using (var connection = new NpgsqlConnection(connectionInformations))
         {
-            using (var cmd = new SQLiteCommand(connection))
-            {
-                connection.Open();
-                cmd.CommandText = Launcher.CreateTable;
-                cmd.ExecuteNonQuery();
+            connection.Open();
 
-                cmd.CommandText = "INSERT INTO temperature (celsius, date, heure) VALUES (@c, @d, @h)";
+            using (var cmd = new NpgsqlCommand())
+            {
+                cmd.Connection = connection;
+
+                cmd.CommandText = "INSERT INTO temperature (temperature_celsius, temperature_date, temperature_heure) VALUES (@c, @d, @h)";
                 cmd.Parameters.AddWithValue("@c", valeur);
                 cmd.Parameters.AddWithValue("d", DateTime.Now.ToString("MM/dd/yyyy"));
                 cmd.Parameters.AddWithValue("h", DateTime.Now.ToString("hh'h'mm"));
@@ -83,9 +83,9 @@ public class ReadFromArduino
                 Console.WriteLine("Valeur inscrite: " + valeur);
                 Console.WriteLine("Date inscrite: " + DateTime.Now.ToString("MM/dd/yyyy"));
                 Console.WriteLine("Heure inscrite: " + DateTime.Now.ToString("hh'h'mm"));
-
-                connection.Close();
             }
+
+            connection.Close();
         }
     }
 }
