@@ -26,7 +26,7 @@ public class ReadFromArduino
     private void ArduinoDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         String valeurArduino = arduino.ReadLine();
-        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 11 || DateTime.Now.Minute == 00))
+        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 08 || DateTime.Now.Minute == 00))
         {
             droitEcriture = false;
             Insert2Database(valeurArduino);
@@ -99,7 +99,9 @@ public class ReadFromArduino
 
                 Console.WriteLine(jsonTable);
 
-                if(DateTime.Now.Hour == 00 && DateTime.Now.Minute == 00 && droitEcriture2 == true)
+                //PostBookAsync(jsonTable);
+
+                if (DateTime.Now.Hour == 00 && DateTime.Now.Minute == 00 && droitEcriture2 == true)
                 {
                     droitEcriture2 = false;
                     PostBookAsync(jsonTable);
@@ -152,7 +154,7 @@ public class ReadFromArduino
     static async Task PostBookAsync(String data)
     {
         // notre cible
-        string page = "http://127.0.0.1:8080/ajouter-temperature/";
+        string page = "http://192.168.1.12:8080/ajouter-temperature/";
 
         using (HttpClient client = new HttpClient())
         {
