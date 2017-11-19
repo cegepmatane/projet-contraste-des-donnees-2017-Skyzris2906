@@ -22,11 +22,6 @@ import modele.Accelerometre;
 
 public class AccelerometreDAO {
 	
-	private String lireBalise(Element element, String balise)
-	{
- 		return element.getElementsByTagName("id").item(0).getTextContent();
- 	}
-	
 	private Document parserXML(String xml)
 	{
 		Document doc = null;
@@ -47,6 +42,7 @@ public class AccelerometreDAO {
 		return doc;
 	}
 	
+	
 	private String consommerService(String url)
 	{
 		String xml = null;
@@ -65,45 +61,16 @@ public class AccelerometreDAO {
 			catch (MalformedURLException e){
 				e.printStackTrace();
 			}
-
 			catch (IOException e) {
 				e.printStackTrace();
 			}
 			return null;
 	}
 			
-	public Accelerometre TrouverAccelerometre(int numero)
-	{
-		String xml = consommerService("http://localhost/temperature/liste" + numero);
-		if(xml != null)
-		{
-					// interpretation du xml
-					Document document = parserXML(xml);
-					if (document == null) return null;
-					
-					//  a définir selon la table dans postgresql
-					 
-					Element element = document.getDocumentElement();
-					
-					String id = lireBalise(element,"id");
-					String accelerometre = lireBalise(element,"accelerometre");
-					String date = lireBalise(element,"date");
-					String heure = lireBalise(element,"heure");
-					
-					System.out.println("Resultats trouves " + id + " " + accelerometre + " " + date + " "  + heure);
-					
-					Accelerometre accelerometre = new Accelerometre();
-					// accelerometre.setId(Integer.parseInt(id));
-					return accelerometre;
-			}	
-	
-			return null;
-		}
-	
 	public List<Accelerometre> listerAccelerometre()
 	 	{
 	 		// Récupérer le xml
-			String xml = consommerService("http://localhost/temperature/liste/");		
+			String xml = consommerService("http://1010110110001110/service_accelerometre/accelerometre/liste/index.php");		
 	 	
 	 		// Interprétation du xml - construire les modeles
 			
@@ -119,15 +86,24 @@ public class AccelerometreDAO {
 	 				for(int position = 0; position < listeNoeudsAccelerometres.getLength(); position++)
 	 				{
 	 					Element elementAccelerometre = (Element)listeNoeudsAccelerometres.item(position);
-	 					//System.out.println("Tagname=" + elementAccelerometre.getTagName());
-	 					
+ 				/*		System.out.println("Tagname=" + elementAccelerometre.getTagName());
 	 					String id = lireBalise(elementAccelerometre,"id");
 						String accelerometre = lireBalise(elementAccelerometre,"accelerometre");
 						String date = lireBalise(elementAccelerometre,"date");
 						String heure = lireBalise(elementAccelerometre,"heure");
-	 					
+					
 						Accelerometre accelerometre = new Accelerometre();
 		 				//	accelerometre.setId(Integer.parseInt(id)); // TODO : robustesse 
+							listeAccelerometres.add(accelerometre);
+	 				}
+		 				return listeAccelerometres;
+				*/ 		
+	 					String numero = document.getElementsByTagName("id").item(0).getTextContent();
+	 					String pixel = document.getElementsByTagName("pixel ").item(0).getTextContent();
+	 					String date = document.getElementsByTagName("date").item(0).getTextContent();
+	 					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
+	 					Accelerometre accelerometre = new Accelerometre();
+	 					//accelerometre.setId(Integer.parseInt(id)); // TODO : robustesse 
 							listeAccelerometres.add(accelerometre);
 		 				}
 		 				return listeAccelerometres;

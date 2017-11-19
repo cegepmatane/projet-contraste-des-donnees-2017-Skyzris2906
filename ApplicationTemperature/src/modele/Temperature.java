@@ -1,9 +1,9 @@
 package modele;
 
-public class Pixel {
+public class Temperature {
 	
 	protected int id;
-	protected int pixel;
+	protected int temperature;
 	protected String date;
 	protected String heure;
 
@@ -15,12 +15,12 @@ public class Pixel {
 		this.id = id;
 	}
 	
-	public int getPixel() {
-		return pixel;
+	public int getTemperature() {
+		return temperature;
 	}
 
-	public void setPixel(int pixel) {
-		this.pixel = pixel;
+	public void setTemperature(int temperature) {
+		this.temperature = temperature;
 	}
 
 	public String getDate() {
