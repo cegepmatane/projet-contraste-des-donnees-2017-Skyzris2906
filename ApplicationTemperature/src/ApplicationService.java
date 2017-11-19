@@ -15,13 +15,13 @@ import javax.xml.parsers.DocumentBuilder;
 
 import accesseur.AccelerometreDAO;
 
-public class AccelerometreService 
+public class ApplicationService 
 {
 	public static void main (String[] args)
 	{
 		
 		AccelerometreDAO accelerometreDAO = new AccelerometreDAO();
-		accelerometreDAO.listerAccelerometres();
+		accelerometreDAO.listerAccelerometre();
 		
 	}
 

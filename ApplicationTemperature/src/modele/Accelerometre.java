@@ -3,7 +3,7 @@ package modele;
 public class Accelerometre {
 	
 	protected int id;
-	protected int pixel;
+	protected int accelerometre;
 	protected String date;
 	protected String heure;
 	
@@ -19,13 +19,13 @@ public class Accelerometre {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public int getPixel() {
-		return pixel;
+	
+	public int getAccelerometre() {
+		return accelerometre;
 	}
 
-	public void setPixel(int pixel) {
-		this.pixel = pixel;
+	public void setAccelerometre(int accelerometre) {
+		this.accelerometre = accelerometre;
 	}
 
 	public String getDate() {
