@@ -8,7 +8,7 @@
 	//print_r($_GET);
 	$idTemperature = filter_input(INPUT_GET, 'temperature', FILTER_VALIDATE_INT);
 
-	$SQL_TROUVER_TEMPERATURE = "SELECT * FROM temperature WHERE id = :id";
+	$SQL_TROUVER_TEMPERATURE = "SELECT * FROM temperature WHERE id_temperature = :id";
 	$requeteTrouverTemperature = $basededonnees->prepare($SQL_TROUVER_TEMPERATURE);
 	$requeteTrouverTemperature->bindParam(':id', $idTemperature, PDO::PARAM_INT);
 	$requeteTrouverTemperature->execute();
