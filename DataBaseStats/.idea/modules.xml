@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DataBaseStats.iml" filepath="$PROJECT_DIR$/DataBaseStats.iml" />
-      <module fileurl="file://C:\Users\1731861\Documents\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\DataBaseStats\DataBaseStats.iml" filepath="C:\Users\1731861\Documents\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\DataBaseStats\DataBaseStats.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataBaseStats.iml" filepath="$PROJECT_DIR$/DataBaseStats.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../../1731861/Documents/GitHub/projet-contraste-des-donnees-2017-Skyzris2906/DataBaseStats/DataBaseStats.iml" filepath="$PROJECT_DIR$/../../../../../1731861/Documents/GitHub/projet-contraste-des-donnees-2017-Skyzris2906/DataBaseStats/DataBaseStats.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\1731861\Documents\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\DataBaseStats\app\app.iml" filepath="C:\Users\1731861\Documents\GitHub\projet-contraste-des-donnees-2017-Skyzris2906\DataBaseStats\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../../1731861/Documents/GitHub/projet-contraste-des-donnees-2017-Skyzris2906/DataBaseStats/app/app.iml" filepath="$PROJECT_DIR$/../../../../../1731861/Documents/GitHub/projet-contraste-des-donnees-2017-Skyzris2906/DataBaseStats/app/app.iml" />
     </modules>
   </component>
 </project>

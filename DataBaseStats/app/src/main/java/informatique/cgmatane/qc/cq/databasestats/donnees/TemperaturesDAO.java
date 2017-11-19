@@ -6,9 +6,13 @@ import android.util.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +46,11 @@ public class TemperaturesDAO {
         listeTemperatures.clear();
 
         try{
-            InputStream flux = context.getAssets().open("temperatures.xml");
+
+            URL url = new URL("http://192.168.1.12/service_temp/temperature/liste/index.php");
+            HttpURLConnection service = (HttpURLConnection) url.openConnection();
+            InputStream flux = service.getInputStream();
+
             Scanner lecteur = new Scanner(flux).useDelimiter("\\A");
             String xml = lecteur.hasNext() ? lecteur.next() : "";
 
@@ -58,7 +66,7 @@ public class TemperaturesDAO {
                     Element elementTemperature = (Element) nodeListe.item(i);
 
                     int id = Integer.parseInt(elementTemperature.getElementsByTagName("id").item(0).getTextContent());
-                    double degre = Double.parseDouble(elementTemperature.getElementsByTagName("degre").item(0).getTextContent());
+                    double degre = Double.parseDouble(elementTemperature.getElementsByTagName("temperature").item(0).getTextContent());
                     String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
                     String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
 

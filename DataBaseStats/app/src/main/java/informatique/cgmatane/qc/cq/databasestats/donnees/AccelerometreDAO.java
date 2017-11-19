@@ -9,6 +9,8 @@ import org.w3c.dom.NodeList;
 
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,10 +45,12 @@ public class AccelerometreDAO {
         listeAccelerometre.clear();
 
         try{
-            InputStream flux = context.getAssets().open("accelerometre.xml");
+            URL url = new URL("http://192.168.1.12/service_accelerometre/accelerometre/liste/index.php");
+            HttpURLConnection service = (HttpURLConnection) url.openConnection();
+            InputStream flux = service.getInputStream();
+
             Scanner lecteur = new Scanner(flux).useDelimiter("\\A");
             String xml = lecteur.hasNext() ? lecteur.next() : "";
-
             if (xml != null) {
 
                 DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
