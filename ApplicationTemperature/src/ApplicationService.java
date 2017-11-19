@@ -23,6 +23,8 @@ public class ApplicationService
 		AccelerometreDAO accelerometreDAO = new AccelerometreDAO();
 		accelerometreDAO.listerAccelerometre();
 		
+		
+		
 	}
 
 }

@@ -2,46 +2,51 @@ package modele;
 
 public class Accelerometre {
 	
-	protected int id;
-	protected int accelerometre;
-	protected String date;
-	protected String heure;
-	
-	//public void setTemperatureDate(String temperatureDate) {
-	//	this.temperatureDate = temperatureDate;
+    private  int id;
+    private Double x;
+    private Double y;
+    private Double z;
+    private String date;
+    private String heure;
+    
+//	public void setAccelerometreDate(String accelerometreDate) {
+//	this.accelerometreDate = accelerometreDate;
 //	}
-
-
+    
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public int getAccelerometre() {
-		return accelerometre;
+	public Double getX() {
+		return x;
 	}
-
-	public void setAccelerometre(int accelerometre) {
-		this.accelerometre = accelerometre;
+	public void setX(Double x) {
+		this.x = x;
 	}
-
+	public Double getY() {
+		return y;
+	}
+	public void setY(Double y) {
+		this.y = y;
+	}
+	public Double getZ() {
+		return z;
+	}
+	public void setZ(Double z) {
+		this.z = z;
+	}
 	public String getDate() {
 		return date;
 	}
-
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 	public String getHeure() {
 		return heure;
 	}
-
 	public void setHeure(String heure) {
 		this.heure = heure;
 	}
-	
 }
