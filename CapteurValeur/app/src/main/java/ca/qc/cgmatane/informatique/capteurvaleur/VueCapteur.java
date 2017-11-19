@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -51,20 +52,18 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
 
         checkStoragePermission();
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         valeur = (TextView)findViewById(R.id.valeur_capteur);
 
         accesseurBaseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
         Log.d("INSTANCE", "Bdd = " + accesseurBaseDeDonnees);
 
         Log.d("INSTANCE", "PATH = " + BaseDeDonnees.databasePath);
 
         Log.d("INSTANCE", "JSON = " + getResults().toString());
-
-
     }
 
     @Override
@@ -87,15 +86,15 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         final String strDate = dateFormat.format(calendar.getTime());
 
-        final String strTemps = calendar.getTime().getHours() + ":" + calendar.getTime().getMinutes();
+        final String strTemps = calendar.getTime().getHours() + "h" + calendar.getTime().getMinutes();
 
         final float x = sensorEvent.values[0];
         final float y = sensorEvent.values[1];
         final float z = sensorEvent.values[2];
 
-        valeur.setText(" x: " + x + " y: " + y + " z: " + z + " date: " + strDate + " heure: " + strTemps + " seconds: " + calendar.getTime().getSeconds());
+        valeur.setText(" x: " + x + " y: " + y + " z: " + z + " \n\ndate: " + strDate + " heure: " + strTemps + " seconds: " + calendar.getTime().getSeconds());
 
-        if(calendar.getTime().getSeconds() == 0 && (calendar.getTime().getMinutes() == 58 || calendar.getTime().getMinutes() == 0))
+        if(calendar.getTime().getSeconds() == 0 && (calendar.getTime().getMinutes() == 30 || calendar.getTime().getMinutes() == 0))
         {
             if(!write)
             {
@@ -104,11 +103,12 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
                     @Override
                     public void run() {
                         String AJOUTER_LA_VALEUR = "INSERT INTO accelerometre(x, y, z, " +
-                                "date, heure) VALUES('" + x +
+                                "date, heure, sync) VALUES('" + x +
                                 "', '" + y + "', " +
                                 "'" + z + "', " +
                                 "'" + strDate + "', " +
-                                "'" + strTemps + "')";
+                                "'" + strTemps + "', " +
+                                "'" + 0 + "')";
 
                         Log.d("INSERT", AJOUTER_LA_VALEUR);
 
@@ -116,28 +116,32 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
 
                         Toast.makeText(VueCapteur.this, "Valeur ajouté à la BDD", Toast.LENGTH_LONG).show();
                         write = true;
+                    }
+                }, 1);
+            }
+        }
 
+        if(calendar.getTime().getSeconds() == 0 && calendar.getTime().getMinutes() == 5 && calendar.getTime().getHours() == 2)
+        {
+            if(!write)
+            {
+                final Handler handler = new Handler();
+                boolean post = handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        JSONArray array = getResults();
                         try {
-
-                            URL url = new URL("http://192.168.1.12:8080/ajouter-accelerometre/");
+                            URL url = new URL("http://127.0.0.1:8080/ajouter-accelerometre/");
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setDoOutput(true);
                             conn.setRequestMethod("POST");
                             conn.setRequestProperty("Content-Type", "application/json");
 
-                            String input = "{\"x\":" + x + ", \"y\":" + y + ", \"z\":" + z + ", " +
-                                    "\"date\":" + strDate +", \"heure\":" + strTemps +"}";
-
                             OutputStream os = conn.getOutputStream();
-                            os.write(getResults().toString().getBytes());
+                            os.write(array.toString().getBytes());
                             os.flush();
 
                             conn.getResponseCode();
-
-                           /* if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                                throw new RuntimeException("Failed : HTTP error code : "
-                                        + conn.getResponseCode());
-                            }*/
 
                             conn.disconnect();
 
@@ -150,6 +154,22 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
                             e.printStackTrace();
 
                         }
+                        for (int i = 0; i < array.length(); i++) {
+                            try {
+                                JSONObject object = array.getJSONObject(i);
+                                String UPDATE_SYNC = "UPDATE accelerometre " +
+                                        "SET sync = '1' WHERE id = '" +
+                                        object.getInt("id") + "'";
+
+                                Log.d("SYNC", UPDATE_SYNC);
+                                accesseurBaseDeDonnees.getWritableDatabase().execSQL(UPDATE_SYNC);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        Toast.makeText(VueCapteur.this, "Valeurs Synced", Toast.LENGTH_LONG).show();
+                        write = true;
                     }
                 }, 1);
             }
@@ -160,8 +180,7 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
         String myPath = BaseDeDonnees.databasePath;// Set path to your database
         SQLiteDatabase myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
-
-        String searchQuery = "SELECT * FROM accelerometre";
+        String searchQuery = "SELECT * FROM accelerometre WHERE sync = 0";
         Cursor cursor = myDataBase.rawQuery(searchQuery, null);
 
         JSONArray resultSet = new JSONArray();
@@ -258,7 +277,6 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.READ_EXTERNAL_STORAGE)
                             == PackageManager.PERMISSION_GRANTED) {
-                        //add stuff
                     }
 
                 } else {

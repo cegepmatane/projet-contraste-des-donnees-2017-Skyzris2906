@@ -36,7 +36,8 @@ public class BaseDeDonnees extends SQLiteOpenHelper
                 "y DOUBLE, " +
                 "z DOUBLE, " +
                 "date TEXT, " +
-                "heure TEXT)";
+                "heure TEXT, " +
+                "sync TEXT)";
 
         db.execSQL(CREATE_TABLE);
     }
