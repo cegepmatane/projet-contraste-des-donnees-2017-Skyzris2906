@@ -84,18 +84,6 @@ public class AccelerometreDAO {
 	 				for(int position = 0; position < listeNoeudsAccelerometres.getLength(); position++)
 	 				{
 	 					Element elementAccelerometre = (Element)listeNoeudsAccelerometres.item(position);
- 				/*		System.out.println("Tagname=" + elementAccelerometre.getTagName());
-	 					String id = lireBalise(elementAccelerometre,"id");
-						String accelerometre = lireBalise(elementAccelerometre,"accelerometre");
-						String date = lireBalise(elementAccelerometre,"date");
-						String heure = lireBalise(elementAccelerometre,"heure");
-					
-						Accelerometre accelerometre = new Accelerometre();
-		 				//	accelerometre.setId(Integer.parseInt(id)); // TODO : robustesse 
-						listeAccelerometres.add(accelerometre);
-	 				}
-		 				return listeAccelerometres;
-				*/ 		
 	 					String numero = document.getElementsByTagName("id").item(0).getTextContent();
 	 					double x = Double.parseDouble(getElementsByTagName("x").item(0).getTextContent());
 	 					double y = Double.parseDouble(getElementsByTagName("y").item(0).getTextContent());

@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 
 import accesseur.AccelerometreDAO;
+import accesseur.TemperatureDAO;
 
 public class ApplicationService 
 {
@@ -23,7 +24,8 @@ public class ApplicationService
 		AccelerometreDAO accelerometreDAO = new AccelerometreDAO();
 		accelerometreDAO.listerAccelerometre();
 		
-		
+		TemperatureDAO temperatureDAO = new TemperatureDAO();
+		temperatureDAO.listerTemperature();
 		
 	}
 
