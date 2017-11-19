@@ -114,7 +114,7 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
 
                         try {
 
-                            URL url = new URL("http://127.0.0.1:8080/ajouter-accelerometre/");
+                            URL url = new URL("http://192.168.1.12:8080/ajouter-accelerometre/");
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setDoOutput(true);
                             conn.setRequestMethod("POST");

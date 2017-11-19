@@ -6,7 +6,7 @@
 	include "../basededonnees.php";
 
 	//print_r($_GET);
-	$idTemperature = filter_input(INPUT_GET, 'todo', FILTER_VALIDATE_INT);
+	$idTemperature = filter_input(INPUT_GET, 'temperature', FILTER_VALIDATE_INT);
 
 	$SQL_TROUVER_TEMPERATURE = "SELECT * FROM temperature WHERE id = :id";
 	$requeteTrouverTemperature = $basededonnees->prepare($SQL_TROUVER_TEMPERATURE);

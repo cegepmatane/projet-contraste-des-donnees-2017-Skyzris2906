@@ -10,11 +10,12 @@
 	$listeTemperatures = $requeteListeTemperatures->fetchAll(PDO::FETCH_OBJ);
 ?>
 <listeTemperatures>
-u<?php
-foreach($listeTemperatures as $temp)
+<?php
+foreach($listeTemperatures as $temperature)
 {
 ?>
 	<Temperature>
+		<id><?=$temperature->id_temperature?></id>
 		<temperature><?=$temperature->temperature_celsius?></temperature>
 		<date><?=$temperature->temperature_date?></date>
 		<heure><?=$temperature->temperature_heure?></heure>
