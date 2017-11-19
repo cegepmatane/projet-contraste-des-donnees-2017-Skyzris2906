@@ -12,6 +12,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +54,10 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
         valeur = (TextView)findViewById(R.id.valeur_capteur);
 
         accesseurBaseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         Log.d("INSTANCE", "Bdd = " + accesseurBaseDeDonnees);
 
         Log.d("INSTANCE", "PATH = " + BaseDeDonnees.databasePath);
@@ -90,7 +95,7 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
 
         valeur.setText(" x: " + x + " y: " + y + " z: " + z + " date: " + strDate + " heure: " + strTemps + " seconds: " + calendar.getTime().getSeconds());
 
-        if(calendar.getTime().getSeconds() == 0 && (calendar.getTime().getMinutes() == 30 || calendar.getTime().getMinutes() == 0))
+        if(calendar.getTime().getSeconds() == 0 && (calendar.getTime().getMinutes() == 58 || calendar.getTime().getMinutes() == 0))
         {
             if(!write)
             {
@@ -120,17 +125,19 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
                             conn.setRequestMethod("POST");
                             conn.setRequestProperty("Content-Type", "application/json");
 
-                            /*String input = "{\"x\":" + x + ", \"y\":" + y + ", \"z\":" + z + ", " +
-                                    "\"date\":" + strDate +", \"heure\":" + strTemps +"}";*/
+                            String input = "{\"x\":" + x + ", \"y\":" + y + ", \"z\":" + z + ", " +
+                                    "\"date\":" + strDate +", \"heure\":" + strTemps +"}";
 
                             OutputStream os = conn.getOutputStream();
                             os.write(getResults().toString().getBytes());
                             os.flush();
 
-                            if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                            conn.getResponseCode();
+
+                           /* if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                                 throw new RuntimeException("Failed : HTTP error code : "
                                         + conn.getResponseCode());
-                            }
+                            }*/
 
                             conn.disconnect();
 
