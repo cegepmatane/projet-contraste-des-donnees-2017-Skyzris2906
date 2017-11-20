@@ -1,0 +1,4 @@
+INSERT INTO accelerometre (x, y, z, date, heure) VALUES ('-0.113725', '0.124498', '9.61033', '19/11/2017', '22h38');
+INSERT INTO accelerometre (x, y, z, date, heure) VALUES ('-0.114922', '0.123301', '9.6199', '19/11/2017', '22h38');
+INSERT INTO accelerometre (x, y, z, date, heure) VALUES ('-0.113725', '0.150835', '9.60673', '19/11/2017', '22h42');
+INSERT INTO accelerometre (x, y, z, date, heure) VALUES ('-0.116119', '0.153229', '9.61631', '19/11/2017', '22h46');
