@@ -75,6 +75,8 @@ public class ApplicationService extends Application
         lblMax = new Label("Maximum Temperatures : ");
         //System.out.println(Statistiques.maximum(listerToutesLesTemperatures)+" °C");
         
+        
+        
         // Scene accelerometre
         btnSceneBDD2=new Button ("Accelerometre");
         btnSceneAcce=new Button("Retour");
@@ -88,34 +90,35 @@ public class ApplicationService extends Application
         listerAccelerometre = accelerometreDAO.listerAccelerometre();
         
         lblx = new Label("x : ");
+        //System.out.println(AcelerometreDAO.x(listerAccelerometre)+" ");
         lbly = new Label("y : ");
+        //System.out.println(AcelerometreDAO.y(listerAccelerometre)+" ")
         lblz = new Label("z : ");
+        //System.out.println(AcelerometreDAO.z(listerAccelerometre)+" ")
         lblDate = new Label("Date : ");
         lblHeure = new Label("Heure : ");
    
         
         //Pane
         paneBDD=new FlowPane();
-        paneTemp=new FlowPane();
-        paneAcce=new FlowPane();
-        
         paneBDD.setVgap(30);
+        paneBDD.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
+        paneBDD.getChildren().addAll(lblSceneBDD, btnSceneBDD, btnSceneBDD2);
+        
+        paneTemp=new FlowPane();
         paneTemp.setVgap(30);
         paneTemp.setHgap(30);
+        paneTemp.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
+        paneTemp.getChildren().addAll(lblSceneTemp,lblMax,lblMoy,lblMin, btnSceneTemp);
+        
+        paneAcce=new FlowPane();
         paneAcce.setVgap(30);
         paneAcce.setHgap(30);
-        
-        //set background color of each Pane
-        paneBDD.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
-        paneTemp.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
         paneAcce.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
-           
-        //add everything to panes
-        paneBDD.getChildren().addAll(lblSceneBDD, btnSceneBDD, btnSceneBDD2);
-        paneTemp.getChildren().addAll(lblSceneTemp,lblMax,lblMoy,lblMin, btnSceneTemp);
         paneAcce.getChildren().addAll(lblSceneAcce, btnSceneAcce,lblx, lbly, lblz, lblDate, lblHeure);
         
-        //make 3 scenes from 3 panes
+        
+        
         sceneBDD= new Scene(paneBDD, 600, 200);
         sceneTemp = new Scene(paneTemp, 600, 200);
         sceneAcce = new Scene(paneAcce, 600, 200);
