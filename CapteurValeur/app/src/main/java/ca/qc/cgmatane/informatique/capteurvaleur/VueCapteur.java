@@ -41,6 +41,7 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
     public static final int MY_PERMISSIONS_REQUEST_STORAGE = 999;
     BaseDeDonnees accesseurBaseDeDonnees;
     boolean write = false;
+    boolean write2 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
 
         Log.d("INSTANCE", "PATH = " + BaseDeDonnees.databasePath);
 
-        Log.d("INSTANCE", "JSON = " + getResults().toString());
+        //Log.d("INSTANCE", "JSON = " + getResults().toString());
     }
 
     @Override
@@ -121,9 +122,9 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
             }
         }
 
-        if(calendar.getTime().getSeconds() == 0 && calendar.getTime().getMinutes() == 5 && calendar.getTime().getHours() == 2)
+        if(calendar.getTime().getSeconds() == 0 && calendar.getTime().getMinutes() == 0 && calendar.getTime().getHours() == 0)
         {
-            if(!write)
+            if(!write2)
             {
                 final Handler handler = new Handler();
                 boolean post = handler.postDelayed(new Runnable() {
@@ -131,7 +132,7 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
                     public void run() {
                         JSONArray array = getResults();
                         try {
-                            URL url = new URL("http://127.0.0.1:8080/ajouter-accelerometre/");
+                            URL url = new URL("http://192.168.1.146:8080/ajouter-accelerometre/");
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setDoOutput(true);
                             conn.setRequestMethod("POST");
@@ -169,7 +170,7 @@ public class VueCapteur extends AppCompatActivity implements SensorEventListener
 
                         }
                         Toast.makeText(VueCapteur.this, "Valeurs Synced", Toast.LENGTH_LONG).show();
-                        write = true;
+                        write2 = true;
                     }
                 }, 1);
             }
