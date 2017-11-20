@@ -5,7 +5,7 @@
 -- Dumped from database version 9.6.5
 -- Dumped by pg_dump version 9.6.5
 
--- Started on 2017-11-01 13:51:41
+-- Started on 2017-11-19 19:40:19
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -25,7 +25,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2130 (class 0 OID 0)
+-- TOC entry 2142 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -40,7 +40,48 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 186 (class 1259 OID 49212)
+-- TOC entry 188 (class 1259 OID 41191)
+-- Name: accelerometre; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE accelerometre (
+    id bigint NOT NULL,
+    x text,
+    y text,
+    z text,
+    date text,
+    heure text
+);
+
+
+ALTER TABLE accelerometre OWNER TO postgres;
+
+--
+-- TOC entry 187 (class 1259 OID 41189)
+-- Name: accelerometre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE accelerometre_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE accelerometre_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2143 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: accelerometre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE accelerometre_id_seq OWNED BY accelerometre.id;
+
+
+--
+-- TOC entry 186 (class 1259 OID 41180)
 -- Name: temperature; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -55,7 +96,7 @@ CREATE TABLE temperature (
 ALTER TABLE temperature OWNER TO postgres;
 
 --
--- TOC entry 185 (class 1259 OID 49210)
+-- TOC entry 185 (class 1259 OID 41178)
 -- Name: temperature_id_temperature_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -70,7 +111,7 @@ CREATE SEQUENCE temperature_id_temperature_seq
 ALTER TABLE temperature_id_temperature_seq OWNER TO postgres;
 
 --
--- TOC entry 2131 (class 0 OID 0)
+-- TOC entry 2144 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: temperature_id_temperature_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -79,7 +120,15 @@ ALTER SEQUENCE temperature_id_temperature_seq OWNED BY temperature.id_temperatur
 
 
 --
--- TOC entry 2002 (class 2604 OID 49215)
+-- TOC entry 2010 (class 2604 OID 41194)
+-- Name: accelerometre id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY accelerometre ALTER COLUMN id SET DEFAULT nextval('accelerometre_id_seq'::regclass);
+
+
+--
+-- TOC entry 2009 (class 2604 OID 41183)
 -- Name: temperature id_temperature; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -87,37 +136,122 @@ ALTER TABLE ONLY temperature ALTER COLUMN id_temperature SET DEFAULT nextval('te
 
 
 --
--- TOC entry 2123 (class 0 OID 49212)
+-- TOC entry 2135 (class 0 OID 41191)
+-- Dependencies: 188
+-- Data for Name: accelerometre; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2145 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: accelerometre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('accelerometre_id_seq', 1, false);
+
+
+--
+-- TOC entry 2133 (class 0 OID 41180)
 -- Dependencies: 186
 -- Data for Name: temperature; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) FROM stdin;
-1	22.26\r	10/31/2017	10h00
-2	22.35\r	10/31/2017	10h30
-3	22.26\r	10/31/2017	11h00
-4	22.61\r	10/31/2017	11h30
-5	33.98\r	11/01/2017	12h00
-6	25.27\r	11/01/2017	10h30
-7	25.09\r	11/01/2017	11h00
-8	25.27\r	11/01/2017	11h30
-9	25.71\r	11/01/2017	12h30
-10	33.20\r	11/01/2017	01h00
-11	23.41\r	11/01/2017	01h30
-\.
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (1, '22.26
+', '10/31/2017', '10h00');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (2, '22.35
+', '10/31/2017', '10h30');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (3, '22.26
+', '10/31/2017', '11h00');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (4, '22.61
+', '10/31/2017', '11h30');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (5, '33.98
+', '11/01/2017', '12h00');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (6, '25.27
+', '11/01/2017', '10h30');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (7, '25.09
+', '11/01/2017', '11h00');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (8, '25.27
+', '11/01/2017', '11h30');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (9, '25.71
+', '11/01/2017', '12h30');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (10, '33.20
+', '11/01/2017', '01h00');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (11, '23.41
+', '11/01/2017', '01h30');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (12, '23.05
+', '11/18/2017', '02h48');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (13, '21.38
+', '11/18/2017', '03h19');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (14, '21.38
+', '11/18/2017', '03h21');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (15, '21.29
+', '11/18/2017', '03h23');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (16, '20.07
+', '11/18/2017', '04h00');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (17, '19.98
+', '11/18/2017', '04h02');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (18, '19.98
+', '11/18/2017', '04h04');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (19, '19.98
+', '11/18/2017', '04h05');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (20, '19.98
+', '11/18/2017', '04h07');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (21, '19.89
+', '11/18/2017', '04h08');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (22, '19.89
+', '11/18/2017', '04h12');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (23, '19.98
+', '11/18/2017', '04h13');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (24, '19.89
+', '11/18/2017', '04h15');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (25, '19.98
+', '11/18/2017', '04h28');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (26, '19.80
+', '11/18/2017', '04h37');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (27, '19.89
+', '11/18/2017', '04h37');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (28, '19.80
+', '11/18/2017', '04h38');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (29, '19.72
+', '11/18/2017', '04h48');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (30, '19.63
+', '11/18/2017', '04h49');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (31, '19.72
+', '11/18/2017', '04h49');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (32, '19.63
+', '11/18/2017', '04h51');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (33, '19.54
+', '11/18/2017', '04h54');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (34, '19.54
+', '11/18/2017', '04h56');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (35, '19.45
+', '11/18/2017', '05h11');
+INSERT INTO temperature (id_temperature, temperature_celsius, temperature_date, temperature_heure) VALUES (36, '22.08
+', '11/18/2017', '06h08');
 
 
 --
--- TOC entry 2132 (class 0 OID 0)
+-- TOC entry 2146 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: temperature_id_temperature_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('temperature_id_temperature_seq', 11, true);
+SELECT pg_catalog.setval('temperature_id_temperature_seq', 36, true);
 
 
 --
--- TOC entry 2004 (class 2606 OID 49220)
+-- TOC entry 2014 (class 2606 OID 41199)
+-- Name: accelerometre accelerometre_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY accelerometre
+    ADD CONSTRAINT accelerometre_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2012 (class 2606 OID 41188)
 -- Name: temperature temperature_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -125,7 +259,7 @@ ALTER TABLE ONLY temperature
     ADD CONSTRAINT temperature_pkey PRIMARY KEY (id_temperature);
 
 
--- Completed on 2017-11-01 13:51:41
+-- Completed on 2017-11-19 19:40:19
 
 --
 -- PostgreSQL database dump complete

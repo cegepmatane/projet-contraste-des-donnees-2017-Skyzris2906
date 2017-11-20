@@ -1,0 +1,72 @@
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('22.26
+', '10/31/2017', '10h00');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('22.35
+', '10/31/2017', '10h30');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('22.26
+', '10/31/2017', '11h00');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('22.61
+', '10/31/2017', '11h30');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('33.98
+', '11/01/2017', '12h00');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('25.27
+', '11/01/2017', '10h30');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('25.09
+', '11/01/2017', '11h00');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('25.27
+', '11/01/2017', '11h30');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('25.71
+', '11/01/2017', '12h30');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('33.20
+', '11/01/2017', '01h00');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('23.41
+', '11/01/2017', '01h30');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('23.05
+', '11/18/2017', '02h48');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('21.38
+', '11/18/2017', '03h19');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('21.38
+', '11/18/2017', '03h21');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('21.29
+', '11/18/2017', '03h23');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('20.07
+', '11/18/2017', '04h00');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.98
+', '11/18/2017', '04h02');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.98
+', '11/18/2017', '04h04');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.98
+', '11/18/2017', '04h05');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.98
+', '11/18/2017', '04h07');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.89
+', '11/18/2017', '04h08');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.89
+', '11/18/2017', '04h12');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.98
+', '11/18/2017', '04h13');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.89
+', '11/18/2017', '04h15');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.98
+', '11/18/2017', '04h28');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.80
+', '11/18/2017', '04h37');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.89
+', '11/18/2017', '04h37');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.80
+', '11/18/2017', '04h38');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.72
+', '11/18/2017', '04h48');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.63
+', '11/18/2017', '04h49');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.72
+', '11/18/2017', '04h49');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.63
+', '11/18/2017', '04h51');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.54
+', '11/18/2017', '04h54');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.54
+', '11/18/2017', '04h56');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('19.45
+', '11/18/2017', '05h11');
+INSERT INTO temperature(temperature_celsius,temperature_date,temperature_heure) VALUES ('22.08
+', '11/18/2017', '06h08');

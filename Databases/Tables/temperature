@@ -1,139 +1,0 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 9.6.5
--- Dumped by pg_dump version 9.6.5
-
--- Started on 2017-11-18 19:39:38
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
-SET search_path = public, pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
---
--- TOC entry 186 (class 1259 OID 49212)
--- Name: temperature; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE temperature (
-    id_temperature bigint NOT NULL,
-    temperature_celsius text,
-    temperature_date text,
-    temperature_heure text
-);
-
-
-ALTER TABLE temperature OWNER TO postgres;
-
---
--- TOC entry 185 (class 1259 OID 49210)
--- Name: temperature_id_temperature_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE temperature_id_temperature_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE temperature_id_temperature_seq OWNER TO postgres;
-
---
--- TOC entry 2127 (class 0 OID 0)
--- Dependencies: 185
--- Name: temperature_id_temperature_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE temperature_id_temperature_seq OWNED BY temperature.id_temperature;
-
-
---
--- TOC entry 2001 (class 2604 OID 49215)
--- Name: temperature id_temperature; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY temperature ALTER COLUMN id_temperature SET DEFAULT nextval('temperature_id_temperature_seq'::regclass);
-
-
---
--- TOC entry 2122 (class 0 OID 49212)
--- Dependencies: 186
--- Data for Name: temperature; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO temperature VALUES (1, '22.26', '10/31/2017', '10h00');
-INSERT INTO temperature VALUES (2, '22.35', '10/31/2017', '10h30');
-INSERT INTO temperature VALUES (3, '22.26', '10/31/2017', '11h00');
-INSERT INTO temperature VALUES (4, '22.61', '10/31/2017', '11h30');
-INSERT INTO temperature VALUES (5, '33.98', '11/01/2017', '12h00');
-INSERT INTO temperature VALUES (6, '25.27', '11/01/2017', '10h30');
-INSERT INTO temperature VALUES (7, '25.09', '11/01/2017', '11h00');
-INSERT INTO temperature VALUES (8, '25.27', '11/01/2017', '11h30');
-INSERT INTO temperature VALUES (9, '25.71', '11/01/2017', '12h30');
-INSERT INTO temperature VALUES (10, '33.20', '11/01/2017', '01h00');
-INSERT INTO temperature VALUES (11, '23.41', '11/01/2017', '01h30');
-INSERT INTO temperature VALUES (12, '23.05', '11/18/2017', '02h48');
-INSERT INTO temperature VALUES (13, '21.38', '11/18/2017', '03h19');
-INSERT INTO temperature VALUES (14, '21.38', '11/18/2017', '03h21');
-INSERT INTO temperature VALUES (15, '21.29', '11/18/2017', '03h23');
-INSERT INTO temperature VALUES (16, '20.07', '11/18/2017', '04h00');
-INSERT INTO temperature VALUES (17, '19.98', '11/18/2017', '04h02');
-INSERT INTO temperature VALUES (18, '19.98', '11/18/2017', '04h04');
-INSERT INTO temperature VALUES (19, '19.98', '11/18/2017', '04h05');
-INSERT INTO temperature VALUES (20, '19.98', '11/18/2017', '04h07');
-INSERT INTO temperature VALUES (21, '19.89', '11/18/2017', '04h08');
-INSERT INTO temperature VALUES (22, '19.89', '11/18/2017', '04h12');
-INSERT INTO temperature VALUES (23, '19.98', '11/18/2017', '04h13');
-INSERT INTO temperature VALUES (24, '19.89', '11/18/2017', '04h15');
-INSERT INTO temperature VALUES (25, '19.98', '11/18/2017', '04h28');
-INSERT INTO temperature VALUES (26, '19.80', '11/18/2017', '04h37');
-INSERT INTO temperature VALUES (27, '19.89', '11/18/2017', '04h37');
-INSERT INTO temperature VALUES (28, '19.80', '11/18/2017', '04h38');
-INSERT INTO temperature VALUES (29, '19.72', '11/18/2017', '04h48');
-INSERT INTO temperature VALUES (30, '19.63', '11/18/2017', '04h49');
-INSERT INTO temperature VALUES (31, '19.72', '11/18/2017', '04h49');
-INSERT INTO temperature VALUES (32, '19.63', '11/18/2017', '04h51');
-INSERT INTO temperature VALUES (33, '19.54', '11/18/2017', '04h54');
-INSERT INTO temperature VALUES (34, '19.54', '11/18/2017', '04h56');
-INSERT INTO temperature VALUES (35, '19.45', '11/18/2017', '05h11');
-INSERT INTO temperature VALUES (36, '22.08', '11/18/2017', '06h08');
-
-
---
--- TOC entry 2128 (class 0 OID 0)
--- Dependencies: 185
--- Name: temperature_id_temperature_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('temperature_id_temperature_seq', 36, true);
-
-
---
--- TOC entry 2003 (class 2606 OID 49220)
--- Name: temperature temperature_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY temperature
-    ADD CONSTRAINT temperature_pkey PRIMARY KEY (id_temperature);
-
-
--- Completed on 2017-11-18 19:39:39
-
---
--- PostgreSQL database dump complete
---
-

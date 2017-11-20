@@ -1,0 +1,16 @@
+CREATE TABLE temperature (
+    id_temperature bigserial NOT NULL PRIMARY KEY,
+    temperature_celsius text,
+    temperature_date text,
+    temperature_heure text
+);
+
+
+CREATE TABLE accelerometre (
+    id bigserial NOT NULL PRIMARY KEY,
+    x text,
+    y text,
+    z text,
+	date text,
+	heure text
+);
