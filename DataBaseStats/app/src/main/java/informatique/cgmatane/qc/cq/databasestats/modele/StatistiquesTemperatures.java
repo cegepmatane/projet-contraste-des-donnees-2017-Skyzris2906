@@ -14,6 +14,11 @@ public class StatistiquesTemperatures {
 
         double moyenne = 0.0;
 
+        if (listeTemperatures.size()==0)
+        {
+            return moyenne;
+        }
+
         for(Temperature temperature : listeTemperatures){
             moyenne += temperature.getTemperature();
         }
@@ -23,7 +28,14 @@ public class StatistiquesTemperatures {
 
     public static double calculerMaximum(List<Temperature> listeTemperatures){
 
-        double maximum = listeTemperatures.get(0).getTemperature();
+        double maximum = 0.0;
+
+        if (listeTemperatures.size()==0)
+        {
+            return maximum;
+        }
+
+        maximum =  listeTemperatures.get(0).getTemperature();
 
         for(Temperature temperature : listeTemperatures){
 
@@ -37,7 +49,13 @@ public class StatistiquesTemperatures {
 
     public static  double calculerMinimum(List<Temperature> listeTemperatures){
 
-        double minimum = listeTemperatures.get(0).getTemperature();
+        double minimum = 0.0;
+
+        if (listeTemperatures.size()==0)
+        {
+            return minimum;
+        }
+        minimum = listeTemperatures.get(0).getTemperature();
 
         for(Temperature temperature : listeTemperatures){
 
