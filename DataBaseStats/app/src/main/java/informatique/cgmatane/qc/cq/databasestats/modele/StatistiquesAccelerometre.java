@@ -12,7 +12,7 @@ public class StatistiquesAccelerometre {
 
     public static String calculerMoyenne(List<Accelerometre> listeAccelerometre){
 
-        String moyenne = "";
+        String moyenne;
         double moyenneX = 0.0;
         double moyenneY = 0.0;
         double moyenneZ = 0.0;
@@ -38,11 +38,11 @@ public class StatistiquesAccelerometre {
 
     public static String calculerMaximum(List<Accelerometre> listeAccelerometre){
 
-        String maximum = "";
+        String maximum;
 
-        double maximumX = 0.0;
-        double maximumY = 0.0;
-        double maximumZ = 0.0;
+        double maximumX;
+        double maximumY;
+        double maximumZ;
 
         if (listeAccelerometre.size()==0)
         {
@@ -71,11 +71,11 @@ public class StatistiquesAccelerometre {
 
     public static  String calculerMinimum(List<Accelerometre> listeAccelerometre) {
 
-        String minimum = "";
+        String minimum;
 
-        double minimumX = 0.0;
-        double minimumY = 0.0;
-        double minimumZ = 0.0;
+        double minimumX;
+        double minimumY;
+        double minimumZ;
 
         if (listeAccelerometre.size() == 0) {
             return minimum = "\nx=0.0\ny=0.0\nz=0.0";
