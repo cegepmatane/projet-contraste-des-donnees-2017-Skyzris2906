@@ -13,6 +13,7 @@ import informatique.cgmatane.qc.cq.databasestats.R;
 import informatique.cgmatane.qc.cq.databasestats.donnees.AccelerometreDAO;
 import informatique.cgmatane.qc.cq.databasestats.donnees.TemperaturesDAO;
 import informatique.cgmatane.qc.cq.databasestats.modele.Accelerometre;
+import informatique.cgmatane.qc.cq.databasestats.modele.StatistiquesAccelerometre;
 import informatique.cgmatane.qc.cq.databasestats.modele.Temperature;
 
 public class VueAccelerometre extends AppCompatActivity {
@@ -45,6 +46,11 @@ public class VueAccelerometre extends AppCompatActivity {
         listeAccelerometre = accelerometreDAO.listerToutesLesValeursAccelerometre();
 
         libelleNombreValeurs.setText("Total : "+ listeAccelerometre.size()+ " valeurs");
+
+        libelleMoyenne.setText("Moyenne : "+ StatistiquesAccelerometre.calculerMoyenne(listeAccelerometre));
+        libelleValeurMax.setText("Valeur Maximum : "+ StatistiquesAccelerometre.calculerMaximum(listeAccelerometre));
+        libelleValeurMin.setText("Valeur Minimum : "+ StatistiquesAccelerometre.calculerMinimum(listeAccelerometre));
+
 
     }
 
