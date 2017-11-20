@@ -32,6 +32,7 @@ public class TemperaturesDAO {
     private List<Temperature> listeTemperatures;
     private List<HashMap<String,String>> listeTemperaturesEnHashMap;
     private Context context;
+    private static final String URL_CONNECTION = "http://192.168.1.146/service_temp/temperature/liste/index.php";
 
     public TemperaturesDAO(Context context){
 
@@ -47,7 +48,7 @@ public class TemperaturesDAO {
 
         try{
 
-            URL url = new URL("http://192.168.1.146/service_temp/temperature/liste/index.php");
+            URL url = new URL(URL_CONNECTION);
             HttpURLConnection service = (HttpURLConnection) url.openConnection();
             InputStream flux = service.getInputStream();
 
