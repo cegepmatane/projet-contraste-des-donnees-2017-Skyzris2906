@@ -1,5 +1,7 @@
 package informatique.cgmatane.qc.cq.databasestats.modele;
 
+import android.util.Log;
+
 import java.util.List;
 
 /**

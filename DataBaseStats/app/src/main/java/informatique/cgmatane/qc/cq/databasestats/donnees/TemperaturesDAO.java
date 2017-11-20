@@ -47,7 +47,7 @@ public class TemperaturesDAO {
 
         try{
 
-            URL url = new URL("http://192.168.1.12/service_temp/temperature/liste/index.php");
+            URL url = new URL("http://192.168.1.146/service_temp/temperature/liste/index.php");
             HttpURLConnection service = (HttpURLConnection) url.openConnection();
             InputStream flux = service.getInputStream();
 

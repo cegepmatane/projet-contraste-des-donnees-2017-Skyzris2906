@@ -45,7 +45,7 @@ public class AccelerometreDAO {
         listeAccelerometre.clear();
 
         try{
-            URL url = new URL("http://192.168.1.12/service_accelerometre/accelerometre/liste/index.php");
+            URL url = new URL("http://192.168.1.146/service_accelerometre/accelerometre/liste/index.php");
             HttpURLConnection service = (HttpURLConnection) url.openConnection();
             InputStream flux = service.getInputStream();
 
