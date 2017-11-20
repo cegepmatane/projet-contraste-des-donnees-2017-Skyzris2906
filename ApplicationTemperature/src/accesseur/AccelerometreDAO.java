@@ -70,7 +70,7 @@ public class AccelerometreDAO {
 	public List<Accelerometre> listerAccelerometre()
 	 	{
 	 		// Récupérer le xml
-			String xml = consommerService("http://1010110110001110/service_accelerometre/accelerometre/liste/index.php");		
+			String xml = consommerService("http://127.0.0.1/service_accelerometre/accelerometre/liste/index.php");		
 			
 	 		// Interprétation du xml - construire les modeles
 			if(xml != null)

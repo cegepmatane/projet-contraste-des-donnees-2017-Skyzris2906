@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 import java.util.Scanner;
 import java.io.StringBufferInputStream;
 import javax.xml.parsers.DocumentBuilder;
@@ -27,6 +28,8 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import modele.Statistiques;
+import modele.Temperature;
 import accesseur.AccelerometreDAO;
 import accesseur.TemperatureDAO;
 
@@ -35,9 +38,11 @@ public class ApplicationService extends Application
 	Stage window;
 	Scene sceneBDD, sceneTemp, sceneAcce;
     Button btnSceneBDD,btnSceneBDD2, btnSceneTemp, btnSceneAcce;
-    Label lblSceneBDD, lblSceneTemp, lblSceneAcce;
+    Label lblSceneBDD, lblSceneTemp,lblMax ,lblMoy ,lblMin, lblSceneAcce;
     FlowPane paneBDD, paneTemp, paneAcce;
-	
+    
+    protected TemperatureDAO temperatureDAO;
+    protected List<Temperature> listerToutesLesTemperatures;
 	
 	public static void main(String[] args)
 	{
@@ -63,7 +68,18 @@ public class ApplicationService extends Application
         btnSceneAcce.setOnAction(e-> ButtonClicked(e));
         
         lblSceneBDD=new Label("Scene BDD");
+        
         lblSceneTemp=new Label("Scene Temperature");
+        temperatureDAO = new TemperatureDAO();
+        
+        listerToutesLesTemperatures = temperatureDAO.listerToutesLesTemperature();
+        
+        lblMoy = new Label("Moyenne Temperatures : ");
+        //System.out.println("Valeur moyenne : " + Statistiques.moyenne(listerToutesLesTemperatures)+" °C");
+        lblMin = new Label("Minimum Temperatures : ");
+        lblMax = new Label("Maximum Temperatures : ");
+        
+ 
         lblSceneAcce=new Label("Scene Accelerometre");
         
         //make 3 Panes
@@ -82,7 +98,7 @@ public class ApplicationService extends Application
            
         //add everything to panes
         paneBDD.getChildren().addAll(lblSceneBDD, btnSceneBDD, btnSceneBDD2);
-        paneTemp.getChildren().addAll(lblSceneTemp, btnSceneTemp);
+        paneTemp.getChildren().addAll(lblSceneTemp,lblMax,lblMoy,lblMin, btnSceneTemp);
         paneAcce.getChildren().addAll(lblSceneAcce, btnSceneAcce);
         
         //make 3 scenes from 3 panes
@@ -106,39 +122,4 @@ public class ApplicationService extends Application
         else
             window.setScene(sceneBDD);
     }
-		
-	
-	
-	
-		/*
-		System.out.println("dans la methode start()");
-		primaryStage.setTitle("Application BDD Temperature/Accelerometre"); // titre  de la scene
-        FlowPane RootNode = new FlowPane(); //Utilisation du FlowPanel
-        RootNode.setAlignment(Pos.CENTER); // centrer le controle de la zone
-        Scene scene = new Scene(RootNode, 400, 300); //Creation de la scene
-        primaryStage.setScene(scene);
-        
-        // creation de boutons push
-        Button btnTemp = new Button ("Temperatures");
-        btnTemp.setOnAction(e -> primaryStage.setScene(scene2));
-        Button btnAcce = new Button ("Accelerometre");
-        // action du bouton Temp
-        btnTemp.setOnAction(new EventHandler<ActionEvent>(){
-        	public void handle(ActionEvent ae) {
-        		//response.setText("temperatures");
-        	}
-		});
-        // action du bouton Acce
-        btnAcce.setOnAction(new EventHandler<ActionEvent>(){
-        	public void handle(ActionEvent ae) {
-        		//response.setText("Accelerometre");
-        	}
-		});
-        // ajouter le label et les boutons sur la scene
-        RootNode.getChildren().addAll(btnTemp ,btnAcce);
-   	 
-        // on affiche la scene
-        primaryStage.show();
- 		*/
-	
 }

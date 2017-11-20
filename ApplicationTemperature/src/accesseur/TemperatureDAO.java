@@ -70,10 +70,10 @@ public class TemperatureDAO
 			return null;
 	}
 	
-	public List<Temperature> listerTemperature()
+	public List<Temperature> listerToutesLesTemperature()
  	{
  		// Récupérer le xml
-		String xml = consommerService("http://10101011100/service_temp/temperature/liste/index.php");		
+		String xml = consommerService("http://127.0.0.1/service_temp/temperature/liste/index.php");		
 		
  		// Interprétation du xml - construire les modeles
 		if(xml != null)
