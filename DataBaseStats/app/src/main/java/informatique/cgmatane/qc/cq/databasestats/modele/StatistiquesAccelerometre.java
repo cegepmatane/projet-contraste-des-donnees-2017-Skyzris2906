@@ -29,9 +29,9 @@ public class StatistiquesAccelerometre {
 
         }
 
-        moyenneX = (Math.round(moyenneX*100)/100)/listeAccelerometre.size();
-        moyenneY = (Math.round(moyenneY*100)/100)/listeAccelerometre.size();
-        moyenneZ = (Math.round(moyenneZ*100)/100)/listeAccelerometre.size();
+        moyenneX = moyenneX/listeAccelerometre.size();
+        moyenneY = moyenneY/listeAccelerometre.size();
+        moyenneZ = moyenneZ/listeAccelerometre.size();
 
         return moyenne = "\nx= " + moyenneX + "\ny= " + moyenneY + "\nz= " + moyenneZ;
     }
