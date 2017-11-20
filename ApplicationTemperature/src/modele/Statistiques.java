@@ -2,8 +2,8 @@ package modele;
 
 import java.util.List;
 
-public class Statistiques {
-	
+public class Statistiques 
+{	
 	 public static double moyenne(List<Temperature> listeTemperatures)
 	 {
         double moy = 0.0;
@@ -39,5 +39,4 @@ public class Statistiques {
         }
         return min;
     }
-
 }

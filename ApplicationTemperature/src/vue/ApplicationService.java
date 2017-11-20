@@ -16,6 +16,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javafx.application.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,9 +32,13 @@ import accesseur.TemperatureDAO;
 
 public class ApplicationService extends Application
 {
-
 	Stage window;
-	Scene scene1, scene2, scene3;
+	Scene sceneBDD, sceneTemp, sceneAcce;
+    Button btnSceneBDD,btnSceneBDD2, btnSceneTemp, btnSceneAcce;
+    Label lblSceneBDD, lblSceneTemp, lblSceneAcce;
+    FlowPane paneBDD, paneTemp, paneAcce;
+	
+	
 	public static void main(String[] args)
 	{
 		launch(args);  // lancement de l'application javaFX
@@ -41,6 +46,71 @@ public class ApplicationService extends Application
 
 	public void start(Stage primaryStage)
 	{
+		window = primaryStage;
+		//can now use the stage in other methods
+	       
+        //make things to put on panes
+        btnSceneBDD=new Button("Temperatures");
+        btnSceneBDD2=new Button ("Accelerometre");
+        
+        btnSceneTemp=new Button("Retour");
+        btnSceneAcce=new Button("Retour");
+        
+        btnSceneBDD.setOnAction(e-> ButtonClicked(e));
+        btnSceneBDD2.setOnAction(e-> ButtonClicked(e));
+        
+        btnSceneTemp.setOnAction(e-> ButtonClicked(e));
+        btnSceneAcce.setOnAction(e-> ButtonClicked(e));
+        
+        lblSceneBDD=new Label("Scene BDD");
+        lblSceneTemp=new Label("Scene Temperature");
+        lblSceneAcce=new Label("Scene Accelerometre");
+        
+        //make 3 Panes
+        paneBDD=new FlowPane();
+        paneTemp=new FlowPane();
+        paneAcce=new FlowPane();
+        
+        paneBDD.setVgap(10);
+        paneTemp.setVgap(10);
+        paneAcce.setVgap(10);
+        
+        //set background color of each Pane
+        paneBDD.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
+        paneTemp.setStyle("-fx-background-color: red;-fx-padding: 10px;");
+        paneAcce.setStyle("-fx-background-color: yellow;-fx-padding: 10px;");
+           
+        //add everything to panes
+        paneBDD.getChildren().addAll(lblSceneBDD, btnSceneBDD, btnSceneBDD2);
+        paneTemp.getChildren().addAll(lblSceneTemp, btnSceneTemp);
+        paneAcce.getChildren().addAll(lblSceneAcce, btnSceneAcce);
+        
+        //make 3 scenes from 3 panes
+        sceneBDD= new Scene(paneBDD, 400, 500);
+        sceneTemp = new Scene(paneTemp, 400, 500);
+        sceneAcce = new Scene(paneAcce, 400, 500);
+        
+        primaryStage.setTitle("Application BDD");
+        primaryStage.setScene(sceneBDD);
+        primaryStage.show();
+    }
+	
+	public void ButtonClicked(ActionEvent e)
+    {
+        if (e.getSource()==btnSceneBDD)
+            window.setScene(sceneTemp);
+        
+        else if(e.getSource()==btnSceneBDD2)
+            window.setScene(sceneAcce);
+        	
+        else
+            window.setScene(sceneBDD);
+    }
+		
+	
+	
+	
+		/*
 		System.out.println("dans la methode start()");
 		primaryStage.setTitle("Application BDD Temperature/Accelerometre"); // titre  de la scene
         FlowPane RootNode = new FlowPane(); //Utilisation du FlowPanel
@@ -69,30 +139,6 @@ public class ApplicationService extends Application
    	 
         // on affiche la scene
         primaryStage.show();
-
-	}
-
+ 		*/
 	
-	public void startTemp(Stage stage)
-	{
-        stage.setTitle("Application BDD Temperature"); // titre  de la scene
-        FlowPane RootNode = new FlowPane(); //Utilisation du FlowPanel
-        RootNode.setAlignment(Pos.CENTER); // centrer le controle de la zone
-        Scene sceneTemp = new Scene(RootNode, 400, 300); //Creation de la scene
-        stage.setScene(sceneTemp);
-   
-        
-        Button btnRetour = new Button ("Retour");
-        // action du bouton Temp
-        btnRetour.setOnAction(new EventHandler<ActionEvent>(){
-        	public void handle(ActionEvent ae) {
-        		////
-        	}
-		});
-        
-     // ajouter le label et les boutons sur la scene
-        RootNode.getChildren().addAll(btnRetour);
-        // on affiche la scene
-        stage.show();
-	}
 }

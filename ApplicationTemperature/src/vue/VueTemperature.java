@@ -6,7 +6,6 @@ import modele.Temperature;
 
 public class VueTemperature extends Application
 {
-	
 	public VueTemperature (TemperatureDAO temperature, Temperature temp)
 	{
 		

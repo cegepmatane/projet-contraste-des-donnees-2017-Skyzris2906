@@ -3,9 +3,9 @@ package modele;
 public class Accelerometre {
 	
     private  int id;
-    private Double x;
-    private Double y;
-    private Double z;
+    private String x;
+    private String y;
+    private String z;
     private String date;
     private String heure;
     
@@ -19,22 +19,22 @@ public class Accelerometre {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Double getX() {
+	public String getX() {
 		return x;
 	}
-	public void setX(Double x) {
+	public void setX(String x) {
 		this.x = x;
 	}
-	public Double getY() {
+	public String getY() {
 		return y;
 	}
-	public void setY(Double y) {
+	public void setY(String y) {
 		this.y = y;
 	}
-	public Double getZ() {
+	public String getZ() {
 		return z;
 	}
-	public void setZ(Double z) {
+	public void setZ(String z) {
 		this.z = z;
 	}
 	public String getDate() {
