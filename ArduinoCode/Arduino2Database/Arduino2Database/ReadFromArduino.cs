@@ -26,7 +26,7 @@ public class ReadFromArduino
     private void ArduinoDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         String valeurArduino = arduino.ReadLine();
-        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 08 || DateTime.Now.Minute == 00))
+        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 30 || DateTime.Now.Minute == 00))
         {
             droitEcriture = false;
             Insert2Database(valeurArduino);
@@ -71,7 +71,7 @@ public class ReadFromArduino
 
     private void Insert2Database(String valeur)
     {
-        var connectionInformations = "Host=127.0.0.1;Username=postgres;Password=Sql1995;Database=principale;";
+        var connectionInformations = "Host=127.0.0.1;Username=postgres;Password=Sql1995;Database=temperaturedb;";
 
         using (var connection = new NpgsqlConnection(connectionInformations))
         {
@@ -81,12 +81,13 @@ public class ReadFromArduino
             {
                 cmd.Connection = connection;
 
-                cmd.CommandText = "INSERT INTO temperature (temperature_celsius, temperature_date, temperature_heure) VALUES (@c, @d, @h)";
+                cmd.CommandText = "INSERT INTO temperature (temperature_celsius, temperature_date, temperature_heure, sync) VALUES (@c, @d, @h, @s)";
                 cmd.Parameters.AddWithValue("@c", valeur);
-                cmd.Parameters.AddWithValue("d", DateTime.Now.ToString("MM/dd/yyyy"));
-                cmd.Parameters.AddWithValue("h", DateTime.Now.ToString("hh'h'mm"));
+                cmd.Parameters.AddWithValue("@d", DateTime.Now.ToString("MM/dd/yyyy"));
+                cmd.Parameters.AddWithValue("@h", DateTime.Now.ToString("hh'h'mm"));
+                cmd.Parameters.AddWithValue("@s", "0");
 
-                tableTemporaire.Rows.Add(valeur, DateTime.Now.ToString("MM/dd/yyyy"), DateTime.Now.ToString("hh'h'mm"));
+                tableTemporaire.Rows.Add(valeur, DateTime.Now.ToString("MM/dd/yyyy"), DateTime.Now.ToString("hh'h'mm"), "0");
 
                 cmd.ExecuteNonQuery();
 
@@ -96,34 +97,31 @@ public class ReadFromArduino
 
 
                 String jsonTable = DataTableToJson(tableTemporaire);
-
                 Console.WriteLine(jsonTable);
 
-                //PostBookAsync(jsonTable);
+                //RequeteJson(jsonTable);
+                //Console.WriteLine("Envoi");
+
+
+
 
                 if (DateTime.Now.Hour == 00 && DateTime.Now.Minute == 00 && droitEcriture2 == true)
                 {
-                    droitEcriture2 = false;
-                    PostBookAsync(jsonTable);
+                    droitEcriture2 = false;             
+                    RequeteJson(jsonTable);
+                    Console.WriteLine("Envoi de la requete : " + jsonTable);
+                    cmd.CommandText = "UPDATE temperature SET sync = '1' WHERE sync = '0' ";
+                    cmd.ExecuteNonQuery();
+                    tableTemporaire.Clear();
+                    tableTemporaire = GetTable();
+                    jsonTable = DataTableToJson(tableTemporaire);
+                    Console.WriteLine("Envoi de la requete 2 : " + jsonTable);
                 }
 
                 if (droitEcriture2 == false && DateTime.Now.Hour == 00 && DateTime.Now.Minute == 01)
                     droitEcriture2 = true;
 
             }
-
-            //using (NpgsqlCommand cmd = new NpgsqlCommand ("SELECT * FROM temperature", connection))
-            //{
-            //    using (var reader = cmd.ExecuteReader())
-            //    {
-            //        while (reader.HasRows)
-            //        {
-            //            String json = JsonConvert.SerializeObject(reader);
-            //            Console.WriteLine(json);
-            //            reader.NextResult();
-            //        }
-            //    }
-            //}
             connection.Close();
         }
 
@@ -134,10 +132,10 @@ public class ReadFromArduino
     {
         DataTable table = new DataTable();
 
-        //table.Columns.Add("id_temperature", typeof(int));
         table.Columns.Add("temperature_celsius", typeof(string));
         table.Columns.Add("temperature_date", typeof(string));
         table.Columns.Add("temperature_heure", typeof(string));
+        table.Columns.Add("sync", typeof(string));
 
         return table;
     }
@@ -151,10 +149,10 @@ public class ReadFromArduino
 
 
     //Envoi en HTTP
-    static async Task PostBookAsync(String data)
+    static async Task RequeteJson(String data)
     {
         // notre cible
-        string page = "http://192.168.1.12:8080/ajouter-temperature/";
+        string page = "http://192.168.1.146:8080/ajouter-temperature/";
 
         using (HttpClient client = new HttpClient())
         {
