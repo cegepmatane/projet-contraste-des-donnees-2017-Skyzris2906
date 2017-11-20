@@ -19,7 +19,7 @@ public class StatistiquesAccelerometre {
 
         if (listeAccelerometre.size()==0)
         {
-            return moyenne = "x=0.0 y=0.0 z=0.0";
+            return moyenne = "\nx=0.0\ny=0.0\nz=0.0";
         }
 
         for(Accelerometre accelerometre : listeAccelerometre){
@@ -33,7 +33,7 @@ public class StatistiquesAccelerometre {
         moyenneY = (Math.round(moyenneY*100)/100)/listeAccelerometre.size();
         moyenneZ = (Math.round(moyenneZ*100)/100)/listeAccelerometre.size();
 
-        return moyenne = "x= " + moyenneX + " y= " + moyenneY + " z= " + moyenneZ;
+        return moyenne = "\nx= " + moyenneX + "\ny= " + moyenneY + "\nz= " + moyenneZ;
     }
 
     public static String calculerMaximum(List<Accelerometre> listeAccelerometre){
@@ -46,7 +46,7 @@ public class StatistiquesAccelerometre {
 
         if (listeAccelerometre.size()==0)
         {
-            return maximum = "x=0.0 y=0.0 z=0.0";
+            return maximum = "\nx=0.0\ny=0.0\nz=0.0";
         }
 
         maximumX =  listeAccelerometre.get(0).getX();
@@ -66,7 +66,7 @@ public class StatistiquesAccelerometre {
             }
         }
 
-        return maximum = "x= " + maximumX + " y= " + maximumY + " z= " + maximumZ;
+        return maximum = "\nx= " + maximumX + "\ny= " + maximumY + "\nz= " + maximumZ;
     }
 
     public static  String calculerMinimum(List<Accelerometre> listeAccelerometre) {
@@ -78,7 +78,7 @@ public class StatistiquesAccelerometre {
         double minimumZ = 0.0;
 
         if (listeAccelerometre.size() == 0) {
-            return minimum = "x=0.0 y=0.0 z=0.0";
+            return minimum = "\nx=0.0\ny=0.0\nz=0.0";
         }
 
         minimumX = listeAccelerometre.get(0).getX();
@@ -98,6 +98,6 @@ public class StatistiquesAccelerometre {
             }
         }
 
-        return minimum = "x= " + minimumX + " y= " + minimumY + " z= " + minimumZ;
+        return minimum = "\nx= " + minimumX + "\ny= " + minimumY + "\nz= " + minimumZ;
     }
 }
