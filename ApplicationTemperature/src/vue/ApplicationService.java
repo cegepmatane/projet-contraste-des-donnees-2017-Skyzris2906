@@ -20,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -28,6 +29,7 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import modele.Accelerometre;
 import modele.Statistiques;
 import modele.Temperature;
 import accesseur.AccelerometreDAO;
@@ -38,11 +40,13 @@ public class ApplicationService extends Application
 	Stage window;
 	Scene sceneBDD, sceneTemp, sceneAcce;
     Button btnSceneBDD,btnSceneBDD2, btnSceneTemp, btnSceneAcce;
-    Label lblSceneBDD, lblSceneTemp,lblMax ,lblMoy ,lblMin, lblSceneAcce;
+    Label lblSceneBDD, lblSceneTemp,lblMax ,lblMoy ,lblMin, lblSceneAcce, lblx, lbly, lblz, lblDate, lblHeure;
     FlowPane paneBDD, paneTemp, paneAcce;
     
     protected TemperatureDAO temperatureDAO;
+    protected AccelerometreDAO accelerometreDAO;
     protected List<Temperature> listerToutesLesTemperatures;
+    protected List<Accelerometre> listerAccelerometre;
 	
 	public static void main(String[] args)
 	{
@@ -52,59 +56,69 @@ public class ApplicationService extends Application
 	public void start(Stage primaryStage)
 	{
 		window = primaryStage;
-		//can now use the stage in other methods
 	       
-        //make things to put on panes
+        // scene temperature
         btnSceneBDD=new Button("Temperatures");
-        btnSceneBDD2=new Button ("Accelerometre");
-        
         btnSceneTemp=new Button("Retour");
-        btnSceneAcce=new Button("Retour");
         
         btnSceneBDD.setOnAction(e-> ButtonClicked(e));
-        btnSceneBDD2.setOnAction(e-> ButtonClicked(e));
-        
         btnSceneTemp.setOnAction(e-> ButtonClicked(e));
-        btnSceneAcce.setOnAction(e-> ButtonClicked(e));
-        
-        lblSceneBDD=new Label("Scene BDD");
-        
-        lblSceneTemp=new Label("Scene Temperature");
+
+        lblSceneTemp=new Label("Temperature");
         temperatureDAO = new TemperatureDAO();
-        
         listerToutesLesTemperatures = temperatureDAO.listerToutesLesTemperature();
         
         lblMoy = new Label("Moyenne Temperatures : ");
-        //System.out.println("Valeur moyenne : " + Statistiques.moyenne(listerToutesLesTemperatures)+" °C");
+        //System.out.println(Statistiques.moyenne(listerToutesLesTemperatures)+" °C");
         lblMin = new Label("Minimum Temperatures : ");
+        //System.out.println(Statistiques.minimum(listerToutesLesTemperatures)+" °C");
         lblMax = new Label("Maximum Temperatures : ");
+        //System.out.println(Statistiques.maximum(listerToutesLesTemperatures)+" °C");
         
- 
-        lblSceneAcce=new Label("Scene Accelerometre");
+        // Scene accelerometre
+        btnSceneBDD2=new Button ("Accelerometre");
+        btnSceneAcce=new Button("Retour");
         
-        //make 3 Panes
+        btnSceneBDD2.setOnAction(e-> ButtonClicked(e));
+        btnSceneAcce.setOnAction(e-> ButtonClicked(e));
+        lblSceneBDD=new Label("Base de donées : ");
+        
+        lblSceneAcce=new Label("Accelerometre");
+        accelerometreDAO = new AccelerometreDAO();
+        listerAccelerometre = accelerometreDAO.listerAccelerometre();
+        
+        lblx = new Label("x : ");
+        lbly = new Label("y : ");
+        lblz = new Label("z : ");
+        lblDate = new Label("Date : ");
+        lblHeure = new Label("Heure : ");
+   
+        
+        //Pane
         paneBDD=new FlowPane();
         paneTemp=new FlowPane();
         paneAcce=new FlowPane();
         
-        paneBDD.setVgap(10);
-        paneTemp.setVgap(10);
-        paneAcce.setVgap(10);
+        paneBDD.setVgap(30);
+        paneTemp.setVgap(30);
+        paneTemp.setHgap(30);
+        paneAcce.setVgap(30);
+        paneAcce.setHgap(30);
         
         //set background color of each Pane
         paneBDD.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
-        paneTemp.setStyle("-fx-background-color: red;-fx-padding: 10px;");
-        paneAcce.setStyle("-fx-background-color: yellow;-fx-padding: 10px;");
+        paneTemp.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
+        paneAcce.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
            
         //add everything to panes
         paneBDD.getChildren().addAll(lblSceneBDD, btnSceneBDD, btnSceneBDD2);
         paneTemp.getChildren().addAll(lblSceneTemp,lblMax,lblMoy,lblMin, btnSceneTemp);
-        paneAcce.getChildren().addAll(lblSceneAcce, btnSceneAcce);
+        paneAcce.getChildren().addAll(lblSceneAcce, btnSceneAcce,lblx, lbly, lblz, lblDate, lblHeure);
         
         //make 3 scenes from 3 panes
-        sceneBDD= new Scene(paneBDD, 400, 500);
-        sceneTemp = new Scene(paneTemp, 400, 500);
-        sceneAcce = new Scene(paneAcce, 400, 500);
+        sceneBDD= new Scene(paneBDD, 600, 200);
+        sceneTemp = new Scene(paneTemp, 600, 200);
+        sceneAcce = new Scene(paneAcce, 600, 200);
         
         primaryStage.setTitle("Application BDD");
         primaryStage.setScene(sceneBDD);
