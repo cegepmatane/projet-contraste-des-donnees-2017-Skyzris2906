@@ -14,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ import java.util.Scanner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import informatique.cgmatane.qc.cq.databasestats.modele.ModeleDate;
 import informatique.cgmatane.qc.cq.databasestats.modele.Temperature;
 
 /**
@@ -71,7 +73,9 @@ public class TemperaturesDAO {
                     String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
                     String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
 
-                    Temperature temperature = new Temperature(id,degre,date,heure);
+                    Calendar calendrier = ModeleDate.getDate(date,heure);
+
+                    Temperature temperature = new Temperature(id,degre,calendrier);
 
                     listeTemperatures.add(temperature);
                 }
