@@ -33,6 +33,7 @@ public class TemperaturesDAO {
 
     private List<Temperature> listeTemperatures;
     private List<HashMap<String,String>> listeTemperaturesEnHashMap;
+    private List<Temperature> listeTriee;
     private Context context;
     private static final String URL_CONNECTION = "http://192.168.1.146/service_temp/temperature/liste/index.php";
 
@@ -42,9 +43,10 @@ public class TemperaturesDAO {
 
         listeTemperatures = new ArrayList<>();
         listeTemperaturesEnHashMap = new ArrayList<>();
+        listeTriee = new ArrayList<>();
     }
 
-    public List<Temperature> listerToutesLesTemperatures(){
+    public List<Temperature> listerLesTemperatures(){
 
         listeTemperatures.clear();
 
@@ -92,9 +94,7 @@ public class TemperaturesDAO {
 
         listeTemperaturesEnHashMap.clear();
 
-        List<Temperature> listeTemperatures = listerToutesLesTemperatures();
-
-        for(Temperature temperature : listeTemperatures){
+        for(Temperature temperature : this.listeTriee){
             listeTemperaturesEnHashMap.add(temperature.exporteEnHashMap());
         }
 
