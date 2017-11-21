@@ -100,4 +100,102 @@ public class TemperaturesDAO {
 
         return listeTemperaturesEnHashMap;
     }
+
+    public List<Temperature> listerTemperaturesAnnee(){
+
+        this.listeTriee.clear();
+
+        listerLesTemperatures();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Temperature temperature : this.listeTemperatures){
+
+            if(temperature.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(temperature);
+            }
+        }
+
+        return listeTriee;
+    }
+
+    public List<Temperature> listerTemperaturesMois(){
+
+        this.listeTriee.clear();
+
+        listerLesTemperatures();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Temperature temperature : this.listeTemperatures){
+
+            if(temperature.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && temperature.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(temperature);
+            }
+        }
+
+        return listeTriee;
+    }
+
+    public List<Temperature> listerTemperaturesSemaine(){
+
+        this.listeTriee.clear();
+
+        listerLesTemperatures();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Temperature temperature : this.listeTemperatures){
+
+            if(temperature.getDate().get(Calendar.WEEK_OF_YEAR) == dateActuelle.get(Calendar.WEEK_OF_YEAR) && temperature.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(temperature);
+            }
+        }
+
+        return listeTriee;
+    }
+
+    public List<Temperature> listerTemperaturesJour(){
+
+        this.listeTriee.clear();
+
+        listerLesTemperatures();
+
+        Calendar dateActuelle = Calendar.getInstance();
+//        Calendar dateDebut = Calendar.getInstance();
+//        Calendar dateFin = Calendar.getInstance();
+//
+//        dateDebut.set(dateActuelle.get(Calendar.YEAR),dateActuelle.get(Calendar.MONTH),dateActuelle.get(Calendar.DATE),0,0,0);
+//        dateFin.set(dateActuelle.get(Calendar.YEAR),dateActuelle.get(Calendar.MONTH),dateActuelle.get(Calendar.DATE),23,59,59);
+//
+//        long dateDebutMilli = dateDebut.getTimeInMillis();
+//        long dateFinMilli = dateFin.getTimeInMillis();
+
+        for (Temperature temperature : this.listeTemperatures){
+
+            if(temperature.getDate().get(Calendar.DATE) == dateActuelle.get(Calendar.DATE) && temperature.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && temperature.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(temperature);
+            }
+        }
+
+
+        return this.listeTriee;
+    }
+
+    public List<Temperature> listerToutesLesTemperatures(){
+
+        this.listeTriee.clear();
+
+        listerLesTemperatures();
+
+        for (Temperature temperature : this.listeTemperatures){
+            listeTriee.add(temperature);
+        }
+
+        return this.listeTriee;
+    }
 }
