@@ -1,5 +1,6 @@
 package informatique.cgmatane.qc.cq.databasestats.modele;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 /**
@@ -10,14 +11,12 @@ public class Temperature {
 
     private int id;
     private double temperature;
-    private String date;
-    private String heure;
+    private Calendar date;
 
-    public Temperature(int id, double temperature, String date, String heure) {
+    public Temperature(int id, double temperature, Calendar date) {
         this.id = id;
         this.temperature = temperature;
         this.date = date;
-        this.heure = heure;
     }
 
     public int getId() {
@@ -36,20 +35,36 @@ public class Temperature {
         this.temperature = temperature;
     }
 
-    public String getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(int jour, int mois, int annee, int heure, int minute) {
+        this.date.set(annee,mois-1,jour,heure,minute,00);
+    }
+
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
-    public String getHeure() {
-        return heure;
+    public int getJour(){
+        return date.get(Calendar.DATE);
     }
 
-    public void setHeure(String heure) {
-        this.heure = heure;
+    public int getMois(){
+        return date.get(Calendar.MONTH)+1;
+    }
+
+    public int getAnnnee(){
+        return date.get(Calendar.YEAR);
+    }
+
+    public int getHeure(){
+        return date.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public int getMinutes(){
+        return date.get(Calendar.MINUTE);
     }
 
     @Override
@@ -57,8 +72,7 @@ public class Temperature {
         return "Temperature{" +
                 "id=" + id +
                 ", temperature=" + temperature +
-                ", date='" + date + '\'' +
-                ", heure='" + heure + '\'' +
+                ", date=" + ModeleDate.dateFrancaise(this.getDate()) +
                 '}';
     }
 
@@ -67,7 +81,7 @@ public class Temperature {
 
         listeTemperatures.put("id_temperature",String.valueOf(this.id));
         listeTemperatures.put("temperature",String.valueOf(this.temperature) + " °C");
-        listeTemperatures.put("date",this.date + " " + this.heure);
+        listeTemperatures.put("date",ModeleDate.dateFrancaise(this.getDate()));
 
         return listeTemperatures;
     }
