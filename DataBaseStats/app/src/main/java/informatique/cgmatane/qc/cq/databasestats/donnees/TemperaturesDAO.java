@@ -51,11 +51,10 @@ public class TemperaturesDAO {
         listeTemperatures.clear();
 
         try{
-
-            URL url = new URL(URL_CONNECTION);
-            HttpURLConnection service = (HttpURLConnection) url.openConnection();
-            InputStream flux = service.getInputStream();
-
+//            URL url = new URL(URL_CONNECTION);
+//            HttpURLConnection service = (HttpURLConnection) url.openConnection();
+//            InputStream flux = service.getInputStream();
+            InputStream flux = context.getAssets().open("temperatures.xml");
             Scanner lecteur = new Scanner(flux).useDelimiter("\\A");
             String xml = lecteur.hasNext() ? lecteur.next() : "";
 
@@ -71,7 +70,7 @@ public class TemperaturesDAO {
                     Element elementTemperature = (Element) nodeListe.item(i);
 
                     int id = Integer.parseInt(elementTemperature.getElementsByTagName("id").item(0).getTextContent());
-                    double degre = Double.parseDouble(elementTemperature.getElementsByTagName("temperature").item(0).getTextContent());
+                    double degre = Double.parseDouble(elementTemperature.getElementsByTagName("degre").item(0).getTextContent());
                     String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
                     String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
 
