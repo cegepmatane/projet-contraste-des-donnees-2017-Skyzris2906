@@ -12,16 +12,16 @@
         android:id="@+id/liste_accelerometre_vue_accelerometre"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginStart="7dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/libelle_nombrevaleurs_vue_accelerometre"
+        app:layout_constraintBottom_toTopOf="@+id/bouton_annee_vue_accelerometre"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,12 +30,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre valeurs"
-        android:layout_marginStart="27dp"
+        android:layout_marginStart="33dp"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/libelle_moyenne_vue_accelerometre"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="7dp"
-        app:layout_constraintLeft_toLeftOf="@+id/liste_accelerometre_vue_accelerometre" />
+        android:layout_marginBottom="15dp"
+        app:layout_constraintLeft_toLeftOf="@+id/bouton_annee_vue_accelerometre" />
 
     <TextView
         android:id="@+id/libelle_moyenne_vue_accelerometre"
@@ -45,7 +45,6 @@
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/libelle_valeurmax_vue_accelerometre"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="9dp"
         app:layout_constraintLeft_toLeftOf="@+id/libelle_nombrevaleurs_vue_accelerometre" />
 
     <TextView
@@ -73,4 +72,51 @@
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="4dp"
         app:layout_constraintLeft_toLeftOf="@+id/libelle_valeurmax_vue_accelerometre" />
+
+
+    <Button
+        android:id="@+id/bouton_annee_vue_accelerometre"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="1dp"
+        android:text="Année"
+        app:layout_constraintBaseline_toBaselineOf="@+id/bouton_mois_vue_accelerometre"
+        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/bouton_mois_vue_accelerometre"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:text="Mois"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/libelle_nombrevaleurs_vue_accelerometre"
+        app:layout_constraintRight_toRightOf="@+id/libelle_nombrevaleurs_vue_accelerometre"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintLeft_toRightOf="@+id/libelle_nombrevaleurs_vue_accelerometre" />
+
+    <Button
+        android:id="@+id/bouton_semaine_vue_accelerometre"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="1dp"
+        android:text="Semaine"
+        app:layout_constraintBaseline_toBaselineOf="@+id/bouton_mois_vue_accelerometre"
+        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toRightOf="@+id/bouton_mois_vue_accelerometre" />
+
+    <Button
+        android:id="@+id/bouton_jour_vue_accelerometre"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:text="Jour"
+        android:layout_marginEnd="16dp"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/bouton_semaine_vue_accelerometre"
+        tools:layout_constraintBaseline_creator="1" />
 </android.support.constraint.ConstraintLayout>
