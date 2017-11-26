@@ -161,4 +161,24 @@ public class AccelerometreDAO {
         return listeTriee;
     }
 
+    public List<Accelerometre> listerAccelerometreJour(){
+
+        this.listeTriee.clear();
+
+        listerLesValeursAccelerometre();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Accelerometre accelerometre : this.listeAccelerometre){
+
+            if(accelerometre.getDate().get(Calendar.DATE) == dateActuelle.get(Calendar.DATE) && accelerometre.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && accelerometre.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(accelerometre);
+            }
+        }
+
+        return this.listeTriee;
+    }
+
+
 }
