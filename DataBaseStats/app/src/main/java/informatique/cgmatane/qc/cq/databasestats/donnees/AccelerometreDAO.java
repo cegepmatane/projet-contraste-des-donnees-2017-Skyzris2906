@@ -21,6 +21,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import informatique.cgmatane.qc.cq.databasestats.modele.Accelerometre;
+import informatique.cgmatane.qc.cq.databasestats.modele.ModeleDate;
 import informatique.cgmatane.qc.cq.databasestats.modele.Temperature;
 
 /**
@@ -74,7 +75,9 @@ public class AccelerometreDAO {
                     String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
                     String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
 
-                    Accelerometre accelerometre = new Accelerometre(id,x,y,z,date,heure);
+                    Calendar calendrier = ModeleDate.getDate(date,heure);
+
+                    Accelerometre accelerometre = new Accelerometre(id,x,y,z,calendrier);
 
                     listeAccelerometre.add(accelerometre);
                 }
@@ -100,7 +103,7 @@ public class AccelerometreDAO {
         return listeAccelerometreEnHashMap;
     }
 
-    public List<Temperature> listerTemperaturesAnnee(){
+    public List<Accelerometre> listerAccelerometreAnnee(){
 
         this.listeTriee.clear();
 
