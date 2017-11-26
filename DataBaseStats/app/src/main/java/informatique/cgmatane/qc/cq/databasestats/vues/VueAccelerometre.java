@@ -2,6 +2,7 @@ package informatique.cgmatane.qc.cq.databasestats.vues;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import informatique.cgmatane.qc.cq.databasestats.donnees.AccelerometreDAO;
 import informatique.cgmatane.qc.cq.databasestats.donnees.TemperaturesDAO;
 import informatique.cgmatane.qc.cq.databasestats.modele.Accelerometre;
 import informatique.cgmatane.qc.cq.databasestats.modele.StatistiquesAccelerometre;
+import informatique.cgmatane.qc.cq.databasestats.modele.StatistiquesTemperatures;
 import informatique.cgmatane.qc.cq.databasestats.modele.Temperature;
 
 public class VueAccelerometre extends AppCompatActivity {
@@ -28,6 +30,11 @@ public class VueAccelerometre extends AppCompatActivity {
     protected TextView libelleValeurMin;
     protected TextView libelleNombreValeurs;
 
+    protected Button boutonAnnee;
+    protected Button boutonMois;
+    protected Button boutonSemaine;
+    protected Button boutonJour;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,10 @@ public class VueAccelerometre extends AppCompatActivity {
         libelleMoyenne = (TextView)findViewById(R.id.libelle_moyenne_vue_accelerometre);
         libelleValeurMax = (TextView)findViewById(R.id.libelle_valeurmax_vue_accelerometre);
         libelleValeurMin = (TextView)findViewById(R.id.libelle_valeurmin_vue_accelerometre);
+        boutonAnnee = (Button)findViewById(R.id.bouton_annee_vue_accelerometre);
+        boutonMois = (Button)findViewById(R.id.bouton_mois_vue_accelerometre);
+        boutonSemaine = (Button)findViewById(R.id.bouton_semaine_vue_accelerometre);
+        boutonJour = (Button)findViewById(R.id.bouton_jour_vue_accelerometre);
 
         accelerometreDAO = new AccelerometreDAO(getApplicationContext());
 
@@ -45,12 +56,7 @@ public class VueAccelerometre extends AppCompatActivity {
 
         listeAccelerometre = accelerometreDAO.listerToutesLesValeursAccelerometre();
 
-        libelleNombreValeurs.setText("Total : "+ listeAccelerometre.size()+ " valeurs");
-
-        libelleMoyenne.setText("Moyenne : "+ StatistiquesAccelerometre.calculerMoyenne(listeAccelerometre));
-        libelleValeurMax.setText("Valeur Maximum : "+ StatistiquesAccelerometre.calculerMaximum(listeAccelerometre));
-        libelleValeurMin.setText("Valeur Minimum : "+ StatistiquesAccelerometre.calculerMinimum(listeAccelerometre));
-
+        afficherStatistiques();
 
     }
 
@@ -67,5 +73,14 @@ public class VueAccelerometre extends AppCompatActivity {
         );
 
         vueListeAccelerometre.setAdapter(adapteurVueListeAccelerometre);
+    }
+
+    protected void afficherStatistiques(){
+
+        libelleNombreValeurs.setText("Total : "+ listeAccelerometre.size()+ " valeurs");
+
+        libelleMoyenne.setText("Moyenne : "+ StatistiquesAccelerometre.calculerMoyenne(listeAccelerometre));
+        libelleValeurMax.setText("Valeur Maximum : "+ StatistiquesAccelerometre.calculerMaximum(listeAccelerometre));
+        libelleValeurMin.setText("Valeur Minimum : "+ StatistiquesAccelerometre.calculerMinimum(listeAccelerometre));
     }
 }
