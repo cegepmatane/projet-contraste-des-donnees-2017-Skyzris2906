@@ -12,6 +12,7 @@ import java.io.StringBufferInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -30,6 +31,7 @@ public class AccelerometreDAO {
 
     private List<Accelerometre> listeAccelerometre;
     private List<HashMap<String,String>> listeAccelerometreEnHashMap;
+    private List<Accelerometre> listeTriee;
     private Context context;
     private static final String URL_CONNECTION = "http://192.168.1.146/service_accelerometre/accelerometre/liste/index.php";
 
@@ -39,9 +41,11 @@ public class AccelerometreDAO {
 
         listeAccelerometre = new ArrayList<>();
         listeAccelerometreEnHashMap = new ArrayList<>();
+        listeTriee = new ArrayList<>();
+
     }
 
-    public List<Accelerometre> listerToutesLesValeursAccelerometre(){
+    public List<Accelerometre> listerLesValeursAccelerometre(){
 
         listeAccelerometre.clear();
 
@@ -87,12 +91,31 @@ public class AccelerometreDAO {
 
         listeAccelerometreEnHashMap.clear();
 
-        List<Accelerometre> listeAccelerometre = listerToutesLesValeursAccelerometre();
+        List<Accelerometre> listeAccelerometre = listerLesValeursAccelerometre();
 
         for(Accelerometre accelerometre : listeAccelerometre){
             listeAccelerometreEnHashMap.add(accelerometre.exporteEnHashMap());
         }
 
         return listeAccelerometreEnHashMap;
+    }
+
+    public List<Temperature> listerTemperaturesAnnee(){
+
+        this.listeTriee.clear();
+
+        listerLesValeursAccelerometre();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Accelerometre accelerometre : this.listeAccelerometre){
+
+            if(accelerometre.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(accelerometre);
+            }
+        }
+
+        return listeTriee;
     }
 }
