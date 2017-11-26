@@ -93,6 +93,17 @@ public class VueAccelerometre extends AppCompatActivity {
             }
         });
 
+        boutonJour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                listeAccelerometre = accelerometreDAO.listerAccelerometreJour();
+                adapteurVueListeAccelerometre.notifyDataSetChanged();
+                afficherValeursAccelerometre();
+                afficherStatistiques();
+            }
+        });
+
     }
 
     protected void afficherValeursAccelerometre(){
