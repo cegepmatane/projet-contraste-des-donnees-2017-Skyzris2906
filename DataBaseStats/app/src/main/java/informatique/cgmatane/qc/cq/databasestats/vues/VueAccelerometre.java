@@ -2,6 +2,7 @@ package informatique.cgmatane.qc.cq.databasestats.vues;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -22,6 +23,7 @@ public class VueAccelerometre extends AppCompatActivity {
 
     protected ListView vueListeAccelerometre;
     protected List<HashMap<String,String>> listeAccelerometreEnHashMap;
+    protected SimpleAdapter adapteurVueListeAccelerometre;
     protected AccelerometreDAO accelerometreDAO;
     protected List<Accelerometre> listeAccelerometre;
 
@@ -52,11 +54,22 @@ public class VueAccelerometre extends AppCompatActivity {
 
         accelerometreDAO = new AccelerometreDAO(getApplicationContext());
 
+        listeAccelerometre = accelerometreDAO.listerToutesLesValeursAccelerometre();
         afficherValeursAccelerometre();
 
-        listeAccelerometre = accelerometreDAO.listerToutesLesValeursAccelerometre();
-
         afficherStatistiques();
+
+        boutonAnnee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                listeAccelerometre = accelerometreDAO.listerAccelerometreAnnee();
+                adapteurVueListeAccelerometre.notifyDataSetChanged();
+                afficherValeursAccelerometre();
+                afficherStatistiques();
+
+            }
+        });
 
     }
 
@@ -64,7 +77,7 @@ public class VueAccelerometre extends AppCompatActivity {
 
         listeAccelerometreEnHashMap = accelerometreDAO.listerLesValeursAccelerometreEnHashMap();
 
-        SimpleAdapter adapteurVueListeAccelerometre = new SimpleAdapter(
+         adapteurVueListeAccelerometre = new SimpleAdapter(
                 this,
                 listeAccelerometreEnHashMap,
                 android.R.layout.two_line_list_item,
