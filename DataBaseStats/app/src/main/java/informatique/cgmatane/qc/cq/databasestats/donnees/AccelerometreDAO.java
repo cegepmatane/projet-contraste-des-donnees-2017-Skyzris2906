@@ -21,6 +21,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import informatique.cgmatane.qc.cq.databasestats.modele.Accelerometre;
+import informatique.cgmatane.qc.cq.databasestats.modele.ModeleDate;
 import informatique.cgmatane.qc.cq.databasestats.modele.Temperature;
 
 /**
@@ -50,9 +51,10 @@ public class AccelerometreDAO {
         listeAccelerometre.clear();
 
         try{
-            URL url = new URL(URL_CONNECTION);
-            HttpURLConnection service = (HttpURLConnection) url.openConnection();
-            InputStream flux = service.getInputStream();
+           // URL url = new URL(URL_CONNECTION);
+            //HttpURLConnection service = (HttpURLConnection) url.openConnection();
+            //InputStream flux = service.getInputStream();
+            InputStream flux = context.getAssets().open("accelerometre.xml");
 
             Scanner lecteur = new Scanner(flux).useDelimiter("\\A");
             String xml = lecteur.hasNext() ? lecteur.next() : "";
@@ -74,7 +76,9 @@ public class AccelerometreDAO {
                     String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
                     String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
 
-                    Accelerometre accelerometre = new Accelerometre(id,x,y,z,date,heure);
+                    Calendar calendrier = ModeleDate.getDate(date,heure);
+
+                    Accelerometre accelerometre = new Accelerometre(id,x,y,z,calendrier);
 
                     listeAccelerometre.add(accelerometre);
                 }
@@ -93,14 +97,14 @@ public class AccelerometreDAO {
 
         List<Accelerometre> listeAccelerometre = listerLesValeursAccelerometre();
 
-        for(Accelerometre accelerometre : listeAccelerometre){
+        for(Accelerometre accelerometre : listeTriee){
             listeAccelerometreEnHashMap.add(accelerometre.exporteEnHashMap());
         }
 
         return listeAccelerometreEnHashMap;
     }
 
-    public List<Temperature> listerTemperaturesAnnee(){
+    public List<Accelerometre> listerAccelerometreAnnee(){
 
         this.listeTriee.clear();
 
@@ -118,4 +122,76 @@ public class AccelerometreDAO {
 
         return listeTriee;
     }
+
+
+    public List<Accelerometre> listerAccelerometreMois(){
+
+        this.listeTriee.clear();
+
+        listerLesValeursAccelerometre();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Accelerometre accelerometre : this.listeAccelerometre){
+
+            if(accelerometre.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && accelerometre.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(accelerometre);
+            }
+        }
+
+        return listeTriee;
+    }
+
+    public List<Accelerometre> listerAccelerometreSemaine(){
+
+        this.listeTriee.clear();
+
+        listerLesValeursAccelerometre();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Accelerometre accelerometre : this.listeAccelerometre){
+
+            if(accelerometre.getDate().get(Calendar.WEEK_OF_YEAR) == dateActuelle.get(Calendar.WEEK_OF_YEAR) && accelerometre.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(accelerometre);
+            }
+        }
+
+        return listeTriee;
+    }
+
+    public List<Accelerometre> listerAccelerometreJour(){
+
+        this.listeTriee.clear();
+
+        listerLesValeursAccelerometre();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Accelerometre accelerometre : this.listeAccelerometre){
+
+            if(accelerometre.getDate().get(Calendar.DATE) == dateActuelle.get(Calendar.DATE) && accelerometre.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && accelerometre.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeTriee.add(accelerometre);
+            }
+        }
+
+        return this.listeTriee;
+    }
+
+    public List<Accelerometre> listerToutesLesValeursAccelerometre(){
+
+        this.listeTriee.clear();
+
+        listerLesValeursAccelerometre();
+
+        for (Accelerometre accelerometre : this.listeAccelerometre){
+            listeTriee.add(accelerometre);
+        }
+
+        return this.listeTriee;
+    }
+
 }

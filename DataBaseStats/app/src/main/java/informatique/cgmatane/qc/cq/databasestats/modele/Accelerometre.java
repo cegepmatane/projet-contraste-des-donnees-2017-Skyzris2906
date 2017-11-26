@@ -1,5 +1,6 @@
 package informatique.cgmatane.qc.cq.databasestats.modele;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 /**
@@ -12,16 +13,14 @@ public class Accelerometre {
     private Double x;
     private Double y;
     private Double z;
-    private String date;
-    private String heure;
+    private Calendar date;
 
-    public Accelerometre(int id, Double x, Double y, Double z, String date, String heure) {
+    public Accelerometre(int id, Double x, Double y, Double z, Calendar date) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.z = z;
         this.date = date;
-        this.heure = heure;
     }
 
     public int getId() {
@@ -56,21 +55,33 @@ public class Accelerometre {
         this.z = z;
     }
 
-    public String getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
-
-    public String getHeure() {
-        return heure;
+    public int getJour(){
+        return date.get(Calendar.DATE);
     }
 
-    public void setHeure(String heure) {
-        this.heure = heure;
+    public int getMois(){
+        return date.get(Calendar.MONTH)+1;
     }
+
+    public int getAnnnee(){
+        return date.get(Calendar.YEAR);
+    }
+
+    public int getHeure(){
+        return date.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public int getMinutes(){
+        return date.get(Calendar.MINUTE);
+    }
+
 
     @Override
     public String toString() {
@@ -79,8 +90,7 @@ public class Accelerometre {
                 ", x=" + x +
                 ", y=" + y +
                 ", z=" + z +
-                ", date='" + date + '\'' +
-                ", heure='" + heure + '\'' +
+                ", date='" + ModeleDate.dateFrancaise(this.getDate()) + '\'' +
                 '}';
     }
 
@@ -89,7 +99,7 @@ public class Accelerometre {
 
         listeAccelerometre.put("id_accelerometre",String.valueOf(this.id));
         listeAccelerometre.put("accelerometre","x : " + String.valueOf(this.x) + " - y : " + String.valueOf(this.y) + " - z : " + String.valueOf(this.z));
-        listeAccelerometre.put("date",this.date + " " + this.heure);
+        listeAccelerometre.put("date",ModeleDate.dateFrancaise(this.getDate()));
 
         return listeAccelerometre;
     }
