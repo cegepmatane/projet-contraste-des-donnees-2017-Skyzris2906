@@ -51,9 +51,10 @@ public class AccelerometreDAO {
         listeAccelerometre.clear();
 
         try{
-            URL url = new URL(URL_CONNECTION);
-            HttpURLConnection service = (HttpURLConnection) url.openConnection();
-            InputStream flux = service.getInputStream();
+           // URL url = new URL(URL_CONNECTION);
+            //HttpURLConnection service = (HttpURLConnection) url.openConnection();
+            //InputStream flux = service.getInputStream();
+            InputStream flux = context.getAssets().open("accelerometre.xml");
 
             Scanner lecteur = new Scanner(flux).useDelimiter("\\A");
             String xml = lecteur.hasNext() ? lecteur.next() : "";
@@ -96,7 +97,7 @@ public class AccelerometreDAO {
 
         List<Accelerometre> listeAccelerometre = listerLesValeursAccelerometre();
 
-        for(Accelerometre accelerometre : listeAccelerometre){
+        for(Accelerometre accelerometre : listeTriee){
             listeAccelerometreEnHashMap.add(accelerometre.exporteEnHashMap());
         }
 
@@ -192,6 +193,5 @@ public class AccelerometreDAO {
 
         return this.listeTriee;
     }
-
 
 }
