@@ -180,5 +180,18 @@ public class AccelerometreDAO {
         return this.listeTriee;
     }
 
+    public List<Accelerometre> listerToutesLesValeursAccelerometre(){
+
+        this.listeTriee.clear();
+
+        listerLesValeursAccelerometre();
+
+        for (Accelerometre accelerometre : this.listeAccelerometre){
+            listeTriee.add(accelerometre);
+        }
+
+        return this.listeTriee;
+    }
+
 
 }
