@@ -26,6 +26,10 @@ import modele.Temperature;
 
 public class AccelerometreDAO {
 	
+	private List<Accelerometre> listeOrdonnee = new ArrayList<>();
+	
+	private List<Accelerometre> listerAccelerometres = new ArrayList<>();
+	
 	private Document parserXML(String xml)
 	{
 		Document doc = null;
@@ -81,7 +85,6 @@ public class AccelerometreDAO {
 			 		// Interprétation du xml - construire les modeles
 				if (xml != null) 
 				{
-					 List<Accelerometre> listeAccelerometre =  new ArrayList<>();
 		            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		            Document document = parseur.parse(new StringBufferInputStream(xml));
 		
@@ -100,16 +103,54 @@ public class AccelerometreDAO {
 		
 		                Calendar calendrier = ModeleDate.getDate(date,heure);
 		                Accelerometre accelerometre = new Accelerometre(id,x,y,z,calendrier);
-		                listeAccelerometre.add(accelerometre);
+		                listerAccelerometres.add(accelerometre);
 		            }
-		            return listeAccelerometre;
+		            return listerAccelerometres;
 		        }
 		    }catch (Exception ex){
 		    	ex.printStackTrace();
 		    }	
 				return null;
 	 	}
+	
+	public List<Accelerometre> listerAccelerometreMois(){
 
+	        this.listeOrdonnee.clear();
+
+	        listerAccelerometre();
+
+	        Calendar dateActuelle = Calendar.getInstance();
+
+	        for (Accelerometre accelerometre : this.listerAccelerometres){
+
+	            if(accelerometre.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && accelerometre.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+	                this.listeOrdonnee.add(accelerometre);
+	            }
+	        }
+
+	        return listeOrdonnee;
+	    }
+
+	   public List<Accelerometre> listerAccelerometreJour(){
+
+	        this.listeOrdonnee.clear();
+
+	        listerAccelerometre();
+
+	        Calendar dateActuelle = Calendar.getInstance();
+
+	        for (Accelerometre accelerometre : this.listerAccelerometres){
+
+	            if(accelerometre.getDate().get(Calendar.DATE) == dateActuelle.get(Calendar.DATE) && accelerometre.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && accelerometre.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+	                this.listeOrdonnee.add(accelerometre);
+	            }
+	        }
+
+	        return this.listeOrdonnee;
+	    }
+	 
 	private NodeList getElementsByTagName(String string) {
 		// TODO Auto-generated method stub
 		return null;
