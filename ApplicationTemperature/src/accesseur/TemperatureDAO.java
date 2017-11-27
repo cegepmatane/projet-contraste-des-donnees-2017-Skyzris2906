@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.lang.model.element.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -54,7 +54,7 @@ public class TemperatureDAO
 				URL urlServiceTemperature = new URL (url);
 				URLConnection serviceTemperature = urlServiceTemperature.openConnection();
 				InputStream fluxTemperature = serviceTemperature.getInputStream();
-				
+		
 				Scanner lecteur = new Scanner(fluxTemperature).useDelimiter("\\A");
 				xml = lecteur.hasNext() ? lecteur.next() : "";
 				System.out.println(xml);
@@ -70,10 +70,11 @@ public class TemperatureDAO
 			return null;
 	}
 	
-	public List<Temperature> listerToutesLesTemperature()
+	public List<Temperature> listerLesTemperature()
  	{
  		// Récupérer le xml
-		String xml = consommerService("http://127.0.0.1/service_temp/temperature/liste/index.php");		
+		//String xml = consommerService("http://************/service_temp/temperature/liste/index.php");
+		String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/temperatures.xml");
 		
  		// Interprétation du xml - construire les modeles
 		if(xml != null)
@@ -89,7 +90,7 @@ public class TemperatureDAO
  					Element elementTemperature = (Element)listeNoeudsTemperatures.item(position);
 				
  					String numero = document.getElementsByTagName("id").item(0).getTextContent();
- 					double degre = Double.parseDouble(getElementsByTagName("degre").item(0).getTextContent());
+ 					double degre = Double.parseDouble(document.getElementsByTagName("degre").item(0).getTextContent());
  					String date = document.getElementsByTagName("date").item(0).getTextContent();
  					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
  					

@@ -1,0 +1,32 @@
+<listeTemperatures>
+    <Temperature>
+        <id>1</id>
+        <degre>22.9</degre>
+        <date>22/09/2016</date>
+        <heure>23:30</heure>
+    </Temperature>
+    <Temperature>
+        <id>2</id>
+        <degre>15.6</degre>
+        <date>04/03/2017</date>
+        <heure>15:55</heure>
+    </Temperature>
+    <Temperature>
+        <id>3</id>
+        <degre>25.2</degre>
+        <date>06/11/2017</date>
+        <heure>17:24</heure>
+    </Temperature>
+    <Temperature>
+        <id>4</id>
+        <degre>22.9</degre>
+        <date>21/11/2017</date>
+        <heure>14:22</heure>
+    </Temperature>
+    <Temperature>
+        <id>5</id>
+        <degre>22.9</degre>
+        <date>26/11/2017</date>
+        <heure>16:47</heure>
+    </Temperature>
+</listeTemperatures>

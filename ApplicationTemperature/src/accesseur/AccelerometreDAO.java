@@ -70,8 +70,10 @@ public class AccelerometreDAO {
 	public List<Accelerometre> listerAccelerometre()
 	 	{
 	 		// Récupérer le xml
-			String xml = consommerService("http://127.0.0.1/service_accelerometre/accelerometre/liste/index.php");		
-			
+			//String xml = consommerService("http://********************/service_accelerometre/accelerometre/liste/index.php");		
+		String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/accelerometre.xml");
+		
+		
 	 		// Interprétation du xml - construire les modeles
 			if(xml != null)
 	 		{
@@ -84,14 +86,15 @@ public class AccelerometreDAO {
 	 				for(int position = 0; position < listeNoeudsAccelerometres.getLength(); position++)
 	 				{
 	 					Element elementAccelerometre = (Element)listeNoeudsAccelerometres.item(position);
-	 					String numero = document.getElementsByTagName("id").item(0).getTextContent();
+	 					int numero = Integer.parseInt(document.getElementsByTagName("id").item(0).getTextContent());
 	 					String x = document.getElementsByTagName("x").item(0).getTextContent();
 	 					String y = document.getElementsByTagName("y").item(0).getTextContent();
 	 					String z = document.getElementsByTagName("z").item(0).getTextContent();
 	 					String date = document.getElementsByTagName("date").item(0).getTextContent();
 	 					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
-	 					Accelerometre accelerometre = new Accelerometre();
-		 				//	accelerometre.setId(Integer.parseInt(id)); // TODO : robustesse 
+	 					Accelerometre accelerometre = new Accelerometre(numero,x,y,z,date,heure);
+	 					System.out.println(accelerometre);
+
 						listeAccelerometres.add(accelerometre);
 	 				}
 		 				return listeAccelerometres;

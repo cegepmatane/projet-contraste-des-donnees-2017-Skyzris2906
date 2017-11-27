@@ -3,15 +3,22 @@ package modele;
 public class Accelerometre {
 	
     private  int id;
-    private String x;
-    private String y;
-    private String z;
+    private double x;
+    private double y;
+    private double z;
     private String date;
     private String heure;
     
-//	public void setAccelerometreDate(String accelerometreDate) {
-//	this.accelerometreDate = accelerometreDate;
-//	}
+    
+	public Accelerometre(int id, double  x, double  y, double  z, String date, String heure) 
+	{
+		this.id = id;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.date = date;
+		this.heure = heure;
+	}
     
 	public int getId() {
 		return id;
@@ -19,22 +26,22 @@ public class Accelerometre {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getX() {
+	public double  getX() {
 		return x;
 	}
-	public void setX(String x) {
+	public void setX(double  x) {
 		this.x = x;
 	}
-	public String getY() {
+	public double  getY() {
 		return y;
 	}
-	public void setY(String y) {
+	public void setY(double  y) {
 		this.y = y;
 	}
-	public String getZ() {
+	public double  getZ() {
 		return z;
 	}
-	public void setZ(String z) {
+	public void setZ(double  z) {
 		this.z = z;
 	}
 	public String getDate() {
@@ -49,4 +56,12 @@ public class Accelerometre {
 	public void setHeure(String heure) {
 		this.heure = heure;
 	}
+
+	@Override
+	public String toString() {
+		return "Accelerometre [id=" + id + ", x=" + x + ", y=" + y + ", z=" + z + ", date=" + date + ", heure=" + heure
+				+ "]";
+	}
+	
+	
 }

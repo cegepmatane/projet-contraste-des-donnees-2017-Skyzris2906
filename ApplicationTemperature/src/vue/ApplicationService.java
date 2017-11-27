@@ -50,7 +50,7 @@ public class ApplicationService extends Application
     protected TemperatureDAO temperatureDAO;
     protected AccelerometreDAO accelerometreDAO;
     
-    protected List<Temperature> listerToutesLesTemperatures;
+    protected List<Temperature> listerLesTemperature;
     protected List<Accelerometre> listerAccelerometre;
 	
 	public static void main(String[] args)
@@ -73,9 +73,11 @@ public class ApplicationService extends Application
 
         lblSceneTemp=new Label("Temperature");
         temperatureDAO = new TemperatureDAO();
-        listerToutesLesTemperatures = temperatureDAO.listerToutesLesTemperature();
+        listerLesTemperature = temperatureDAO.listerLesTemperature();
         
-        lblMoy = new Label("Moyenne Temperatures : ");
+        List<Temperature> listeTemperatures;
+		lblMoy = new Label("Moyenne Temperatures : " + Statistiques.calculerMoyenne(listerLesTemperature)+" °C");
+       // lblMoy.setText("Valeur moyenne : " + Statistiques.moyenne(listerToutesLesTemperatures)+" °C");
         //System.out.println(Statistiques.moyenne(listerToutesLesTemperatures)+" °C");
         lblMin = new Label("Minimum Temperatures : ");
         //System.out.println(Statistiques.minimum(listerToutesLesTemperatures)+" °C");
@@ -85,8 +87,7 @@ public class ApplicationService extends Application
         // Graph Temperature
         final NumberAxis xAxisT = new NumberAxis(1, 31, 1);
         final NumberAxis yAxisT = new NumberAxis();
-        final AreaChart<Number,Number> AreaChartTemp = 
-            new AreaChart<Number,Number>(xAxisT,yAxisT);
+        final AreaChart<Number,Number> AreaChartTemp = new AreaChart<Number,Number>(xAxisT,yAxisT);
         AreaChartTemp.setTitle("Temperature moniteur");
  
         XYChart.Series serieWeek= new XYChart.Series();
@@ -110,8 +111,6 @@ public class ApplicationService extends Application
         serieMonth.getData().add(new XYChart.Data(21, 11));
         serieMonth.getData().add(new XYChart.Data(24, 9));
         
-       
-        
         
         // Scene accelerometre
         btnSceneBDD2=new Button ("Accelerometre");
@@ -126,11 +125,11 @@ public class ApplicationService extends Application
         listerAccelerometre = accelerometreDAO.listerAccelerometre();
         
         lblx = new Label("x : ");
-        //System.out.println(AcelerometreDAO.x(listerAccelerometre)+" ");
+       // System.out.println(AccelerometreDAO.x(listerAccelerometre)+" ");
         lbly = new Label("y : ");
-        //System.out.println(AcelerometreDAO.y(listerAccelerometre)+" ");
+      //  System.out.println(AccelerometreDAO.y(listerAccelerometre)+" ");
         lblz = new Label("z : ");
-        //System.out.println(AcelerometreDAO.y(listerAccelerometre)+" ");
+       // System.out.println(AccelerometreDAO.y(listerAccelerometre)+" ");
         lblDate = new Label("Date : ");
         lblHeure = new Label("Heure : ");
         
@@ -138,7 +137,6 @@ public class ApplicationService extends Application
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Number of Month");
-        //creating the chart
         final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
                 
         lineChart.setTitle("Accelerometre");
@@ -187,8 +185,6 @@ public class ApplicationService extends Application
         series3.getData().add(new XYChart.Data(10, 37));
         series3.getData().add(new XYChart.Data(11, 57));
         series3.getData().add(new XYChart.Data(12, 19));
-        
-    
    
         
         //Pane
@@ -208,7 +204,6 @@ public class ApplicationService extends Application
         paneAcce.setHgap(30);
         paneAcce.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
         paneAcce.getChildren().addAll(lblSceneAcce,lblx, lbly, lblz, lblDate, lblHeure, lineChart,btnSceneAcce);
-        
         
         sceneBDD= new Scene(paneBDD, 200,200);
         sceneTemp = new Scene(paneTemp, 600,600);

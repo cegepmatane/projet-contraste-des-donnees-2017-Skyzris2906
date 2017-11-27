@@ -3,40 +3,63 @@ package modele;
 import java.util.List;
 
 public class Statistiques 
-{	
-	 public static double moyenne(List<Temperature> listeTemperatures)
-	 {
-        double moy = 0.0;
-        for(Temperature temperature : listeTemperatures)
-        {
-            moy += temperature.getTemperature();
-        }
-        return (Math.round(moy*100)/100)/listeTemperatures.size();
-	 }
+{
 
-    public static double maximum(List<Temperature> listeTemperatures)
-    {
-        double max = listeTemperatures.get(0).getTemperature();
-        for(Temperature temperature : listeTemperatures)
+    public static double calculerMoyenne(List<Temperature> listeTemperatures){
+
+        double moyenne = 0.0;
+
+        if (listeTemperatures.size()==0)
         {
-            if (temperature.getTemperature() > max)
-            {
-                max = temperature.getTemperature();
-            }
+            return moyenne;
         }
-        return max;
+
+        for(Temperature temperature : listeTemperatures){
+            moyenne += temperature.getTemperature();
+        }
+
+        return (Math.round(moyenne*100)/100)/listeTemperatures.size();
     }
 
-    public static  double minimum(List<Temperature> listeTemperatures)
-    {
-        double min = listeTemperatures.get(0).getTemperature();
-        for(Temperature temperature : listeTemperatures)
+    public static double calculerMaximum(List<Temperature> listeTemperatures){
+
+        double maximum = 0.0;
+
+        if (listeTemperatures.size()==0)
         {
-            if (temperature.getTemperature() < min)
-            {
-                min = temperature.getTemperature();
+            return maximum;
+        }
+
+        maximum =  listeTemperatures.get(0).getTemperature();
+
+        for(Temperature temperature : listeTemperatures){
+
+            if (temperature.getTemperature() > maximum){
+                maximum = temperature.getTemperature();
             }
         }
-        return min;
+
+        return maximum;
     }
+
+    public static  double calculerMinimum(List<Temperature> listeTemperatures){
+
+        double minimum = 0.0;
+
+        if (listeTemperatures.size()==0)
+        {
+            return minimum;
+        }
+        minimum = listeTemperatures.get(0).getTemperature();
+
+        for(Temperature temperature : listeTemperatures){
+
+            if (temperature.getTemperature() < minimum){
+                minimum = temperature.getTemperature();
+            }
+        }
+
+        return minimum;
+    }
+
 }
