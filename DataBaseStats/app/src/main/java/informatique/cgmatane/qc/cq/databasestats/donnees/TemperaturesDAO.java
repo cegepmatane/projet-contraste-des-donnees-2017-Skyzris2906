@@ -51,10 +51,10 @@ public class TemperaturesDAO {
         listeTemperatures.clear();
 
         try{
-//            URL url = new URL(URL_CONNECTION);
-//            HttpURLConnection service = (HttpURLConnection) url.openConnection();
-//            InputStream flux = service.getInputStream();
-            InputStream flux = context.getAssets().open("temperatures.xml");
+            URL url = new URL(URL_CONNECTION);
+            HttpURLConnection service = (HttpURLConnection) url.openConnection();
+            InputStream flux = service.getInputStream();
+//            InputStream flux = context.getAssets().open("temperatures.xml");
             Scanner lecteur = new Scanner(flux).useDelimiter("\\A");
             String xml = lecteur.hasNext() ? lecteur.next() : "";
 
@@ -66,15 +66,14 @@ public class TemperaturesDAO {
                 NodeList nodeListe = document.getElementsByTagName("Temperature");
 
                 for (int i =0; i<nodeListe.getLength(); i++) {
-
                     Element elementTemperature = (Element) nodeListe.item(i);
 
                     int id = Integer.parseInt(elementTemperature.getElementsByTagName("id").item(0).getTextContent());
-                    double degre = Double.parseDouble(elementTemperature.getElementsByTagName("degre").item(0).getTextContent());
+                    double degre = Double.parseDouble(elementTemperature.getElementsByTagName("temperature").item(0).getTextContent());
                     String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
                     String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
 
-                    Calendar calendrier = ModeleDate.getDate(date,heure);
+                    Calendar calendrier = ModeleDate.getDateTemperature(date,heure);
 
                     Temperature temperature = new Temperature(id,degre,calendrier);
 
