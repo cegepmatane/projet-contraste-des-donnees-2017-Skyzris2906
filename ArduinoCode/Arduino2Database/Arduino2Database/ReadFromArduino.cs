@@ -26,7 +26,7 @@ public class ReadFromArduino
     private void ArduinoDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         String valeurArduino = arduino.ReadLine();
-        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 23|| DateTime.Now.Minute == 00))
+        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 30|| DateTime.Now.Minute == 22))
         {
             droitEcriture = false;
             Insert2Database(valeurArduino);
@@ -105,7 +105,7 @@ public class ReadFromArduino
 
 
 
-                if (DateTime.Now.Hour == 22 && DateTime.Now.Minute == 23 && droitEcriture2 == true)
+                if (DateTime.Now.Hour == 09 && DateTime.Now.Minute == 30 && droitEcriture2 == true)
                 {
                     droitEcriture2 = false;             
                     RequeteJson(jsonTable);
