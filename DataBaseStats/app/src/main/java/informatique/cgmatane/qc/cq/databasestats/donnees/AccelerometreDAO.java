@@ -67,14 +67,14 @@ public class AccelerometreDAO {
 
                 for (int i =0; i<nodeListe.getLength(); i++) {
 
-                    Element elementTemperature = (Element) nodeListe.item(i);
+                    Element elementAccelerometre = (Element) nodeListe.item(i);
 
-                    int id = Integer.parseInt(elementTemperature.getElementsByTagName("id").item(0).getTextContent());
-                    double x = Double.parseDouble(elementTemperature.getElementsByTagName("x").item(0).getTextContent());
-                    double y = Double.parseDouble(elementTemperature.getElementsByTagName("y").item(0).getTextContent());
-                    double z = Double.parseDouble(elementTemperature.getElementsByTagName("z").item(0).getTextContent());
-                    String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
-                    String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
+                    int id = Integer.parseInt(elementAccelerometre.getElementsByTagName("id").item(0).getTextContent());
+                    double x = Double.parseDouble(elementAccelerometre.getElementsByTagName("x").item(0).getTextContent());
+                    double y = Double.parseDouble(elementAccelerometre.getElementsByTagName("y").item(0).getTextContent());
+                    double z = Double.parseDouble(elementAccelerometre.getElementsByTagName("z").item(0).getTextContent());
+                    String date = elementAccelerometre.getElementsByTagName("date").item(0).getTextContent();
+                    String heure = elementAccelerometre.getElementsByTagName("heure").item(0).getTextContent();
 
                     Calendar calendrier = ModeleDate.getDate(date,heure);
 
