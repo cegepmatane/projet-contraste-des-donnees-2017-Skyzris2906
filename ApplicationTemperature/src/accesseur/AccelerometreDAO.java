@@ -6,19 +6,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.text.Element;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import modele.Accelerometre;
+import modele.ModeleDate;
+import modele.Temperature;
 
 public class AccelerometreDAO {
 	
@@ -54,7 +58,7 @@ public class AccelerometreDAO {
 				
 				Scanner lecteur = new Scanner(fluxAccelerometre).useDelimiter("\\A");
 				xml = lecteur.hasNext() ? lecteur.next() : "";
-				System.out.println(xml);
+				//System.out.println(xml);
 				return xml;
 			}
 			catch (MalformedURLException e){
@@ -69,37 +73,41 @@ public class AccelerometreDAO {
 			
 	public List<Accelerometre> listerAccelerometre()
 	 	{
-	 		// Récupérer le xml
-			//String xml = consommerService("http://********************/service_accelerometre/accelerometre/liste/index.php");		
-		String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/accelerometre.xml");
+		 		// Récupérer le xml
+				//String xml = consommerService("http://********************/service_accelerometre/accelerometre/liste/index.php");		
+			String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/accelerometre.xml");
+			
+			try {
+			 		// Interprétation du xml - construire les modeles
+				if (xml != null) 
+				{
+					 List<Accelerometre> listeAccelerometre =  new ArrayList<>();
+		            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		            Document document = parseur.parse(new StringBufferInputStream(xml));
 		
+		            NodeList nodeListe = document.getElementsByTagName("Accelerometre");
 		
-	 		// Interprétation du xml - construire les modeles
-			if(xml != null)
-	 		{
-	 				Document document = parserXML(xml);
-	 				if (document == null) return null;
-	 				
-	 				ArrayList<Accelerometre> listeAccelerometres = new ArrayList<Accelerometre>();
-	 				NodeList listeNoeudsAccelerometres = document.getElementsByTagName("accelerometre");
-	 				
-	 				for(int position = 0; position < listeNoeudsAccelerometres.getLength(); position++)
-	 				{
-	 					Element elementAccelerometre = (Element)listeNoeudsAccelerometres.item(position);
-	 					int numero = Integer.parseInt(document.getElementsByTagName("id").item(0).getTextContent());
-	 					double x = Double.parseDouble(document.getElementsByTagName("x").item(0).getTextContent());
-	 					double y = Double.parseDouble(document.getElementsByTagName("y").item(0).getTextContent());
-	 					double z = Double.parseDouble(document.getElementsByTagName("z").item(0).getTextContent());
-	 					String date = document.getElementsByTagName("date").item(0).getTextContent();
-	 					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
-	 					Accelerometre accelerometre = new Accelerometre(numero,x,y,z,date,heure);
-	 					System.out.println(accelerometre);
-
-						listeAccelerometres.add(accelerometre);
-	 				}
-		 				return listeAccelerometres;
-	 		}		
-			return null;
+		            for (int i =0; i<nodeListe.getLength(); i++) {
+		
+		                Element elementAccelerometre = (Element) nodeListe.item(i);
+		
+		                int id = Integer.parseInt(elementAccelerometre.getElementsByTagName("id").item(0).getTextContent());
+		                double x = Double.parseDouble(elementAccelerometre.getElementsByTagName("x").item(0).getTextContent());
+		                double y = Double.parseDouble(elementAccelerometre.getElementsByTagName("y").item(0).getTextContent());
+		                double z = Double.parseDouble(elementAccelerometre.getElementsByTagName("z").item(0).getTextContent());
+		                String date = elementAccelerometre.getElementsByTagName("date").item(0).getTextContent();
+		                String heure = elementAccelerometre.getElementsByTagName("heure").item(0).getTextContent();
+		
+		                Calendar calendrier = ModeleDate.getDate(date,heure);
+		                Accelerometre accelerometre = new Accelerometre(id,x,y,z,calendrier);
+		                listeAccelerometre.add(accelerometre);
+		            }
+		            return listeAccelerometre;
+		        }
+		    }catch (Exception ex){
+		    	ex.printStackTrace();
+		    }	
+				return null;
 	 	}
 
 	private NodeList getElementsByTagName(String string) {

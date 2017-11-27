@@ -23,5 +23,14 @@ public class ModeleDate {
 	        return dateFinale;
 
 	    }
+	 
+	 public static String dateFrancaise(Calendar date){
+
+	        String dateConvertie = String.format("%02d",date.get(Calendar.DATE)) + "/" + String.format("%02d",date.get(Calendar.MONTH)+1)
+	                + "/" + String.format("%02d",date.get(Calendar.YEAR)) + " " + String.format("%02d",date.get(Calendar.HOUR_OF_DAY))
+	                + ":" + String.format("%02d",date.get(Calendar.MINUTE));
+
+	        return dateConvertie;
+	    }
 	
 }

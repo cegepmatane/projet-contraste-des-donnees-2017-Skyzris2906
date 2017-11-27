@@ -1,23 +1,23 @@
 package modele;
 
+import java.util.Calendar;
+
 public class Accelerometre {
 	
     private  int id;
     private double x;
     private double y;
     private double z;
-    private String date;
-    private String heure;
+    private Calendar date;
     
     
-	public Accelerometre(int id, double  x, double  y, double  z, String date, String heure) 
+	public Accelerometre(int id, double  x, double  y, double  z, Calendar date) 
 	{
 		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.date = date;
-		this.heure = heure;
 	}
     
 	public int getId() {
@@ -44,24 +44,43 @@ public class Accelerometre {
 	public void setZ(double  z) {
 		this.z = z;
 	}
-	public String getDate() {
+	public Calendar getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Calendar date) {
 		this.date = date;
-	}
-	public String getHeure() {
-		return heure;
-	}
-	public void setHeure(String heure) {
-		this.heure = heure;
 	}
 
 	@Override
-	public String toString() {
-		return "Accelerometre [id=" + id + ", x=" + x + ", y=" + y + ", z=" + z + ", date=" + date + ", heure=" + heure
-				+ "]";
-	}
+	   public String toString() {
+        return "Accelerometre{" +
+                "id=" + id +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", date='" + ModeleDate.dateFrancaise(this.getDate()) + '\'' +
+                '}';
+    }
+	
+	 public int getJour(){
+	        return date.get(Calendar.DATE);
+	    }
+
+	    public int getMois(){
+	        return date.get(Calendar.MONTH)+1;
+	    }
+
+	    public int getAnnnee(){
+	        return date.get(Calendar.YEAR);
+	    }
+
+	    public int getHeure(){
+	        return date.get(Calendar.HOUR_OF_DAY);
+	    }
+
+	    public int getMinutes(){
+	        return date.get(Calendar.MINUTE);
+	    }
 	
 	
 }

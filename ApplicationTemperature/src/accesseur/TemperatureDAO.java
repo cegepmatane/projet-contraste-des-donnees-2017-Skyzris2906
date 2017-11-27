@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import modele.Accelerometre;
+import modele.ModeleDate;
 import modele.Temperature;
 
 public class TemperatureDAO 
@@ -57,7 +59,7 @@ public class TemperatureDAO
 		
 				Scanner lecteur = new Scanner(fluxTemperature).useDelimiter("\\A");
 				xml = lecteur.hasNext() ? lecteur.next() : "";
-				System.out.println(xml);
+				//System.out.println(xml);
 				return xml;
 			}
 			catch (MalformedURLException e){
@@ -77,29 +79,36 @@ public class TemperatureDAO
 		String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/temperatures.xml");
 		
  		// Interprétation du xml - construire les modeles
-		if(xml != null)
- 		{
- 				Document document = parserXML(xml);
- 				if (document == null) return null;
- 				
- 				ArrayList<Temperature> listeTemperatures = new ArrayList<Temperature>();
- 				NodeList listeNoeudsTemperatures = document.getElementsByTagName("Temperature");
- 				
- 				for(int position = 0; position < listeNoeudsTemperatures.getLength(); position++)
- 				{
- 					Element elementTemperature = (Element)listeNoeudsTemperatures.item(position);
+		try {
+			if (xml != null) {
 				
- 					int numero = Integer.parseInt(document.getElementsByTagName("id").item(0).getTextContent());
- 					double degre = Double.parseDouble(document.getElementsByTagName("degre").item(0).getTextContent());
- 					String date = document.getElementsByTagName("date").item(0).getTextContent();
- 					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
- 					
- 					Temperature temperature= new Temperature(numero,degre,date,heure);
-	 				//	temperature.setId(Integer.parseInt(id)); // TODO : robustesse 
-					listeTemperatures.add(temperature);
- 				}
-	 				return listeTemperatures;
- 			}		
+				 List<Temperature> listeTemperatures =  new ArrayList<>();
+	            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	            Document document = parseur.parse(new StringBufferInputStream(xml));
+
+	            NodeList nodeListe = document.getElementsByTagName("Temperature");
+
+	            for (int i =0; i<nodeListe.getLength(); i++) {
+
+	                Element elementTemperature = (Element) nodeListe.item(i);
+
+	                int id = Integer.parseInt(elementTemperature.getElementsByTagName("id").item(0).getTextContent());
+	                double degre = Double.parseDouble(elementTemperature.getElementsByTagName("degre").item(0).getTextContent());
+	                String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
+	                String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
+
+	                Calendar calendrier = ModeleDate.getDate(date,heure);
+
+	                Temperature temperature = new Temperature(id,degre,calendrier);
+	                System.out.println(temperature);
+	                listeTemperatures.add(temperature);
+	                
+	            }
+	    		return listeTemperatures;
+	        }	
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		return null;
  	}
 

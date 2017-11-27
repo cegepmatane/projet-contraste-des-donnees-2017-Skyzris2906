@@ -2,7 +2,7 @@ package modele;
 
 import java.util.List;
 
-public class Statistiques 
+public class StatistiquesT 
 {
 
     public static double calculerMoyenne(List<Temperature> listeTemperatures){
