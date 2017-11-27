@@ -79,8 +79,8 @@ public class TemperatureDAO
 	public List<Temperature> listerLesTemperature()
  	{
  		// Récupérer le xml
-		//String xml = consommerService("http://************/service_temp/temperature/liste/index.php");
-		String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/temperatures.xml");
+		String xml = consommerService("http://192.168.1.146/service_temp/temperature/liste/index.php");
+		//String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/temperatures.xml");
 		
  		// Interprétation du xml - construire les modeles
 		try {
@@ -96,11 +96,11 @@ public class TemperatureDAO
 	                Element elementTemperature = (Element) nodeListe.item(i);
 
 	                int id = Integer.parseInt(elementTemperature.getElementsByTagName("id").item(0).getTextContent());
-	                double degre = Double.parseDouble(elementTemperature.getElementsByTagName("degre").item(0).getTextContent());
+	                double degre = Double.parseDouble(elementTemperature.getElementsByTagName("temperature").item(0).getTextContent());
 	                String date = elementTemperature.getElementsByTagName("date").item(0).getTextContent();
 	                String heure = elementTemperature.getElementsByTagName("heure").item(0).getTextContent();
 
-	                Calendar calendrier = ModeleDate.getDate(date,heure);
+	                Calendar calendrier = ModeleDate.getDateTemperature(date,heure);
 
 	                Temperature temperature = new Temperature(id,degre,calendrier);
 	                System.out.println(temperature);

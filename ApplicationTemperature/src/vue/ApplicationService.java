@@ -83,7 +83,7 @@ public class ApplicationService extends Application
         lblMax = new Label("Maximum Temperatures : " + StatistiquesT.calculerMaximum(listerLesTemperatureMois)+" °C");
         
         // Graph Temperature Mois
-        final NumberAxis xAxisTempM = new NumberAxis(1, 31, 2);
+        final NumberAxis xAxisTempM = new NumberAxis(0, 31, 2);
         final NumberAxis yAxisTempM = new NumberAxis();
         final AreaChart<Number,Number> AreaChartTempMois = new AreaChart<Number,Number>(xAxisTempM,yAxisTempM);
         AreaChartTempMois.setTitle("Temperature moniteur mois");
@@ -101,7 +101,7 @@ public class ApplicationService extends Application
         
         // Graph Temperature Jour
         listerLesTemperatureJour = temperatureDAO.listerTemperaturesJour();
-        final NumberAxis xAxisTempJ = new NumberAxis(1, 24, 2);
+        final NumberAxis xAxisTempJ = new NumberAxis(0, 24, 2);
         final NumberAxis yAxisTempJ = new NumberAxis();
         final AreaChart<Number,Number> AreaChartTempJour = new AreaChart<Number,Number>(xAxisTempJ,yAxisTempJ);
         

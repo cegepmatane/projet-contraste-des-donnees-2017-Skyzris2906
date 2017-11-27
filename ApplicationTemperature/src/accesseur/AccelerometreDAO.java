@@ -77,8 +77,8 @@ public class AccelerometreDAO
 	public List<Accelerometre> listerAccelerometre()
 	 	{
 		 		// Récupérer le xml
-				//String xml = consommerService("http://********************/service_accelerometre/accelerometre/liste/index.php");		
-			String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/accelerometre.xml");
+			String xml = consommerService("http://192.168.1.146/service_accelerometre/accelerometre/liste/index.php");		
+			//String xml = consommerService("file:///C:/AndroidStudioProjects/projet-contraste-des-donnees-2017-Skyzris2906/ApplicationTemperature/src/vue/accelerometre.xml");
 			
 			try {
 			 		// Interprétation du xml - construire les modeles
@@ -100,7 +100,7 @@ public class AccelerometreDAO
 		                String date = elementAccelerometre.getElementsByTagName("date").item(0).getTextContent();
 		                String heure = elementAccelerometre.getElementsByTagName("heure").item(0).getTextContent();
 		
-		                Calendar calendrier = ModeleDate.getDate(date,heure);
+		                Calendar calendrier = ModeleDate.getDateAccelerometre(date,heure);
 		                Accelerometre accelerometre = new Accelerometre(id,x,y,z,calendrier);
 		                listerAccelerometres.add(accelerometre);
 		            }
