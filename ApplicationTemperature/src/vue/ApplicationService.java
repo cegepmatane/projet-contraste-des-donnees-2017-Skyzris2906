@@ -72,7 +72,7 @@ public class ApplicationService extends Application
         btnSceneBDD.setOnAction(e-> ButtonClicked(e));
         btnSceneTemp.setOnAction(e-> ButtonClicked(e));
 
-        lblSceneTemp=new Label("Temperature");
+        lblSceneTemp=new Label("");
         temperatureDAO = new TemperatureDAO();
         listerLesTemperatureMois = temperatureDAO.listerTemperaturesMois();
         
@@ -83,30 +83,34 @@ public class ApplicationService extends Application
         lblMax = new Label("Maximum Temperatures : " + StatistiquesT.calculerMaximum(listerLesTemperatureMois)+" °C");
         
         // Graph Temperature Mois
-        final NumberAxis xAxisTempM = new NumberAxis(1, 31, 1);
+        final NumberAxis xAxisTempM = new NumberAxis(1, 31, 2);
         final NumberAxis yAxisTempM = new NumberAxis();
         final AreaChart<Number,Number> AreaChartTempMois = new AreaChart<Number,Number>(xAxisTempM,yAxisTempM);
         AreaChartTempMois.setTitle("Temperature moniteur mois");
+        xAxisTempM.setLabel("Jour");
+        yAxisTempM.setLabel("Degrès Celcius");
  
         XYChart.Series serieMois= new XYChart.Series();
         serieMois.setName("Mois");
-       // System.out.println(listerLesTemperature);
         
         for (Temperature temp : listerLesTemperatureMois)
         {
         	serieMois.getData().add(new XYChart.Data(temp.getJour(),temp.getTemperature()));
         }
         
+        
         // Graph Temperature Jour
         listerLesTemperatureJour = temperatureDAO.listerTemperaturesJour();
-        final NumberAxis xAxisTempJ = new NumberAxis(1, 24, 1);
+        final NumberAxis xAxisTempJ = new NumberAxis(1, 24, 2);
         final NumberAxis yAxisTempJ = new NumberAxis();
         final AreaChart<Number,Number> AreaChartTempJour = new AreaChart<Number,Number>(xAxisTempJ,yAxisTempJ);
+        
         AreaChartTempJour.setTitle("Temperature moniteur jour");
+        xAxisTempJ.setLabel("Heure");
+        yAxisTempJ.setLabel("Degrès Celcius");
  
         XYChart.Series serieJour= new XYChart.Series();
         serieJour.setName("Jour");
-       // System.out.println(listerLesTemperature);
         
         for (Temperature temp : listerLesTemperatureJour)
         {
@@ -128,22 +132,24 @@ public class ApplicationService extends Application
         btnSceneAcce.setOnAction(e-> ButtonClicked(e));
         lblSceneBDD=new Label("Base de donées : ");
         
-        lblSceneAcce=new Label("Accelerometre");
+        lblSceneAcce=new Label("");
         accelerometreDAO = new AccelerometreDAO();
         listerAccelerometreMois = accelerometreDAO.listerAccelerometreMois();
         
         lblx = new Label("Moyenne : " + StatistiquesA.calculerMoyenne(listerAccelerometreMois));
+     //  listerAccelerometreMois
         
         // Graph Accelerometre Mois
         final NumberAxis xAxis = new NumberAxis(1,31,1);
         final NumberAxis yAxis = new NumberAxis();
         final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
-        
-        System.out.println(listerAccelerometreMois);       
+           
         
         lineChart.setTitle("Accelerometre Mois");
+        xAxis.setLabel("Jour");
         XYChart.Series seriesX = new XYChart.Series();
         seriesX.setName("X");
+        
         for(Accelerometre acce : listerAccelerometreMois)
         {
         	seriesX.getData().add(new XYChart.Data(acce.getJour(), acce.getX()));
@@ -171,8 +177,10 @@ public class ApplicationService extends Application
         final LineChart<Number,Number> lineChartJ = new LineChart<Number,Number>(xAxisJ,yAxisJ);
         
         lineChartJ.setTitle("Accelerometre jour");
+        xAxisJ.setLabel("H");
         XYChart.Series seriesXJ = new XYChart.Series();
         seriesXJ.setName("X");
+        
         for(Accelerometre acce : listerAccelerometreJour)
         {
         	seriesXJ.getData().add(new XYChart.Data(acce.getHeure(), acce.getX()));
@@ -196,29 +204,32 @@ public class ApplicationService extends Application
         
         //Pane
         paneBDD=new FlowPane();
+        paneBDD.setHgap(500);
         paneBDD.setVgap(30);
+        paneBDD.setHgap(500);
         paneBDD.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
         paneBDD.getChildren().addAll(lblSceneBDD, btnSceneBDD, btnSceneBDD2);
+        paneBDD.setAlignment(Pos.CENTER);
         
         paneTemp=new FlowPane();
-        paneTemp.setVgap(30);
+        paneTemp.setVgap(10);
         paneTemp.setHgap(30);
         paneTemp.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
         paneTemp.getChildren().addAll(lblSceneTemp,lblMax,lblMoy,lblMin,AreaChartTempMois,AreaChartTempJour,btnSceneTemp);
         
         paneAcce=new FlowPane();
-        paneAcce.setVgap(30);
+        paneAcce.setVgap(10);
         paneAcce.setHgap(30);
         paneAcce.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
         paneAcce.getChildren().addAll(lblSceneAcce,lblx,lineChart,lineChartJ,btnSceneAcce);
         
-        sceneBDD= new Scene(paneBDD, 200,200);
+        sceneBDD= new Scene(paneBDD, 400,400);
         
-        sceneTemp = new Scene(paneTemp, 600,1100);
+        sceneTemp = new Scene(paneTemp, 600,910);
         AreaChartTempMois.getData().addAll(serieMois);
         AreaChartTempJour.getData().addAll(serieJour);
         
-        sceneAcce = new Scene(paneAcce, 600, 1100);
+        sceneAcce = new Scene(paneAcce, 600, 910);
         lineChart.getData().addAll(seriesX,seriesY,seriesZ);
         lineChartJ.getData().addAll(seriesXJ,seriesYJ,seriesZJ);
         

@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -24,10 +23,10 @@ import modele.Accelerometre;
 import modele.ModeleDate;
 import modele.Temperature;
 
-public class AccelerometreDAO {
-	
+public class AccelerometreDAO 
+{
+
 	private List<Accelerometre> listeOrdonnee = new ArrayList<>();
-	
 	private List<Accelerometre> listerAccelerometres = new ArrayList<>();
 	
 	private Document parserXML(String xml)
@@ -132,7 +131,7 @@ public class AccelerometreDAO {
 	        return listeOrdonnee;
 	    }
 
-	   public List<Accelerometre> listerAccelerometreJour(){
+   public List<Accelerometre> listerAccelerometreJour(){
 
 	        this.listeOrdonnee.clear();
 
@@ -155,6 +154,5 @@ public class AccelerometreDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 	
 }
