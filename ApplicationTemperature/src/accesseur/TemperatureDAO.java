@@ -89,12 +89,12 @@ public class TemperatureDAO
  				{
  					Element elementTemperature = (Element)listeNoeudsTemperatures.item(position);
 				
- 					String numero = document.getElementsByTagName("id").item(0).getTextContent();
+ 					int numero = Integer.parseInt(document.getElementsByTagName("id").item(0).getTextContent());
  					double degre = Double.parseDouble(document.getElementsByTagName("degre").item(0).getTextContent());
  					String date = document.getElementsByTagName("date").item(0).getTextContent();
  					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
  					
- 					Temperature temperature= new Temperature();
+ 					Temperature temperature= new Temperature(numero,degre,date,heure);
 	 				//	temperature.setId(Integer.parseInt(id)); // TODO : robustesse 
 					listeTemperatures.add(temperature);
  				}

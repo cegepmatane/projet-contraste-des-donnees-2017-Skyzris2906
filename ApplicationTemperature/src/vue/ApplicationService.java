@@ -77,13 +77,8 @@ public class ApplicationService extends Application
         
         List<Temperature> listeTemperatures;
 		lblMoy = new Label("Moyenne Temperatures : " + Statistiques.calculerMoyenne(listerLesTemperature)+" °C");
-       // lblMoy.setText("Valeur moyenne : " + Statistiques.moyenne(listerToutesLesTemperatures)+" °C");
-        //System.out.println(Statistiques.moyenne(listerToutesLesTemperatures)+" °C");
-        lblMin = new Label("Minimum Temperatures : ");
-        //System.out.println(Statistiques.minimum(listerToutesLesTemperatures)+" °C");
-        lblMax = new Label("Maximum Temperatures : ");
-        //System.out.println(Statistiques.maximum(listerToutesLesTemperatures)+" °C");
-        
+        lblMin = new Label("Minimum Temperatures : " + Statistiques.calculerMinimum(listerLesTemperature)+" °C");
+        lblMax = new Label("Maximum Temperatures : " + Statistiques.calculerMaximum(listerLesTemperature)+" °C");
         // Graph Temperature
         final NumberAxis xAxisT = new NumberAxis(1, 31, 1);
         final NumberAxis yAxisT = new NumberAxis();

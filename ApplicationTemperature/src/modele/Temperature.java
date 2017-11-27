@@ -1,11 +1,19 @@
 package modele;
 
+import java.util.Calendar;
+
 public class Temperature {
 	
 	protected int id;
-	protected int temperature;
-	protected String date;
-	protected String heure;
+	protected double temperature;
+	protected Calendar date;
+
+	public Temperature(int id, double temperature, Calendar date)
+	{
+		this.id = id;
+		this.temperature = temperature;
+		this.date = date;
+	}
 
 	public int getId() {
 		return id;
@@ -15,28 +23,19 @@ public class Temperature {
 		this.id = id;
 	}
 	
-	public int getTemperature() {
+	public double getTemperature() {
 		return temperature;
 	}
 
-	public void setTemperature(int temperature) {
+	public void setTemperature(double temperature) {
 		this.temperature = temperature;
 	}
 
-	public String getDate() {
+	public Calendar getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
-
-	public String getHeure() {
-		return heure;
-	}
-
-	public void setHeure(String heure) {
-		this.heure = heure;
-	}
-	
 }

@@ -87,9 +87,9 @@ public class AccelerometreDAO {
 	 				{
 	 					Element elementAccelerometre = (Element)listeNoeudsAccelerometres.item(position);
 	 					int numero = Integer.parseInt(document.getElementsByTagName("id").item(0).getTextContent());
-	 					String x = document.getElementsByTagName("x").item(0).getTextContent();
-	 					String y = document.getElementsByTagName("y").item(0).getTextContent();
-	 					String z = document.getElementsByTagName("z").item(0).getTextContent();
+	 					double x = Double.parseDouble(document.getElementsByTagName("x").item(0).getTextContent());
+	 					double y = Double.parseDouble(document.getElementsByTagName("y").item(0).getTextContent());
+	 					double z = Double.parseDouble(document.getElementsByTagName("z").item(0).getTextContent());
 	 					String date = document.getElementsByTagName("date").item(0).getTextContent();
 	 					String heure = document.getElementsByTagName("heure").item(0).getTextContent();
 	 					Accelerometre accelerometre = new Accelerometre(numero,x,y,z,date,heure);
