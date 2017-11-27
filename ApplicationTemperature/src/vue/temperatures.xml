@@ -20,13 +20,13 @@
     <Temperature>
         <id>4</id>
         <degre>22.9</degre>
-        <date>21/11/2017</date>
+        <date>15/11/2017</date>
         <heure>14:22</heure>
     </Temperature>
     <Temperature>
         <id>5</id>
         <degre>22.9</degre>
-        <date>26/11/2017</date>
+        <date>27/11/2017</date>
         <heure>16:47</heure>
     </Temperature>
 </listeTemperatures>

@@ -27,6 +27,10 @@ import modele.Temperature;
 
 public class TemperatureDAO 
 {	
+	private List<Temperature> listeOrdonnee = new ArrayList<>();
+	
+	private List<Temperature> listerTemperatures = new ArrayList<>();
+	
 	private Document parserXML(String xml)
 	{
 		Document doc = null;
@@ -82,7 +86,6 @@ public class TemperatureDAO
 		try {
 			if (xml != null) {
 				
-				 List<Temperature> listeTemperatures =  new ArrayList<>();
 	            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 	            Document document = parseur.parse(new StringBufferInputStream(xml));
 
@@ -101,10 +104,10 @@ public class TemperatureDAO
 
 	                Temperature temperature = new Temperature(id,degre,calendrier);
 	                System.out.println(temperature);
-	                listeTemperatures.add(temperature);
+	                listerTemperatures.add(temperature);
 	                
 	            }
-	    		return listeTemperatures;
+	    		return listerTemperatures;
 	        }	
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -112,6 +115,45 @@ public class TemperatureDAO
 		return null;
  	}
 
+    public List<Temperature> listerTemperaturesMois(){
+
+        this.listeOrdonnee.clear();
+
+        listerLesTemperature();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Temperature temperature : this.listerTemperatures){
+
+            if(temperature.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && temperature.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeOrdonnee.add(temperature);
+            }
+        }
+
+        return listeOrdonnee;
+    }
+	
+    public List<Temperature> listerTemperaturesJour(){
+
+        this.listeOrdonnee.clear();
+
+        listerLesTemperature();
+
+        Calendar dateActuelle = Calendar.getInstance();
+
+        for (Temperature temperature : this.listerTemperatures){
+
+            if(temperature.getDate().get(Calendar.DATE) == dateActuelle.get(Calendar.DATE) && temperature.getDate().get(Calendar.MONTH) == dateActuelle.get(Calendar.MONTH) && temperature.getDate().get(Calendar.YEAR) == dateActuelle.get(Calendar.YEAR)){
+
+                this.listeOrdonnee.add(temperature);
+            }
+        }
+
+
+        return this.listeOrdonnee;
+    }
+	
 	private NodeList getElementsByTagName(String string) {
 		// TODO Auto-generated method stub
 		return null;
