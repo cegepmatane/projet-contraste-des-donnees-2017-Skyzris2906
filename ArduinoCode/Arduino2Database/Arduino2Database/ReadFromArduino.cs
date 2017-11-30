@@ -26,7 +26,7 @@ public class ReadFromArduino
     private void ArduinoDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         String valeurArduino = arduino.ReadLine();
-        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 30|| DateTime.Now.Minute == 22))
+        if (valeurArduino.Length == 6 && droitEcriture == true && (DateTime.Now.Minute == 38|| DateTime.Now.Minute == 43))
         {
             droitEcriture = false;
             Insert2Database(valeurArduino);
@@ -35,7 +35,7 @@ public class ReadFromArduino
         else
             valeurArduino = "";
 
-        if (droitEcriture == false && (DateTime.Now.Minute == 29 || DateTime.Now.Minute == 59))
+        if (droitEcriture == false && (DateTime.Now.Minute == 15 || DateTime.Now.Minute == 25))
             droitEcriture = true;
 
         if (DateTime.Now.Second == 00)
@@ -98,14 +98,12 @@ public class ReadFromArduino
 
                 String jsonTable = DataTableToJson(tableTemporaire);
                 Console.WriteLine(jsonTable);
-
+                Console.WriteLine();
+                
                 //RequeteJson(jsonTable);
                 //Console.WriteLine("Envoi");
 
-
-
-
-                if (DateTime.Now.Hour == 09 && DateTime.Now.Minute == 30 && droitEcriture2 == true)
+                if (DateTime.Now.Hour == 09 && DateTime.Now.Minute == 43 && droitEcriture2 == true)
                 {
                     droitEcriture2 = false;             
                     RequeteJson(jsonTable);
@@ -122,6 +120,7 @@ public class ReadFromArduino
                     droitEcriture2 = true;
 
             }
+
             connection.Close();
         }
 
@@ -146,7 +145,6 @@ public class ReadFromArduino
         JSONString = JsonConvert.SerializeObject(table);
         return JSONString;
     }
-
 
     //Envoi en HTTP
     static async Task RequeteJson(String data)
