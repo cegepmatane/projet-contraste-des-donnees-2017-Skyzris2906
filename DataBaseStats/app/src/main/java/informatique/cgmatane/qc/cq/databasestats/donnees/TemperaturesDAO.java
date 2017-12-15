@@ -48,8 +48,9 @@ public class TemperaturesDAO {
 	{
 	  Cursor startCursor = null;
 
-	  if (startCursorString != null && !startCursorString.equals("")) {
-	    startCursor = Cursor.fromUrlSafe(startCursorString);    // Where we left off
+	  if (startCursorString != null && !startCursorString.equals("")) 
+	  {
+	    startCursor = Cursor.fromUrlSafe(startCursorString);
 	  }
 	  Query<Entity> query = Query.newEntityQueryBuilder()
 	      .setKind("Temperature")
@@ -60,12 +61,15 @@ public class TemperaturesDAO {
 	  QueryResults<Entity> resultList = datastore.run(query);
 	  List<Temperature> resultTemps = entitiesToTemps(resultList);
 	  Cursor cursor = resultList.getCursorAfter();
-	  if (cursor != null && resultTemps.size() == 10) {
-	    String cursorString = cursor.toUrlSafe();
-	    return new Result<>(resultTemps, cursorString);
-	  } else {
-	    return new Result<>(resultTemps);
-	  }
+		  if (cursor != null && resultTemps.size() == 10) 
+		  {
+		    String cursorString = cursor.toUrlSafe();
+		    return new Result<>(resultTemps, cursorString);
+		  }
+		  else 
+		  {
+		    return new Result<>(resultTemps);
+		  }
 	}
 
    
