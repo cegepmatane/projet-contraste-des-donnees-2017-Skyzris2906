@@ -31,49 +31,47 @@ import informatique.cgmatane.qc.cq.databasestats.modele.Temperature;
 
 public class TemperaturesDAO {
 
-    private List<Temperature> listeTemperatures;
-    private List<HashMap<String,String>> listeTemperaturesEnHashMap;
-    private List<Temperature> listeTriee;
-    private Context context;
-    private static final String URL_CONNECTION = "http://192.168.1.146/service_temp/temperature/liste/index.php";
-	private Datastore datastore;
-	private KeyFactory keyFactory;
+	private Datastore temperature;
+	private KeyFactory generationCle;
 
-	public DatastoreDao() {
-	  datastore = DatastoreOptions.getDefaultInstance().getService();
-	  keyFactory = datastore.newKeyFactory().setKind("Temperature");
+	public TemperatureDao() {
+	  temperature = DatastoreOptions.getDefaultInstance().getService();
+	  //generationCle = temperature.newKeyFactory().setGenre("Temperature"); inutile pour notre cas
 	}
 
-	public Result<Temperature> listTemperatures(String startCursorString) 
-	{
-	  Cursor startCursor = null;
+	public Resultat<Temperature> listeTemperatures(String debutCurseurString) {
+	  Cursor debutCurseur = null;
 
-	  if (startCursorString != null && !startCursorString.equals("")) 
-	  {
-	    startCursor = Cursor.fromUrlSafe(startCursorString);
+	  if (debutCurseurString != null && !debutCurseurString.equals("")) {
+	    debutCurseur = Cursor.fromUrlSafe(debutCurseurString);
 	  }
+
 	  Query<Entity> query = Query.newEntityQueryBuilder()
-	      .setKind("Temperature")
-	      .setLimit(10)
-	      .setStartCursor(startCursor)
+	      .setGenre("Temperature")
+	      .setLimite(10)
+	      .setStartCursor(debutCurseur)
 	      .setOrderBy(OrderBy.asc(Temperature.DATE))
 	      .build();
-	  QueryResults<Entity> resultList = datastore.run(query);
-	  List<Temperature> resultTemps = entitiesToTemps(resultList);
-	  Cursor cursor = resultList.getCursorAfter();
-		  if (cursor != null && resultTemps.size() == 10) 
-		  {
-		    String cursorString = cursor.toUrlSafe();
-		    return new Result<>(resultTemps, cursorString);
+	  QueryResults<Entity> resultatList = temperature.run(query);
+	  List<Temperature> resultatTemps = entitiesToTemps(resultatList);
+	  Cursor curseur = resultatList.getCursorAfter();
+		  if (curseurr != null && resultatTemps.size() == 10) {
+		    String cursorString = curseur.toUrlSafe();
+		    return new Resultat<>(resultatTemps, curseurString);
 		  }
-		  else 
-		  {
-		    return new Result<>(resultTemps);
+		  else {
+		    return new Resultat<>(resultatTemps);
 		  }
 	}
+}
+ 
 
-   
-//    public List<Temperature> listerLesTemperatures(){
+//		private List<Temperature> listeTemperatures;
+//		private List<HashMap<String,String>> listeTemperaturesEnHashMap;
+//		private List<Temperature> listeTriee;
+//		private Context context;
+//		private static final String URL_CONNECTION = "http://192.168.1.146/service_temp/temperature/liste/index.php";  
+//    	public List<Temperature> listerLesTemperatures(){
 //
 //        listeTemperatures.clear();
 //
@@ -190,14 +188,14 @@ public class TemperaturesDAO {
 //        listerLesTemperatures();
 //
 //        Calendar dateActuelle = Calendar.getInstance();
-////        Calendar dateDebut = Calendar.getInstance();
-////        Calendar dateFin = Calendar.getInstance();
-////
-////        dateDebut.set(dateActuelle.get(Calendar.YEAR),dateActuelle.get(Calendar.MONTH),dateActuelle.get(Calendar.DATE),0,0,0);
-////        dateFin.set(dateActuelle.get(Calendar.YEAR),dateActuelle.get(Calendar.MONTH),dateActuelle.get(Calendar.DATE),23,59,59);
-////
-////        long dateDebutMilli = dateDebut.getTimeInMillis();
-////        long dateFinMilli = dateFin.getTimeInMillis();
+//        Calendar dateDebut = Calendar.getInstance();
+//        Calendar dateFin = Calendar.getInstance();
+//
+//        dateDebut.set(dateActuelle.get(Calendar.YEAR),dateActuelle.get(Calendar.MONTH),dateActuelle.get(Calendar.DATE),0,0,0);
+//        dateFin.set(dateActuelle.get(Calendar.YEAR),dateActuelle.get(Calendar.MONTH),dateActuelle.get(Calendar.DATE),23,59,59);
+//
+//        long dateDebutMilli = dateDebut.getTimeInMillis();
+//        long dateFinMilli = dateFin.getTimeInMillis();
 //
 //        for (Temperature temperature : this.listeTemperatures){
 //
@@ -223,5 +221,3 @@ public class TemperaturesDAO {
 //
 //        return this.listeTriee;
 //    }
-
-}
